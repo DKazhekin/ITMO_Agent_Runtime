@@ -1,0 +1,32 @@
+{
+  "task": "B4.4",
+  "pass": false,
+  "state": {
+    "version": "0",
+    "request_id": "4e4c3b733bf18ee0272c3b5f5639768c",
+    "session_id": "c1a371187d1c1b3873a486c786f92f85",
+    "status": "error",
+    "duration_seconds": 49.233425777999855,
+    "error": "transport_error",
+    "detail": "HTTPException"
+  },
+  "duration_seconds": 49.54963691699959,
+  "task_id": "B4.4",
+  "repeat": 1,
+  "seconds": 49.54963691699959,
+  "tokens_in": null,
+  "tokens_out": null,
+  "tokens_complete": false,
+  "cost_usd": null,
+  "recorded_cost_usd": 9.9e-05,
+  "cost_complete": false,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "error",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "transport_error: HTTPException"
+}

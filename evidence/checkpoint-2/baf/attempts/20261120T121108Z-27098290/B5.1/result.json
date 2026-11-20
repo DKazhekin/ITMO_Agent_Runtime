@@ -1,0 +1,45 @@
+{
+  "task": "B5.1",
+  "pass": true,
+  "state": {
+    "version": "0",
+    "request_id": "2bebf3444d05ea5b9e5caa38e06cf28a",
+    "session_id": "d968201641f0b32c0caabd5368a4a79e",
+    "status": "success",
+    "duration_seconds": 8.94387507500005,
+    "answer": "Готово.\n\n- `python stats.py data.csv` завершился с кодом 0, вывод:\n  - `count: 8`\n  - `mean: 20.75`\n  - `median: 9.5`\n- Медиана **9.5** записана в `/work/answer.txt`.\n\nПроверка вручную: отсортированные значения — 3, 4, 8, 9, 10, 11, 21, 100; средние два элемента (9 и 10) дают 9.5, что совпадает с выводом скрипта.",
+    "model_mode": "real"
+  },
+  "checker": {
+    "exit_code": 0,
+    "stdout": "{\"pass\": true, \"reason\": \"ok\"}\n",
+    "stderr": "",
+    "verdict": {
+      "pass": true,
+      "reason": "ok"
+    }
+  },
+  "tool_evidence": {
+    "pass": true,
+    "reason": "verified B5.1 RunCommand and matching manager result"
+  },
+  "duration_seconds": 28.93447391600057,
+  "task_id": "B5.1",
+  "repeat": 1,
+  "seconds": 28.93447391600057,
+  "tokens_in": 5134,
+  "tokens_out": 407,
+  "tokens_complete": true,
+  "cost_usd": 0.000272,
+  "recorded_cost_usd": 0.000272,
+  "cost_complete": true,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "success",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "ok"
+}

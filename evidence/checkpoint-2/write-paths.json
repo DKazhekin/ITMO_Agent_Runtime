@@ -1,0 +1,89 @@
+{
+  "collected_at_utc": "2026-11-20T12:15:18.478572+00:00",
+  "project": "itmo-cp2-ci",
+  "gateway_port": 18125,
+  "model_mode": "mock",
+  "model_calls": 0,
+  "server_runtime_sha256": {
+    "gateway": "8e000b83e2c9a93ec9d2c9f8b5dc0c461ecd6407d3bba44a55c5a39a353f616c",
+    "harness": "8e000b83e2c9a93ec9d2c9f8b5dc0c461ecd6407d3bba44a55c5a39a353f616c",
+    "sandbox-manager": "8e000b83e2c9a93ec9d2c9f8b5dc0c461ecd6407d3bba44a55c5a39a353f616c"
+  },
+  "method": "Open a production mounted session on a fresh temporary Mac directory per case. Send one executed WriteFile per case directly through the sandbox manager's mounted-exec route using the opaque server ID. Keep the content constant and vary only the path. Read the actual Mac file before and after release.",
+  "setup_note": "An earlier request accidentally used the client ID, which is not the manager binding ID; the HTTP request failed before tool execution and that session was released.",
+  "samples": [
+    {
+      "operation": {
+        "version": "0",
+        "session_id": "98bbaa560745a4de058063a8bff1bf70",
+        "run_id": "9373258da2e3471d92ab40d03486390e",
+        "operation_id": "9373258da2e3471d92ab40d03486390e-0-0",
+        "tool": "WriteFile",
+        "arguments": {
+          "path": "answer.txt",
+          "content": "Identical synthetic file contents.\n"
+        },
+        "timeout_seconds": 20
+      },
+      "tool_result": {
+        "version": "0",
+        "operation_id": "9373258da2e3471d92ab40d03486390e-0-0",
+        "status": "success",
+        "session_id": "98bbaa560745a4de058063a8bff1bf70",
+        "request_id": "9373258da2e3471d92ab40d03486390e",
+        "tool": "WriteFile",
+        "exit_code": 0,
+        "stdout": "written\n",
+        "stderr": "",
+        "truncated": false,
+        "write_decisions": [
+          {
+            "path": "answer.txt",
+            "operation_id": "9373258da2e3471d92ab40d03486390e-0-0",
+            "status": "applied"
+          }
+        ],
+        "duration_seconds": 0.3322555800000373
+      },
+      "file_present_before_close": true,
+      "file_contents_before_close": "Identical synthetic file contents.\n",
+      "file_present_after_close": true,
+      "file_contents_after_close": "Identical synthetic file contents.\n",
+      "session_released": true
+    },
+    {
+      "operation": {
+        "version": "0",
+        "session_id": "e4735ee611d56284c1d8ed8d75bb3d9f",
+        "run_id": "0bd787e2737d4d6ea81fd3dc9d6d3305",
+        "operation_id": "0bd787e2737d4d6ea81fd3dc9d6d3305-0-0",
+        "tool": "WriteFile",
+        "arguments": {
+          "path": "/work/answer.txt",
+          "content": "Identical synthetic file contents.\n"
+        },
+        "timeout_seconds": 20
+      },
+      "tool_result": {
+        "version": "0",
+        "operation_id": "0bd787e2737d4d6ea81fd3dc9d6d3305-0-0",
+        "status": "error",
+        "session_id": "e4735ee611d56284c1d8ed8d75bb3d9f",
+        "request_id": "0bd787e2737d4d6ea81fd3dc9d6d3305",
+        "tool": "WriteFile",
+        "exit_code": 0,
+        "stdout": "written\n",
+        "stderr": "",
+        "truncated": false,
+        "write_decisions": [],
+        "error": "write_outcome_unknown",
+        "duration_seconds": 0.2889821510002548
+      },
+      "file_present_before_close": false,
+      "file_contents_before_close": null,
+      "file_present_after_close": false,
+      "file_contents_after_close": null,
+      "session_released": true
+    }
+  ]
+}

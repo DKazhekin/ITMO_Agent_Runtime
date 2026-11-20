@@ -179,7 +179,7 @@ def publish(source, destination, assigned):
                        "scheduled": planned, "recorded": len(rows), "stopped_reason": stop})
         for task in planned:
             status_by_task[task] = {"attempt": session.name, "stopped_reason": stop,
-                                    "reason": "stopped before final result" if stop else "no final result yet"}
+                                    "reason": "not started after the round stopped" if stop else "no final result yet"}
         seen = set()
         for result in rows:
             task = result["task_id"]
@@ -221,7 +221,7 @@ def publish(source, destination, assigned):
     complete_cost = bool(all_records) and not unknown and not missing
     raw_native = [numeric_cost(record["provider_raw_cost_usd"]) for record in all_records]
     report = {
-        "kind": "mounted_real_baf", "cohort": "first completed attempt per task",
+        "kind": "mounted_real_baf", "cohort": "first recorded attempt per task",
         "assigned": len(assigned), "attempted": attempted, "passed": passed,
         "attempt_records": len(all_records), "retries": len(all_records) - attempted,
         "not_run": missing, "matrix": matrix, "tasks": tasks, "rounds": rounds,

@@ -1,0 +1,91 @@
+{
+  "frozen_commit": "1245dd765fe422a23089d8be5a15a56c305e52f3",
+  "observed_at_utc": "2026-11-20T12:12:47.902664+00:00",
+  "mode": "paid mounted-workspace runs",
+  "source_manifest_scope": "Each round hashes the checkout on the client. Service images and the Linux mount helper were checked independently.",
+  "services": {
+    "gateway": {
+      "image_id": "sha256:c0632b9a56074ee56e159fbf8daa5768a254b58dcc6f031bcb87f2928af45364",
+      "started_at": "2026-11-20T11:38:06.288712253Z",
+      "restart_count": 0,
+      "checked_modules": [
+        "runtime/gateway.py",
+        "runtime/common.py",
+        "runtime/streaming.py",
+        "runtime/session_store.py"
+      ],
+      "differing_modules": {}
+    },
+    "harness": {
+      "image_id": "sha256:71e7d4ab42241e1a6ee165c896a901d7d8b5218183c923203524865d3df95d2a",
+      "started_at": "2026-11-20T11:43:10.198004482Z",
+      "restart_count": 0,
+      "checked_modules": [
+        "runtime/harness.py",
+        "runtime/common.py",
+        "runtime/session_journal.py",
+        "runtime/session_store.py"
+      ],
+      "differing_modules": {}
+    },
+    "llm-proxy": {
+      "image_id": "sha256:c0632b9a56074ee56e159fbf8daa5768a254b58dcc6f031bcb87f2928af45364",
+      "started_at": "2026-11-20T11:43:19.594935869Z",
+      "restart_count": 0,
+      "checked_modules": [
+        "runtime/proxy.py",
+        "runtime/budget.py"
+      ],
+      "differing_modules": {}
+    },
+    "sandbox-manager": {
+      "image_id": "sha256:c0632b9a56074ee56e159fbf8daa5768a254b58dcc6f031bcb87f2928af45364",
+      "started_at": "2026-11-20T11:37:59.159606967Z",
+      "restart_count": 0,
+      "checked_modules": [
+        "runtime/sandbox.py",
+        "runtime/mount.py",
+        "runtime/streaming.py",
+        "runtime/common.py",
+        "runtime/session_journal.py"
+      ],
+      "differing_modules": {
+        "runtime/sandbox.py": {
+          "in_image": "33a0c97ea6b6d32c7cb017f3695fae0f42cf98cfd102b25cff78dc841dec7f1d",
+          "frozen_source": "1fa77cd2ccf5a3219467c383f3210421d9d68cea218b6d843678953f6ed03d26"
+        },
+        "runtime/session_journal.py": {
+          "in_image": "c94f2f97da597cb888b116b1716e1e17526b21edbaade88eea114d376219a74a",
+          "frozen_source": "99c104af7933e76b90fde4f2eae68a03076bd286ecbfb8de6845f9201c7a4a63"
+        }
+      }
+    }
+  },
+  "linux_mount_helper": {
+    "compared_on_host": true,
+    "matching_sha256": {
+      "runtime/mount_observer.py": "d7ad19e9557265f274d0d10c2623bd44ca4c2179e7e4c8565d36c7103ed54dbd",
+      "runtime/mount_host.py": "ba3e173bad6435eb67dffb33c3107b4b7d5189005f0850eb42064fd826574c93",
+      "runtime/mount_wire.py": "16139300f248ecf078a91dddf76b6871a4fdd09f0703ae8c93e993a58c0aae33",
+      "runtime/mount.py": "8166520df9ad0ffa7f978faaa7cd877194c63b9d05d0a0cd7d7fe3cc0d9bc737"
+    }
+  },
+  "qualification": "The manager on the paid bench used earlier startup/shutdown wrappers and earlier precedence of technical event fields. Its process was not restarted during the paid matrix. The corrected manager was deployed on the separate mock bench for the restart verification.",
+  "restart_verification": "live-change/manager-restart/result.json",
+  "demo_after_paid_runs": {
+    "mode": "mock",
+    "provider_key_configured": false,
+    "proxy_networks": [
+      "internal control network"
+    ],
+    "same_budget_remains_blocked": true,
+    "desktop_steps_passed": 11,
+    "desktop_result": "desktop.json",
+    "desktop_result_sha256": "f5e0c6bf79b9eae702c66ee97b0878c6fe507eccb6209f269655b185bb70a5d4",
+    "checked_manager_modules_sha256": {
+      "runtime/sandbox.py": "1fa77cd2ccf5a3219467c383f3210421d9d68cea218b6d843678953f6ed03d26",
+      "runtime/session_journal.py": "99c104af7933e76b90fde4f2eae68a03076bd286ecbfb8de6845f9201c7a4a63"
+    },
+    "manager_modules_match_frozen_commit": true
+  }
+}

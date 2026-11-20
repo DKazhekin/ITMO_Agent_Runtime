@@ -1,20 +1,12 @@
 {
   "kind": "mounted_real_baf",
-  "cohort": "first completed attempt per task",
+  "cohort": "first recorded attempt per task",
   "assigned": 35,
-  "attempted": 12,
-  "passed": 9,
-  "attempt_records": 12,
+  "attempted": 20,
+  "passed": 13,
+  "attempt_records": 20,
   "retries": 0,
   "not_run": [
-    "B4.1",
-    "B4.2",
-    "B4.3",
-    "B4.4",
-    "B5.1",
-    "B5.2",
-    "B5.3",
-    "B5.4",
     "B6.1",
     "B6.2",
     "B6.3",
@@ -49,13 +41,13 @@
     },
     "B4": {
       "assigned": 4,
-      "attempted": 0,
-      "passed": 0
+      "attempted": 4,
+      "passed": 2
     },
     "B5": {
       "assigned": 4,
-      "attempted": 0,
-      "passed": 0
+      "attempted": 4,
+      "passed": 2
     },
     "B6": {
       "assigned": 4,
@@ -344,210 +336,314 @@
       "repeats": []
     },
     "B4.1": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 34.61517179200018,
+        "tokens_in": 8696,
+        "tokens_out": 624,
+        "model_events": 6,
+        "recorded_cost_usd": 0.000357,
+        "trace_cost_usd": 0.000357,
+        "known_trace_cost_usd": 0.000357,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T120410Z-f48a1546",
+        "result": "attempts/20261120T120410Z-f48a1546/B4.1/result.json",
+        "trace": "attempts/20261120T120410Z-f48a1546/B4.1/trace.jsonl",
+        "workspace": "attempts/20261120T120410Z-f48a1546/B4.1/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B4.2": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 23.86999166700116,
+        "tokens_in": 22672,
+        "tokens_out": 1509,
+        "model_events": 7,
+        "recorded_cost_usd": 0.00099,
+        "trace_cost_usd": 0.00099,
+        "known_trace_cost_usd": 0.00099,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T120410Z-f48a1546",
+        "result": "attempts/20261120T120410Z-f48a1546/B4.2/result.json",
+        "trace": "attempts/20261120T120410Z-f48a1546/B4.2/trace.jsonl",
+        "workspace": "attempts/20261120T120410Z-f48a1546/B4.2/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B4.3": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": false,
+        "reason": "write_outcome_unknown",
+        "status": "error",
+        "seconds": 9.737173082990921,
+        "tokens_in": null,
+        "tokens_out": null,
+        "model_events": 3,
+        "recorded_cost_usd": 0.000323,
+        "trace_cost_usd": null,
+        "known_trace_cost_usd": 0.000323,
+        "provider_raw_cost_usd": null,
+        "cost_complete": false,
+        "attempt": "20261120T120410Z-f48a1546",
+        "result": "attempts/20261120T120410Z-f48a1546/B4.3/result.json",
+        "trace": "attempts/20261120T120410Z-f48a1546/B4.3/trace.jsonl",
+        "workspace": "attempts/20261120T120410Z-f48a1546/B4.3/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B4.4": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": false,
+        "reason": "transport_error: HTTPException",
+        "status": "error",
+        "seconds": 49.54963691699959,
+        "tokens_in": null,
+        "tokens_out": null,
+        "model_events": 2,
+        "recorded_cost_usd": 9.9e-05,
+        "trace_cost_usd": null,
+        "known_trace_cost_usd": 9.9e-05,
+        "provider_raw_cost_usd": null,
+        "cost_complete": false,
+        "attempt": "20261120T120410Z-f48a1546",
+        "result": "attempts/20261120T120410Z-f48a1546/B4.4/result.json",
+        "trace": "attempts/20261120T120410Z-f48a1546/B4.4/trace.jsonl",
+        "workspace": "attempts/20261120T120410Z-f48a1546/B4.4/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B5.1": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 28.93447391600057,
+        "tokens_in": 5134,
+        "tokens_out": 407,
+        "model_events": 4,
+        "recorded_cost_usd": 0.000272,
+        "trace_cost_usd": 0.000272,
+        "known_trace_cost_usd": 0.000272,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T121108Z-27098290",
+        "result": "attempts/20261120T121108Z-27098290/B5.1/result.json",
+        "trace": "attempts/20261120T121108Z-27098290/B5.1/trace.jsonl",
+        "workspace": "attempts/20261120T121108Z-27098290/B5.1/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B5.2": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": false,
+        "reason": "write_outcome_unknown",
+        "status": "error",
+        "seconds": 16.0740129170008,
+        "tokens_in": null,
+        "tokens_out": null,
+        "model_events": 4,
+        "recorded_cost_usd": 0.000382,
+        "trace_cost_usd": null,
+        "known_trace_cost_usd": 0.000382,
+        "provider_raw_cost_usd": null,
+        "cost_complete": false,
+        "attempt": "20261120T121108Z-27098290",
+        "result": "attempts/20261120T121108Z-27098290/B5.2/result.json",
+        "trace": "attempts/20261120T121108Z-27098290/B5.2/trace.jsonl",
+        "workspace": "attempts/20261120T121108Z-27098290/B5.2/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B5.3": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 10.187964583004941,
+        "tokens_in": 4620,
+        "tokens_out": 612,
+        "model_events": 4,
+        "recorded_cost_usd": 0.000318,
+        "trace_cost_usd": 0.000318,
+        "known_trace_cost_usd": 0.000318,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T121108Z-27098290",
+        "result": "attempts/20261120T121108Z-27098290/B5.3/result.json",
+        "trace": "attempts/20261120T121108Z-27098290/B5.3/trace.jsonl",
+        "workspace": "attempts/20261120T121108Z-27098290/B5.3/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B5.4": {
-      "first": null,
-      "repeats": [],
-      "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
-      }
+      "first": {
+        "pass": false,
+        "reason": "transport_error: ReadTimeout",
+        "status": "error",
+        "seconds": 80.82780633299262,
+        "tokens_in": null,
+        "tokens_out": null,
+        "model_events": 2,
+        "recorded_cost_usd": 0.000128,
+        "trace_cost_usd": null,
+        "known_trace_cost_usd": 0.000128,
+        "provider_raw_cost_usd": null,
+        "cost_complete": false,
+        "attempt": "20261120T121108Z-27098290",
+        "result": "attempts/20261120T121108Z-27098290/B5.4/result.json",
+        "trace": "attempts/20261120T121108Z-27098290/B5.4/trace.jsonl",
+        "workspace": "attempts/20261120T121108Z-27098290/B5.4/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
     },
     "B6.1": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B6.2": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B6.3": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B6.4": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B7.1": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B7.2": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B7.3": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B7.4": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B8.1": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B8.2": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B8.3": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B8.4": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B9.1": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B9.2": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     },
     "B9.3": {
       "first": null,
       "repeats": [],
       "unattempted": {
-        "attempt": "20261120T115032Z-58aaa24f",
-        "stopped_reason": "transport_error: HTTPException",
-        "reason": "stopped before final result"
+        "attempt": "20261120T121108Z-27098290",
+        "stopped_reason": "transport_error: ReadTimeout",
+        "reason": "not started after the round stopped"
       }
     }
   },
@@ -668,19 +764,85 @@
       ],
       "recorded": 1,
       "stopped_reason": "transport_error: HTTPException"
+    },
+    {
+      "id": "20261120T120410Z-f48a1546",
+      "manifest": "attempts/20261120T120410Z-f48a1546/manifest.json",
+      "summary": "attempts/20261120T120410Z-f48a1546/summary.json",
+      "results": "attempts/20261120T120410Z-f48a1546/results.jsonl",
+      "scheduled": [
+        "B4.1",
+        "B4.2",
+        "B4.3",
+        "B4.4",
+        "B5.1",
+        "B5.2",
+        "B5.3",
+        "B5.4",
+        "B6.1",
+        "B6.2",
+        "B6.3",
+        "B6.4",
+        "B7.1",
+        "B7.2",
+        "B7.3",
+        "B7.4",
+        "B8.1",
+        "B8.2",
+        "B8.3",
+        "B8.4",
+        "B9.1",
+        "B9.2",
+        "B9.3"
+      ],
+      "recorded": 4,
+      "stopped_reason": "transport_error: HTTPException"
+    },
+    {
+      "id": "20261120T121108Z-27098290",
+      "manifest": "attempts/20261120T121108Z-27098290/manifest.json",
+      "summary": "attempts/20261120T121108Z-27098290/summary.json",
+      "results": "attempts/20261120T121108Z-27098290/results.jsonl",
+      "scheduled": [
+        "B5.1",
+        "B5.2",
+        "B5.3",
+        "B5.4",
+        "B6.1",
+        "B6.2",
+        "B6.3",
+        "B6.4",
+        "B7.1",
+        "B7.2",
+        "B7.3",
+        "B7.4",
+        "B8.1",
+        "B8.2",
+        "B8.3",
+        "B8.4",
+        "B9.1",
+        "B9.2",
+        "B9.3"
+      ],
+      "recorded": 4,
+      "stopped_reason": "transport_error: ReadTimeout"
     }
   ],
   "costs": {
     "currency": "USD",
-    "recorded_cost_usd": 0.005548,
-    "known_trace_cost_usd": 0.005548,
+    "recorded_cost_usd": 0.008417,
+    "known_trace_cost_usd": 0.008417,
     "trace_cost_usd": null,
     "provider_raw_cost_usd": null,
     "complete": false,
     "unknown_record_paths": [
       "attempts/20261120T114357Z-f7f83c32/B2.3/result.json",
       "attempts/20261120T114755Z-9c5cdae7/B3.3/result.json",
-      "attempts/20261120T115032Z-58aaa24f/B3.4/result.json"
+      "attempts/20261120T115032Z-58aaa24f/B3.4/result.json",
+      "attempts/20261120T120410Z-f48a1546/B4.3/result.json",
+      "attempts/20261120T120410Z-f48a1546/B4.4/result.json",
+      "attempts/20261120T121108Z-27098290/B5.2/result.json",
+      "attempts/20261120T121108Z-27098290/B5.4/result.json"
     ],
     "source": "Trace usage.cost_usd is the proxy-recorded rounded charge. Native usage.cost is a separate field."
   }

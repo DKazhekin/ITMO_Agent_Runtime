@@ -1,21 +1,137 @@
 {
   "unit": "USD",
-  "limit": 6.0,
-  "proxy_rounded_charges": 0.005548,
-  "reserved_pending": 0.7,
-  "arithmetical_remainder": 5.294452,
+  "limit": 6,
+  "proxy_rounded_charges": 0.008417,
+  "reserved_pending": 1.4,
+  "arithmetical_remainder": 4.591583,
   "paid_requests_enabled": false,
   "blocking_reasons": [
     "unexpected_model_or_provider"
   ],
-  "provider_key_usage_delta": "0.005523127",
+  "ledger_checked_at_utc": "2026-11-20T12:20:44.798243+00:00",
+  "provider_key_usage_delta": "0.008499045",
   "provider_external_key_usage_delta": "0",
-  "provider_checked_at_utc": "2026-11-20T11:52:38.619206+00:00",
+  "provider_checked_at_utc": "2026-11-20T12:19:36.747235+00:00",
+  "outstanding_reservations_usd": [
+    0.35,
+    0.35,
+    0.35,
+    0.35
+  ],
   "known_limitations": [
-    "Key usage is a before/after account counter. It does not identify the provider of an individual request.",
-    "The proxy retained no approved model result for the rejected reply. Its final identity is unconfirmed.",
-    "Reservations are held until reconciled. They are not provider charges."
+    "The provider key usage counter is a before/after total. It does not identify an individual charge or establish the model returned in a particular response.",
+    "The proxy did not retain the rejected response bodies. The missing or differing identity field cannot be identified conclusively.",
+    "Known local charges are rounded up per settled request. Open holds cover requests without a final attributable cost and are not confirmed charges."
   ],
   "provider_counter": "https://openrouter.ai/api/v1/key",
-  "provider_details": "https://openrouter.ai/docs/api/api-reference/generations/get-generation"
+  "provider_details": "https://openrouter.ai/docs/api/api-reference/generations/get-generation",
+  "first_stop": {
+    "assigned": 35,
+    "attempted": 12,
+    "passed": 9,
+    "provider_checked_at_utc": "2026-11-20T11:52:38.619206+00:00",
+    "provider_key_usage_delta": "0.005523127",
+    "proxy_rounded_charges": 0.005548,
+    "reserved_pending": 0.7,
+    "arithmetical_remainder": 5.294452,
+    "blocked": true
+  },
+  "first_stop_upstream_log": {
+    "checked_at_moscow": "2026-11-20 14:57",
+    "generation_started_utc": "2026-11-20T11:49:17Z",
+    "model": "deepseek/deepseek-v4.1-flash-20261017",
+    "provider": "DeepInfra",
+    "http_status": 200,
+    "attempts": 1,
+    "failed_attempts": 0,
+    "displayed_latency_seconds": 5.2,
+    "last_local_request_utc": "2026-11-20T11:50:54Z",
+    "association": "The visible upstream row coincides with the last B3.3 call. There was no separate visible upstream row for B3.4."
+  },
+  "single_incident_review": {
+    "recorded_at_utc": "2026-11-20T12:03:58.976183+00:00",
+    "reason": "unexpected_model_or_provider",
+    "same_budget_id": true,
+    "same_reservations_and_charges": true,
+    "limit_usd": 6,
+    "available_usd_after_review": 5.294452,
+    "previous_database_backup_sha256": "f3326e3eb043708c7bd0c04d782f03554f58e1d909b2fd002f43351cebe74215",
+    "future_checks_enabled": true
+  },
+  "second_stop": {
+    "observed_by_utc": "2026-11-20T12:16:46Z",
+    "last_started_task": "B5.4",
+    "last_task_terminal_reason": "transport_error: ReadTimeout",
+    "first_unstarted_task": "B6.1",
+    "assigned": 35,
+    "attempted": 20,
+    "passed": 13,
+    "unattempted": 15,
+    "new_requests_after_stop": 0,
+    "reason": "unexpected_model_or_provider",
+    "upstream_https_connections_after_stop": 0,
+    "individual_provider_response": "unconfirmed"
+  },
+  "offline_error_classification": {
+    "observed_at_utc": "2026-11-20T12:35:32.554677+00:00",
+    "source_file_sha256": "fc0a201a4ef3fea90d68859cd3b43a7f1808d53b6809fd858fa2bc9e1c3aae0f",
+    "method": "Separate temporary SQLite budgets exercised the frozen proxy completion handler with a synthetic HTTP response for each case. Outgoing socket connections were disabled.",
+    "external_requests": 0,
+    "micro_unit": "One micro-USD is 0.000001 USD. All amounts below are synthetic.",
+    "cases": [
+      {
+        "case": "approved_control",
+        "http_status_upstream": 200,
+        "http_status_proxy": 200,
+        "blocked": false,
+        "reason": [],
+        "reserved_micro": 0,
+        "charged_micro": 100
+      },
+      {
+        "case": "error_object_no_identity",
+        "http_status_upstream": 200,
+        "http_status_proxy": 502,
+        "blocked": true,
+        "reason": [
+          "unexpected_model_or_provider"
+        ],
+        "reserved_micro": 350000,
+        "charged_micro": 0
+      },
+      {
+        "case": "missing_provider",
+        "http_status_upstream": 200,
+        "http_status_proxy": 502,
+        "blocked": true,
+        "reason": [
+          "unexpected_model_or_provider"
+        ],
+        "reserved_micro": 350000,
+        "charged_micro": 0
+      },
+      {
+        "case": "different_provider",
+        "http_status_upstream": 200,
+        "http_status_proxy": 502,
+        "blocked": true,
+        "reason": [
+          "unexpected_model_or_provider"
+        ],
+        "reserved_micro": 350000,
+        "charged_micro": 0
+      },
+      {
+        "case": "http_503",
+        "http_status_upstream": 503,
+        "http_status_proxy": 502,
+        "blocked": false,
+        "reason": [],
+        "reserved_micro": 350000,
+        "charged_micro": 0
+      }
+    ],
+    "historical_case": "The production proxy retained no rejected response body. These tests do not distinguish the historical cases.",
+    "provider_error_reference": "https://openrouter.ai/docs/api_reference/errors-and-debugging"
+  }
 }

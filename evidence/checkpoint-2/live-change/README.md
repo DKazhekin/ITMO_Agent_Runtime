@@ -4,6 +4,8 @@
 
 В опыте [с перезапуском управляющего цикла](harness-restart/result.json) файл уже опубликован на Mac, а следующий ответ модели остановлен. После `docker restart` записан один итог `harness_restarted`. Повтор того же запроса вернул 409. Байты файла, номер его записи в файловой системе (inode) и время последней правки сохранились. Следующая предложенная запись не выполнялась.
 
+В [первой проверке менеджера песочниц](manager-restart-before-fix/sandbox-manager.log) поднятие сервиса после перезапуска прервалось в обработчике запуска. Синхронная процедура закрытия пыталась запустить цикл asyncio внутри уже работающего цикла FastAPI. После переноса синхронной процедуры в рабочий поток [повторный опыт](manager-restart/result.json) завершился с одним итогом `mount_lost`. Повтор того же запроса вернул 409, исходная подтверждённая запись сохранилась. Техническая история исключает содержимое файла.
+
 Стенд использует подготовленные образы автономного проекта `itmo-cp2-ci` и отдельные контейнеры, сети и тома проекта `itmo-cp2-fault`. Модель работает на внутренней сети без ключа поставщика. После опыта удаляются только ресурсы тестового проекта. Опыт с перезапуском проведён после подтверждённой записи. Окно между её публикацией и получением квитанции не проверялось.
 
 Из корня репозитория на Mac с подготовленным локальным подключением:
@@ -15,4 +17,7 @@ source .local/checkpoint2/mount.env
 .venv/bin/python -m scripts.check_mounted_change \
   --context colima-itmo-checkpoint2 --restart-service harness \
   --output evidence/checkpoint-2/live-change/harness-restart
+.venv/bin/python -m scripts.check_mounted_change \
+  --context colima-itmo-checkpoint2 --restart-service sandbox-manager \
+  --manager-source runtime/sandbox.py --output evidence/checkpoint-2/live-change/manager-restart
 ```

@@ -8,273 +8,331 @@
     :root {
       color-scheme: dark;
       --page: #101b24;
-      --surface: #182832;
+      --surface: #182a35;
       --text: #f8f3e7;
-      --muted: #afc2c9;
-      --line: #486573;
-      --green: #83dabb;
-      --amber: #ffd394;
-      --link: #a1dcff;
+      --muted: #c0cdd1;
+      --line: #3c5360;
+      --green: #8be4c1;
+      --amber: #ffd18d;
+      --link: #aedbff;
       font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--page); color: var(--text); }
-    a { color: var(--link); text-underline-offset: .19em; }
-    a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: .2em; }
-    code { font: .88em ui-monospace, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
-    main { width: min(100%, 1440px); margin: 0 auto; }
+    body { margin: 0; color: var(--text); background: var(--page); }
+    a { color: var(--link); text-underline-offset: .2em; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: .18em; }
+    main { max-width: 1350px; margin: auto; }
     section {
-      padding: clamp(1.15rem, 3.8vw, 4rem);
-      padding-block: clamp(1.15rem, 2.9vw, 3.4rem);
-      min-height: min(49rem, calc(100dvh - 4.45rem));
-      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(15px, 2.5vh, 27px);
+      min-height: calc(100svh - 65px);
+      padding: clamp(24px, 4.4vh, 52px) clamp(24px, 5vw, 76px) 17px;
     }
-    .active-deck section[hidden] { display: none; }
+    section + section { border-top: 1px solid var(--line); }
     .active-deck section { border: 0; }
-    h1, h2 { margin: 0 0 .35em; font-size: clamp(2rem, 4.15vw, 4.35rem); line-height: 1.02; letter-spacing: -.042em; text-wrap: balance; }
-    h3 { margin: 0 0 .45em; font-size: clamp(1.12rem, 2.15vw, 1.95rem); line-height: 1.1; }
-    p, li { font-size: clamp(1rem, 1.7vw, 1.45rem); line-height: 1.43; }
-    p { margin: .5em 0; }
-    .lead { color: var(--muted); margin: 0 0 1.15em; max-width: 72ch; }
-    .sources { color: var(--muted); font-size: clamp(.88rem, 1.14vw, 1.05rem); margin: 1.35rem 0 0; }
-    .zones {
+    .active-deck section[hidden] { display: none; }
+    h1, h2, h3, p, figure, ol { margin: 0; }
+    h1, h2 { max-width: 27ch; font-size: clamp(2.1rem, 3.6vw, 3.6rem); line-height: 1.08; letter-spacing: -.036em; text-wrap: balance; }
+    h3, .small-title { font-size: clamp(1.18rem, 1.8vw, 1.65rem); line-height: 1.23; letter-spacing: -.014em; }
+    p, li, td, th { font-size: clamp(1.03rem, 1.48vw, 1.3rem); line-height: 1.38; }
+    code { font: .95em ui-monospace, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+    header p { max-width: 83ch; margin-top: .6rem; color: var(--muted); }
+    strong { font-weight: 680; }
+    .sources { display: flex; flex-wrap: wrap; gap: .4rem 1.35rem; margin-top: auto; padding-top: 5px; }
+    .sources a { font-size: clamp(.91rem, 1.13vw, 1.02rem); }
+    .good { color: var(--green); }
+    .warning { color: var(--amber); }
+    #benchmark-title { max-width: none; }
+    .notes-toggle { font-size: 1rem; }
+    .notes-toggle summary { cursor: pointer; color: var(--link); }
+    .notes-toggle summary:focus-visible { outline: 3px solid var(--amber); outline-offset: .15rem; }
+    .notes-toggle dl { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 2rem; margin: .8rem 0 0; }
+    .notes-toggle dt { font-weight: 650; color: var(--text); }
+    .notes-toggle dd { color: var(--muted); margin: .2rem 0 0; line-height: 1.4; }
+    .route { border-block: 1px solid var(--line); }
+    .route-row {
       display: grid;
-      grid-template-columns: minmax(9rem, .75fr) minmax(31rem, 3.2fr) minmax(9rem, .8fr);
-      gap: .7rem;
-      margin: 1rem 0;
+      grid-template-columns: minmax(6.8rem, .68fr) minmax(0, 1.18fr) 1.6rem minmax(0, 1.24fr) 1.6rem minmax(0, 1.32fr);
+      align-items: center;
+      gap: .45rem;
+      padding: clamp(.64rem, 1.55vh, 1.05rem) 0;
     }
-    .zone { background: var(--surface); border: 1px solid var(--line); border-radius: .58rem; padding: .9rem; position: relative; }
-    .zone-label { color: var(--muted); display: block; font-size: .84rem; font-weight: 700; margin-bottom: .75rem; }
-    .zone.client, .zone.provider { display: flex; flex-direction: column; }
-    .node { padding: .7rem; border: 1px solid var(--line); border-radius: .38rem; min-width: 0; }
-    .node strong { display: block; font-size: clamp(.93rem, 1.5vw, 1.22rem); line-height: 1.2; }
-    .node small { display: block; font-size: .83rem; color: var(--muted); margin-top: .32em; line-height: 1.3; }
-    .node.primary { border-color: var(--green); }
-    .node.action { box-shadow: inset .2rem 0 var(--amber); }
-    .services, .kernel, .mount-lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .48rem; align-items: stretch; }
-    .services .node:not(:last-child)::after, .kernel .node:not(:last-child)::after {
-      content: "⇄"; position: absolute; right: -.64rem; top: .65rem; z-index: 1; background: var(--surface); color: var(--green);
+    .route-row + .route-row { border-top: 1px solid var(--line); }
+    .route-name { color: var(--green); font-size: clamp(1rem, 1.3vw, 1.18rem); font-weight: 650; }
+    .route-row:last-child .route-name, .route-row:last-child .connector { color: var(--amber); }
+    .actor { display: block; min-width: 0; overflow-wrap: anywhere; }
+    .actor b { display: block; font-size: clamp(1.08rem, 1.62vw, 1.46rem); line-height: 1.19; }
+    .actor small { display: block; margin-top: .2rem; color: var(--muted); font-size: clamp(.9rem, 1.15vw, 1.06rem); line-height: 1.28; }
+    .connector { color: var(--green); text-align: center; font-size: clamp(1.3rem, 2vw, 1.8rem); }
+    .note { border-left: 3px solid var(--green); padding-left: .85rem; max-width: 84ch; }
+    .note.warn { border-color: var(--amber); }
+    .paths { display: flex; gap: .8rem; align-items: baseline; flex-wrap: wrap; }
+    .paths span { color: var(--muted); }
+    .paths code { margin-left: .45rem; color: var(--text); }
+    .paths b { color: var(--green); }
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 0; gap: clamp(1rem, 2.6vw, 2.7rem); }
+    .steps li { border-top: 2px solid var(--line); padding-top: .8rem; }
+    .steps li:last-child { border-color: var(--green); }
+    .steps .stage { display: block; color: var(--muted); font-size: 1rem; }
+    .steps .value { display: block; font: 600 clamp(2.75rem, 5.7vw, 5.1rem)/1.08 ui-monospace, Menlo, monospace; letter-spacing: -.06em; margin: .38rem 0 .55rem; }
+    .steps p { max-width: 30ch; }
+    .columns { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(1.4rem, 4vw, 4.1rem); align-items: start; }
+    .sheet-wrap { border: 1px solid var(--line); border-radius: .38rem; overflow: hidden; }
+    .sheet-caption { background: var(--surface); padding: .7rem .85rem; color: var(--muted); font-size: clamp(.97rem, 1.25vw, 1.13rem); }
+    table { border-collapse: collapse; width: 100%; }
+    .sheet th, .sheet td { border-top: 1px solid var(--line); border-right: 1px solid var(--line); padding: .65rem .45rem; text-align: center; white-space: nowrap; }
+    .sheet tr > :last-child { border-right: 0; }
+    .sheet th { color: var(--muted); font-weight: 570; background: var(--surface); }
+    .sheet td.changed { font-weight: 650; color: var(--green); background: #203f3a; box-shadow: inset 0 0 0 2px var(--green); }
+    .sheet small { display: block; font-size: .85rem; }
+    .trace { margin: 0; padding-left: 1.75rem; }
+    .trace li { padding-left: .25rem; }
+    .trace li + li { margin-top: .8rem; }
+    .trace li::marker { color: var(--green); font-weight: 680; }
+    .trace b { display: block; margin-bottom: .1rem; }
+    .footline { color: var(--muted); }
+    .comparison { display: grid; grid-template-columns: 1fr auto 1fr; gap: clamp(.6rem, 2.5vw, 2.3rem); align-items: stretch; }
+    .comparison article { padding: 1rem 0; border-block: 1px solid var(--line); }
+    .comparison article p { margin-top: .45rem; max-width: 39ch; }
+    .comparison .connector { align-self: center; color: var(--amber); }
+    .detail { display: grid; gap: .65rem; }
+    .checks { list-style: none; padding: 0; border-bottom: 1px solid var(--line); }
+    .checks li { display: grid; grid-template-columns: minmax(6.6rem, max-content) 1fr; gap: .8rem; padding: .62rem 0; border-top: 1px solid var(--line); align-items: baseline; }
+    .checks b { white-space: nowrap; color: var(--green); font-size: clamp(1.6rem, 2.5vw, 2.3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+    .timing h3 { margin-bottom: .8rem; }
+    .timing p { color: var(--muted); }
+    .bars { display: grid; gap: .77rem; margin: .85rem 0; }
+    .bar-label { display: flex; justify-content: space-between; gap: .5rem; font-size: clamp(.99rem, 1.43vw, 1.24rem); }
+    .bar-track { margin-top: .35rem; height: 9px; background: var(--surface); }
+    .bar-track span { display: block; height: 100%; background: var(--green); }
+    .bar-track.alt span { background: var(--link); }
+    .totals { display: flex; flex-wrap: wrap; gap: .55rem 2.1rem; align-items: baseline; }
+    .total { display: inline-flex; align-items: baseline; gap: .45rem; font-size: clamp(1rem, 1.45vw, 1.3rem); }
+    .total b { font-size: clamp(1.75rem, 2.7vw, 2.65rem); line-height: 1; }
+    .score th, .score td { padding: .32rem 0; border-bottom: 1px solid var(--line); text-align: left; }
+    .score th { font-size: .94rem; color: var(--muted); font-weight: 560; }
+    .score td:last-child, .score th:last-child { text-align: right; white-space: nowrap; padding-left: .5rem; font-variant-numeric: tabular-nums; }
+    .score .not-run td { color: var(--muted); }
+    @media (min-width: 851px) and (max-height: 760px) {
+      section { gap: 13px; padding-top: 24px; }
+      .score th, .score td { padding-block: .24rem; }
     }
-    .services .node, .kernel .node { position: relative; }
-    .manager { margin: .55rem auto; text-align: center; color: var(--muted); font-size: .87rem; }
-    .client .node + .node, .provider .node + .node { margin-top: auto; }
-    .protocols { display: flex; flex-wrap: wrap; gap: .55rem 1rem; margin: .8rem 0; font-size: .91rem; color: var(--muted); }
-    .protocols span { border-left: .18rem solid var(--green); padding-left: .5rem; }
-    .protocols span:nth-child(2) { border-color: var(--amber); }
-    .columns { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.8rem, 3vw, 2.8rem); }
-    .panel { padding-top: .9rem; border-top: 2px solid var(--line); min-width: 0; }
-    .panel.ok { border-color: var(--green); }
-    .panel.warn { border-color: var(--amber); }
-    .panel ul, .panel ol { padding-left: 1.34em; margin: .6rem 0; }
-    .panel li + li { margin-top: .6em; }
-    .mount-lanes { margin: .75rem 0 1rem; }
-    .mount-lanes .node + .node { border-left-color: var(--green); }
-    .quote { padding: .7rem .9rem; background: var(--surface); border-left: 3px solid var(--amber); }
-    .timeline { list-style: none; padding: 0; margin: 1rem 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: .56rem; }
-    .timeline li { background: var(--surface); border-top: 2px solid var(--green); padding: .8rem; min-width: 0; }
-    .timeline li strong { display: block; line-height: 1.1; }
-    .timeline li span { display: block; color: var(--muted); font-size: .82em; margin-top: .35em; }
-    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin: 1rem 0; }
-    .stat { border-top: 1px solid var(--line); padding-top: .65rem; }
-    .stat b { display: block; line-height: 1; font-size: clamp(1.7rem, 3.3vw, 3.6rem); color: var(--green); }
-    .stat span { display: block; color: var(--muted); margin-top: .5em; }
-    .compact { font-size: clamp(.87rem, 1.3vw, 1.13rem); }
-    table { width: 100%; border-collapse: collapse; font-size: clamp(.86rem, 1.45vw, 1.2rem); }
-    th, td { text-align: left; padding: .28em .38em; vertical-align: top; border-bottom: 1px solid var(--line); }
-    th:last-child, td:last-child { text-align: right; width: 8.5em; font-variant-numeric: tabular-nums; }
-    th { color: var(--muted); }
-    .formula { color: var(--green); }
     .navigation { display: none; }
-    .active-deck .navigation {
-      display: flex; position: sticky; bottom: 0; align-items: center; justify-content: space-between;
-      padding: .65rem clamp(.7rem, 3.8vw, 4rem); gap: .55rem; background: var(--page); border-top: 1px solid var(--line);
-    }
-    button {
-      color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: .45rem;
-      min-height: 2.7rem; padding: .42rem .68rem; font: inherit; cursor: pointer;
-    }
+    .active-deck .navigation { position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: .7rem; padding: .55rem clamp(1rem, 5vw, 4.75rem); min-height: 65px; background: var(--page); border-top: 1px solid var(--line); z-index: 2; }
+    button { color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: .35rem; min-height: 40px; padding: .4rem .95rem; font: inherit; cursor: pointer; }
     button:disabled { opacity: .45; cursor: default; }
     .counter { color: var(--muted); font-variant-numeric: tabular-nums; }
-    @media (max-width: 930px) {
-      .zones { grid-template-columns: 1fr 2.65fr; }
-      .zone.provider { grid-column: 1 / -1; }
-      .zone.provider .node { align-self: start; }
-      .zone.client .node + .node { margin-top: .6rem; }
-      .timeline { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 850px) {
+      section { padding-inline: clamp(18px, 4vw, 34px); }
+      .columns { gap: 1.1rem; }
+      .route-row { grid-template-columns: 6.4rem minmax(0, 1fr) 1rem minmax(0, 1.1fr) 1rem minmax(0, 1.1fr); }
+      .sheet th, .sheet td { padding: .6rem .24rem; }
     }
     @media (max-width: 650px) {
-      section { min-height: min(40rem, calc(100dvh - 4.1rem)); }
-      .zones, .columns, .mount-lanes { grid-template-columns: 1fr; }
-      .services, .kernel { gap: .28rem; }
-      .node { padding: .52rem; }
-      .node small { font-size: .77rem; }
-      .services .node:not(:last-child)::after, .kernel .node:not(:last-child)::after { right: -.5rem; }
-      .timeline { grid-template-columns: repeat(2, 1fr); }
-      .stat-row { gap: .65rem; }
-      .stat span { font-size: .9rem; }
+      section { padding-top: 20px; min-height: calc(100svh - 59px); gap: 1.2rem; }
+      h1, h2 { font-size: clamp(1.9rem, 8vw, 2.4rem); }
+      .route-row { grid-template-columns: minmax(0, 1fr) .75rem minmax(0, 1fr) .75rem minmax(0, 1.05fr); gap: .35rem; }
+      .route-name { grid-column: 1 / -1; }
+      .actor b { font-size: 1rem; }
+      .actor small { font-size: .88rem; }
+      .connector { font-size: 1.1rem; }
+      .columns, .comparison, .notes-toggle dl { grid-template-columns: 1fr; }
+      .comparison { gap: .15rem; }
+      .comparison .connector { display: none; }
+      .comparison article:last-child { border-top: 0; }
+      .steps { grid-template-columns: 1fr; gap: .65rem; }
+      .steps li { display: grid; gap: .15rem .75rem; grid-template-columns: 5.3rem 1fr; align-items: start; padding-top: .5rem; }
+      .steps .stage { grid-column: 2; grid-row: 1; }
+      .steps .value { grid-column: 1; grid-row: 1 / 3; margin: .2rem 0; font-size: 2.15rem; }
+      .steps p { grid-column: 2; max-width: none; }
+      .sheet th, .sheet td { padding: .45rem .28rem; }
+      .totals { gap: .55rem 1.2rem; }
+      .active-deck .navigation { min-height: 59px; }
       .navigation .help { display: none; }
     }
+    @media (max-width: 520px) {
+      .route-row { grid-template-columns: 1.1rem minmax(0, 1fr); padding-block: .7rem; gap: .16rem .32rem; }
+      .route-name { margin-bottom: .18rem; }
+      .actor { grid-column: 2; overflow-wrap: normal; line-height: 1.32; }
+      .actor b, .actor small { display: inline; }
+      .actor small { margin: 0; }
+      .actor small::before { content: " · "; }
+      .route-row .connector { grid-column: 1; transform: rotate(90deg); font-size: 1rem; }
+    }
+    .keep { white-space: nowrap; }
     @media print {
-      :root { color-scheme: light; --page: white; --surface: #f3f7f7; --text: #11232b; --muted: #385563; --line: #78929f; --green: #006549; --amber: #754600; --link: #00577d; }
-      .active-deck section[hidden] { display: block; }
-      section { min-height: auto; break-after: page; padding: 1.3rem; }
+      :root { color-scheme: light; --page: white; --surface: #f1f5f6; --text: #12222b; --muted: #364e58; --line: #96a8ae; --green: #00644a; --amber: #794800; --link: #075784; }
+      .active-deck section[hidden] { display: flex; }
+      section { min-height: auto; padding: 1rem; break-after: page; }
       .active-deck .navigation { display: none; }
+      .sheet td.changed { background: #e4f2eb; }
     }
   </style>
 </head>
 <body>
 <main>
   <section id="architecture" aria-labelledby="architecture-title">
-    <h1 id="architecture-title">Среда исполнения агента</h1>
-    <p class="lead">Вторая контрольная точка · Папка остаётся на Mac, инструменты запускаются в песочнице Linux.</p>
-    <div class="zones" aria-label="Границы клиента, сервера Linux и провайдера">
-      <div class="zone client">
-        <span class="zone-label">Mac · машина клиента</span>
-        <div class="node primary"><strong>Окно / терминал</strong><small>Папка, запрос, события, отмена</small></div>
-        <div class="node action"><strong>Локальная папка</strong><small>Файловая служба и публикация</small></div>
+    <header>
+      <h1 id="architecture-title">Как агент работает с папкой на Mac</h1>
+      <p>Пользователь выбирает папку проекта на Mac и просит записать в <code>answer.txt</code> порт из настроек. Запрос идёт через шлюз, а файл появляется в выбранной папке.</p>
+    </header>
+    <div class="route" aria-label="Путь запроса, выбора действия, команды и файла">
+      <div class="route-row">
+        <span class="route-name">Запрос</span>
+        <span class="actor"><b>Окно на Mac</b><small>отправляет задачу</small></span><span class="connector" aria-hidden="true">→</span>
+        <span class="actor"><b>Шлюз Linux</b><small>проверяет доступ</small></span><span class="connector" aria-hidden="true">→</span>
+        <span class="actor"><b>Управляющий цикл</b><small>ведёт журнал шагов</small></span>
       </div>
-      <div class="zone linux">
-        <span class="zone-label">Linux · четыре служебных контейнера и доверенный помощник</span>
-        <div class="services">
-          <div class="node"><strong>Шлюз</strong><small>Токен, маршруты, поток событий</small></div>
-          <div class="node primary"><strong>Управляющий цикл</strong><small>Модель, инструменты, SQLite-журнал</small></div>
-          <div class="node"><strong>Посредник модели</strong><small>Ключ, маршрут, SQLite-бюджет</small></div>
-        </div>
-        <div class="manager">Цикл ⇅ HTTP/JSON · операция, статус и результат</div>
-        <div class="kernel">
-          <div class="node action"><strong>Помощник Linux</strong><small>SSHFS, наблюдение за передачей байтов</small></div>
-          <div class="node"><strong>Менеджер песочниц</strong><small>Сокеты Docker и помощника, журнал</small></div>
-          <div class="node primary"><strong>Песочница</strong><small><code>/work</code>, пользователь 1000, сеть отключена</small></div>
-        </div>
+      <div class="route-row">
+        <span class="route-name">Выбор действия</span>
+        <span class="actor"><b>Управляющий цикл</b><small>передаёт задачу и наблюдения</small></span><span class="connector" aria-hidden="true">⇄</span>
+        <span class="actor"><b>Посредник модели</b><small>хранит ключ и проверяет бюджет</small></span><span class="connector" aria-hidden="true">⇄</span>
+        <span class="actor"><b>DeepSeek у поставщика</b><small>возвращает действие или ответ</small></span>
       </div>
-      <div class="zone provider">
-        <span class="zone-label">Внешний сервис</span>
-        <div class="node"><strong>OpenRouter</strong><small>DeepSeek через DeepInfra</small></div>
+      <div class="route-row">
+        <span class="route-name">Команда</span>
+        <span class="actor"><b>Управляющий цикл</b><small>вызывает инструмент</small></span><span class="connector" aria-hidden="true">→</span>
+        <span class="actor"><b>Менеджер песочниц</b><small>запускает контейнер</small></span><span class="connector" aria-hidden="true">→</span>
+        <span class="actor"><b>Песочница Linux</b><small>исполняет команду без сети</small></span>
+      </div>
+      <div class="route-row">
+        <span class="route-name">Файл</span>
+        <span class="actor"><b>Песочница</b><small>видит файлы в <code>/work</code></small></span><span class="connector" aria-hidden="true">⇄</span>
+        <span class="actor"><b>Помощник Linux</b><small>передаёт файловые операции</small></span><span class="connector" aria-hidden="true">⇄</span>
+        <span class="actor"><b>Папка на Mac</b><small>файловая служба проверяет и сохраняет правку</small></span>
       </div>
     </div>
-    <div class="protocols" aria-label="Протоколы между зонами">
-      <span>Окно ⇄ шлюз · HTTP/JSON и SSE, поток событий</span>
-      <span>Папка ⇄ помощник · SFTP через обратный SSH-туннель</span>
-      <span>Посредник ⇄ провайдер · HTTPS, запрос и расход токенов</span>
-    </div>
-    <p class="sources"><a href="../../compose.yaml">Контейнеры и сеть</a> · <a href="questions.md">Конспект по вопросам курса</a></p>
+    <p class="note">В проверке окна с заранее заданными ответами модели на Mac появился <code>answer.txt</code> со значением <strong>8137</strong>. События вернулись в окно через шлюз.</p>
+    <details class="notes-toggle">
+      <summary>Какие данные передаются и у кого есть доступ</summary>
+      <dl>
+        <div><dt>Клиент ⇄ шлюз</dt><dd>Запросы и отмена передаются сообщениями JSON по протоколу HTTP. События поступают от сервера потоком (SSE). После обрыва клиент запрашивает события с последнего полученного номера.</dd></div>
+        <div><dt>Цикл ⇄ менеджер песочниц</dt><dd>Цикл отправляет имя инструмента и параметры. Менеджер возвращает код завершения, вывод и итог записи. Доступ к службе контейнеров есть у менеджера.</dd></div>
+        <div><dt>Помощник Linux ⇄ файловая служба Mac</dt><dd>Mac открывает защищённый туннель (SSH). Внутри него передаются файловые операции (SFTP). Помощник подключает папку к Linux как файловую систему (SSHFS), доступную в песочнице под именем <code>/work</code>.</dd></div>
+        <div><dt>Посредник ⇄ внешний поставщик</dt><dd>Посредник отправляет контекст по защищённому соединению (HTTPS) в OpenRouter. Ключ и журнал расходов остаются у посредника. У песочницы нет сетевого доступа.</dd></div>
+      </dl>
+    </details>
+    <div class="sources"><a href="workspace.md">Подключение папки и протоколы</a><a href="../../evidence/checkpoint-2/desktop.json">Проверка в окне</a><a href="questions.md">Конспект выступления</a></div>
   </section>
 
   <section id="mount" aria-labelledby="mount-title">
-    <h2 id="mount-title">Монтирование и сохранение</h2>
-    <p class="lead">Mac открывает туннель. Linux подключает рабочую папку в <code>/work</code> и проверяет, что поколение монтирования живо.</p>
-    <div class="mount-lanes" aria-label="Путь файловой операции">
-      <div class="node"><strong>1. Песочница</strong><small>Читает файл или вызывает запись через <code>/work</code>.</small></div>
-      <div class="node"><strong>2. Помощник Linux</strong><small>Проверяет подтверждённые операции SFTP и связывает их с вызовом инструмента.</small></div>
-      <div class="node action"><strong>3. Mac</strong><small>Сверяет черновик, версию и право на публикацию. Возвращает квитанцию.</small></div>
-    </div>
-    <div class="columns">
-      <div class="panel ok">
-        <h3>Подтверждённая запись</h3>
-        <p>Новый файл создаётся, если имя свободно. Существующий файл заменяется в согласованном режиме macOS при совпадении версии.</p>
-      </div>
-      <div class="panel warn">
-        <h3>Конфликт версий</h3>
-        <p class="quote"><code>8000</code> прочитал агент → <code>9000</code> сохранил пользователь → <code>8080</code> остаётся предложением.</p>
-        <p>В сквозном опыте цикл заметил <code>9000</code>, повторил чтение и отбросил устаревшую команду.</p>
-      </div>
-    </div>
-    <p class="compact">Прямое монтирование прошло 28 из 28 проверок чтения, записи, конфликта и очистки.</p>
-    <p class="sources"><a href="../../evidence/checkpoint-2/mount/README.md">Демонстрация между Mac и Linux</a> · <a href="../../evidence/checkpoint-2/live-change/result.json">Правка во время работы</a> · <a href="../adr/0003-mounting.md">Почему SSHFS</a></p>
+    <header>
+      <h2 id="mount-title">Что происходит, если человек меняет файл</h2>
+      <p>Mac открывает защищённое соединение. Благодаря монтированию программа в Linux видит выбранную папку по пути <code>/work</code>.</p>
+    </header>
+    <p class="paths" aria-label="Два пути к одному файлу"><span>На Mac <code>port.txt</code></span><b aria-hidden="true">⇄</b><span>В песочнице <code>/work/port.txt</code></span></p>
+    <ol class="steps" aria-label="Реальная правка файла во время ответа модели">
+      <li><span class="stage">Первое чтение</span><b class="value">8000</b><p>Агент прочитал порт и начал готовить следующую команду.</p></li>
+      <li><span class="stage">Правка на Mac</span><b class="value warning">9000</b><p>Пока модель отвечала, пользователь сохранил в том же файле новый порт.</p></li>
+      <li><span class="stage">Ответ агента</span><b class="value good">9000</b><p>Цикл отбросил устаревшую команду. Модель запросила повторное чтение и ответила новым значением.</p></li>
+    </ol>
+    <p class="note">Это проверили на подключённой папке Mac. В журнале видны уведомление о правке, повторное чтение и единственный итог. Ответы модели для опыта были заданы заранее.</p>
+    <div class="sources"><a href="../../evidence/checkpoint-2/live-change/result.json">События 6, 8 и 11</a><a href="../../evidence/checkpoint-2/mount/README.md">Проверки монтирования</a></div>
   </section>
 
   <section id="success" aria-labelledby="success-title">
-    <h2 id="success-title">Запрос, исполнение, результат</h2>
-    <p class="lead">Б9.1 в смонтированной папке. Команда переносит формулу в книге Excel и сохраняет файл на Mac.</p>
-    <ol class="timeline" aria-label="События запроса">
-      <li><strong><code>started</code></strong><span>11 · запуск принят</span></li>
-      <li><strong><code>model</code></strong><span>12 · воспроизведение действия</span></li>
-      <li><strong><code>tool_call</code></strong><span>13 · команда в песочнице</span></li>
-      <li><strong><code>tool_result</code></strong><span>14 · код выхода 0</span></li>
-      <li><strong><code>write_decision</code></strong><span>15 · Mac подтвердил запись</span></li>
-      <li><strong><code>result</code></strong><span>17 · успешный итог</span></li>
-    </ol>
-    <div class="stat-row" aria-label="Показатели прогона Б9.1 в режиме воспроизведения">
-      <div class="stat"><b>1,421 с</b><span>попытка целиком</span></div>
-      <div class="stat"><b>0,688 с</b><span>операция по данным менеджера</span></div>
-      <div class="stat"><b>0</b><span>внешних токенов в режиме воспроизведения</span></div>
+    <header>
+      <h2 id="success-title">Как проверили перенос формулы в Excel</h2>
+      <p>В задаче Б9.1 нужно скопировать формулу из <code>D2</code> в пустую ячейку <code>D3</code>. При копировании на строку вниз ссылки на множители тоже должны сдвинуться.</p>
+    </header>
+    <div class="columns">
+      <figure class="sheet-wrap">
+        <figcaption class="sheet-caption"><code>workbook.xlsx</code> · фрагмент листа <code>Data</code> после сохранения</figcaption>
+        <table class="sheet" aria-label="Количество, цена и формулы в строках 2 и 3">
+          <thead><tr><th scope="col">Строка</th><th scope="col">B<small>Количество</small></th><th scope="col">C<small>Цена</small></th><th scope="col">D<small>Формула</small></th></tr></thead>
+          <tbody>
+            <tr><th scope="row">2</th><td>3</td><td>5</td><td><code>=B2*C2</code></td></tr>
+            <tr><th scope="row">3</th><td>4</td><td>7</td><td class="changed"><code>=B3*C3</code></td></tr>
+          </tbody>
+        </table>
+      </figure>
+      <ol class="trace">
+        <li><b>Песочница изменила книгу</b>Команда записала формулу и завершилась с кодом 0.</li>
+        <li><b>Клиент на Mac сохранил файл</b>В журнале появилось подтверждение записи книги.</li>
+        <li><b>Проверка открыла книгу снова</b>В <code>D3</code> оказалась нужная формула. Исходная формула и контрольные ячейки сохранились.</li>
+      </ol>
     </div>
-    <p class="compact">После закрытия сессии независимая проверка открыла сохранённую книгу на Mac и приняла формулу <code>=B3*C3</code>.</p>
-    <p class="sources"><a href="../../evidence/checkpoint-2/mounted-smoke/B9.1/trace.jsonl">Запись сквозного запуска</a> · <a href="../../evidence/checkpoint-2/mounted-smoke/B9.1/work/workbook.xlsx">Полученная книга</a> · <a href="../../baf/B9-formula/B9.1-relative/check.py">Проверка</a></p>
+    <p class="note">Весь пример занял <strong>1,421 с</strong>. Ответы модели задали заранее. Команда отработала в песочнице, а проверка прочитала файл с Mac. Расход внешних токенов — 0.</p>
+    <div class="sources"><a href="../../baf/B9-formula/B9.1-relative/fixture/workbook.xlsx">Книга до</a><a href="../../evidence/checkpoint-2/mounted-smoke/B9.1/work/workbook.xlsx">Книга после</a><a href="../../evidence/checkpoint-2/mounted-smoke/B9.1/trace.jsonl">Журнал Б9.1</a><a href="../../baf/B9-formula/B9.1-relative/check.py">Независимая проверка</a></div>
   </section>
 
   <section id="failure" aria-labelledby="failure-title">
-    <h2 id="failure-title">Остановка при сбое</h2>
-    <p class="lead">После обрыва важно установить, успела ли запись попасть в исходную папку.</p>
-    <div class="columns">
-      <div class="panel warn">
-        <h3>Потеря монтирования</h3>
-        <ul>
-          <li>До операции — <code>mount_lost</code>.</li>
-          <li>Во время записи без квитанции — <code>write_outcome_unknown</code>.</li>
-          <li>Для следующего запуска открывается новая сессия. Старая запись автоматически не повторяется.</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3>Отмена и очистка</h3>
-        <ul>
-          <li>Клиент посылает отмену по номеру запуска.</li>
-          <li>Менеджер удаляет контейнер и процессы, помощник снимает монтирование.</li>
-          <li>Технический итог остаётся в журнале. При гонке записывается один финальный <code>result</code>.</li>
-        </ul>
-      </div>
+    <header>
+      <h2 id="failure-title">Команда завершилась, а исходник остался прежним</h2>
+      <p>В отдельной проверке Б4.1 с имитацией модели редактор изменил <code>README.md</code> в песочнице. Клиенту предстояло решить, можно ли заменить существующий файл на Mac.</p>
+    </header>
+    <div class="comparison">
+      <article><h3>В песочнице</h3><p>Команда завершилась с <strong>кодом 0</strong>. Редактор закончил работу и вернул управление.</p></article>
+      <span class="connector" aria-hidden="true">→</span>
+      <article><h3 class="warning">На Mac</h3><p>Клиент не смог подтвердить безопасную замену. Исходный <code>README.md</code> сохранился. Предложенную правку удалось выгрузить отдельным файлом.</p></article>
     </div>
-    <p class="compact quote">В Б4.1 команда вернула код 0. На событии 4 записан <code>write_unverified</code>. Событие 5 подтвердило отдельное предложение. Исходный файл сохранился, повтор после закрытия получил HTTP 409.</p>
-    <p class="sources"><a href="../../evidence/checkpoint-2/unapplied/active.jsonl">Ход отказа записи</a> · <a href="../../evidence/checkpoint-2/unapplied/result.json">Проверка исходника и повтора</a> · <a href="../../evidence/checkpoint-2/mount/sshfs-disconnect.json">Обрыв монтирования</a></p>
+    <div class="detail">
+      <p><strong>Как это видно.</strong> Событие 4 содержит <code>write_unverified</code>, событие 5 указывает на отдельную версию. Контрольная сумма исходника осталась прежней.</p>
+      <p><strong>Если пропадает связь.</strong> При потере подтверждения во время записи система сообщает, что исход неизвестен. В опыте с перезапуском менеджера уже сохранённый файл остался на месте, второй записи не было.</p>
+    </div>
+    <div class="sources"><a href="../../evidence/checkpoint-2/unapplied/result.json">Проверка исходника и отдельной версии</a><a href="../../evidence/checkpoint-2/unapplied/active.jsonl">Журнал Б4.1 с имитацией модели</a><a href="../../evidence/checkpoint-2/live-change/manager-restart/result.json">Перезапуск менеджера</a></div>
   </section>
 
   <section id="verification" aria-labelledby="verification-title">
-    <h2 id="verification-title">Проверки системы и набора</h2>
-    <p class="lead">Контракты, ограничения и файловые результаты проверяются на синтетических данных.</p>
-    <div class="stat-row">
-      <div class="stat"><b>9 из 9</b><span>коротких задач в режиме воспроизведения</span></div>
-      <div class="stat"><b>105</b><span>проверок исходов 35 задач набора</span></div>
-      <div class="stat"><b>3</b><span>дополнительных проверки набора</span></div>
-    </div>
+    <header>
+      <h2 id="verification-title">Что проверяется без вызова DeepSeek</h2>
+      <p>Автономная команда проверяет службы, сами задания и полный путь от запроса до файла. Для коммита <code>1245dd7</code> эта команда успешно отработала на GitHub.</p>
+    </header>
     <div class="columns">
-      <div class="panel">
-        <h3>Окно и инфраструктура</h3>
-        <p>Состояние сессии, доступ владельца, обработка отмены, границы папки, изоляция сети и освобождение ресурсов.</p>
+      <div>
+        <h3>Результат локального запуска</h3>
+        <ul class="checks">
+          <li><b>277</b><span>тестов клиента, протоколов, изоляции и обработки сбоев</span></li>
+          <li><b>108</b><span>примеров для проверки оценок заданий, включая ошибки и пропущенные файлы</span></li>
+          <li><b>9 из 9</b><span>коротких задач прошли через службы с заранее заданными ответами модели</span></li>
+        </ul>
       </div>
-      <div class="panel">
-        <h3>Действия и сохранённые файлы</h3>
-        <p>Воспроизведение проходит через работающие службы. Б6 проверяется отдельным контейнером без сети. Б9 читает сохранённую книгу.</p>
+      <div class="timing">
+        <h3>Сколько занимает пустая команда</h3>
+        <div class="bars" aria-label="Медианы 251 и 34 миллисекунды по десяти парным повторам">
+          <div><div class="bar-label"><span>Подключённая папка Mac</span><b>251 мс</b></div><div class="bar-track" aria-hidden="true"><span style="width:100%"></span></div></div>
+          <div><div class="bar-label"><span>Локальная копия файлов</span><b>34 мс</b></div><div class="bar-track alt" aria-hidden="true"><span style="width:13.55%"></span></div></div>
+        </div>
+        <p>Медианы по 10 парным измерениям. В первом случае в замер входят создание и удаление контейнера для каждой операции.</p>
       </div>
     </div>
-    <p class="compact">Замер на Mac и Linux, по 10 повторов. Медиана пустой команды — 251 мс с монтированием, 34 мс со снимком. В первом случае в замер входят создание и удаление контейнера для операции.</p>
-    <p class="sources"><a href="../../baf/checker-validation.json">Самопроверка набора</a> · <a href="../../evidence/checkpoint-2/README.md">Автоматические прогоны и статус CI</a> · <a href="../../evidence/checkpoint-2/measurements-after-fix.json">Повторные замеры</a></p>
+    <p class="note">Окно проверили отдельно на Mac. Все <strong>11 шагов</strong> прошли, включая выбор папки, отправку задачи, появление файла и закрытие сессии.</p>
+    <div class="sources"><a href="../../evidence/checkpoint-2/offline.json">Автономная проверка и GitHub</a><a href="../../evidence/checkpoint-2/measurements-after-fix.json">Исходные измерения</a><a href="../../evidence/checkpoint-2/desktop.json">Проверка окна</a></div>
   </section>
 
   <section id="benchmark" aria-labelledby="benchmark-title">
-    <h2 id="benchmark-title">Первая пара и остановка прогона</h2>
-    <p class="lead">Последовательный управляющий цикл и DeepSeek V4.1 Flash 1017 с режимом <code>high</code>, OpenRouter / DeepInfra FP8.</p>
+    <header>
+      <h2 id="benchmark-title">DeepSeek прошла <span class="keep">13 из 20</span> начатых задач</h2>
+      <p>Для оценки подготовили 35 задач. Каждую начатую задачу оценивали по первой попытке на связке «управляющий цикл + DeepSeek V4.1 Flash 1017» через DeepInfra.</p>
+    </header>
+    <div class="totals" id="benchmark-status" aria-label="Из 35 задач 13 зачтены, 7 завершились ошибкой и 15 остались без попытки">
+      <span class="total"><b class="good">13</b> зачтено</span>
+      <span class="total"><b class="warning">7</b> завершились ошибкой</span>
+      <span class="total"><b>15</b> без попытки</span>
+    </div>
     <div class="columns">
-      <table aria-label="Назначение и результаты реальных попыток по функциям">
-        <thead><tr><th scope="col">Базисная функция</th><th scope="col">Зачтено / назначено</th></tr></thead>
+      <table class="score" aria-label="Результаты пяти проверенных групп и объём остальных четырёх">
+        <thead><tr><th scope="col">Вид задачи</th><th scope="col">Зачтено / назначено</th></tr></thead>
         <tbody>
           <tr><td>Б1 · Чтение</td><td data-task-group="B1">4 / 4</td></tr>
           <tr><td>Б2 · Поиск</td><td data-task-group="B2">3 / 4</td></tr>
           <tr><td>Б3 · Создание файла</td><td data-task-group="B3">2 / 4</td></tr>
-          <tr><td>Б4 · Редактирование</td><td data-task-group="B4">— / 4</td></tr>
-          <tr><td>Б5 · Использование инструмента</td><td data-task-group="B5">— / 4</td></tr>
-          <tr><td>Б6 · Генерация кода</td><td data-task-group="B6">— / 4</td></tr>
-          <tr><td>Б7 · Рассуждение</td><td data-task-group="B7">— / 4</td></tr>
-          <tr><td>Б8 · Синтез источников</td><td data-task-group="B8">— / 4</td></tr>
-          <tr><td>Б9 · Перенос формулы</td><td data-task-group="B9">— / 3</td></tr>
+          <tr><td>Б4 · Редактирование</td><td data-task-group="B4">2 / 4</td></tr>
+          <tr><td>Б5 · Применение инструмента</td><td data-task-group="B5">2 / 4</td></tr>
+          <tr class="not-run"><td>Б6 · Код</td><td data-task-group="B6">— / 4</td></tr>
+          <tr class="not-run"><td>Б7 · Рассуждение</td><td data-task-group="B7">— / 4</td></tr>
+          <tr class="not-run"><td>Б8 · Объединение источников</td><td data-task-group="B8">— / 4</td></tr>
+          <tr class="not-run"><td>Б9 · Перенос формулы</td><td data-task-group="B9">— / 3</td></tr>
         </tbody>
       </table>
-      <div class="panel ok">
-        <h3>Б9.1 · Перенос в книге Excel</h3>
-        <p><code>D2</code> содержит <code>=B2*C2</code>. После копирования в <code>D3</code> проверка ожидает <code class="formula">=B3*C3</code>. Исходная формула и контрольные ячейки сохраняются.</p>
-        <p class="compact" id="benchmark-status">Зачтено 9 из 12 начатых. Ещё 23 задачи остались без попытки: журнал расходов остановил вызовы после несоответствия заявленной модели или поставщика.</p>
-        <p class="sources"><a href="../../baf/B9-formula/B9.1-relative/fixture/workbook.xlsx">Исходная книга</a> · <a href="../../baf/B9-formula/B9.1-relative/check.py">Проверка</a> · <a href="../../evidence/checkpoint-2/baf/report.json">Матрица и первичные попытки</a></p>
+      <div class="detail">
+        <h3>Почему остановились перед Б6</h3>
+        <p>Посредник второй раз не смог подтвердить модель или поставщика и остановил новые обращения. Б6–Б9 остались без платных попыток.</p>
+        <p><strong>Причины семи неудач.</strong> Трижды истекло время ожидания. Для двух ошибок обращения к сервису журнал не сохранил подробности. Ещё в двух задачах не подтвердилась запись файла.</p>
       </div>
     </div>
+    <div class="sources"><a href="../../evidence/checkpoint-2/baf/report.json">Все первые попытки</a><a href="../../evidence/checkpoint-2/budget.json">Остановки и расходы</a><a href="../../evidence/checkpoint-2/write-paths.json">Разбор записи файла</a></div>
   </section>
 
   <nav class="navigation" aria-label="Навигация по слайдам">
@@ -311,9 +369,10 @@
   next.addEventListener("click", () => show(current + 1));
   window.addEventListener("hashchange", showHash);
   document.addEventListener("keydown", event => {
+    const target = event.target instanceof Element ? event.target : null;
     if (event.altKey || event.ctrlKey || event.metaKey || event.defaultPrevented ||
-        event.target.closest("input, textarea, select, [contenteditable]") ||
-        (event.key === " " && event.target.closest("a, button"))) return;
+        target?.closest("input, textarea, select, [contenteditable]") ||
+        (event.key === " " && target?.closest("a, button, summary"))) return;
     const targets = { ArrowLeft: current - 1, PageUp: current - 1, ArrowRight: current + 1,
                       PageDown: current + 1, " ": current + 1, Home: 0, End: slides.length - 1 };
     if (!(event.key in targets)) return;

@@ -1,0 +1,287 @@
+........................................................................ [ 25%]
+........................................................................ [ 51%]
+........................................................................ [ 77%]
+.............................................................            [100%]
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/starlette/testclient.py:37
+  /usr/local/lib/python3.12/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+tests/test_model_expectations.py::test_server_rejects_mismatch_before_run_is_accepted[actual0-mock-None]
+  /app/runtime/harness.py:56: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+tests/test_model_expectations.py::test_server_rejects_mismatch_before_run_is_accepted[actual0-mock-None]
+tests/test_mounted_runtime.py::test_owner_routes_repetition_and_private_history
+tests/test_mounted_runtime.py::test_owner_routes_repetition_and_private_history
+  /usr/local/lib/python3.12/site-packages/fastapi/applications.py:4495: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+tests/test_mounted_runtime.py::test_owner_routes_repetition_and_private_history
+  /app/runtime/sandbox.py:57: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+tests/test_mounted_runtime.py::test_owner_routes_repetition_and_private_history
+  /app/runtime/sandbox.py:90: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("shutdown")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+277 passed, 7 warnings in 23.62s
+{
+  "kind": "task_package_validation_not_model_run",
+  "pass": true,
+  "tasks": [
+    {
+      "task_id": "B1.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B1.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B1.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B1.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B2.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B2.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B2.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B2.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B3.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B3.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B3.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B3.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B4.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B4.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B4.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B4.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B5.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B5.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B5.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B5.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B9.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B9.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B9.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    }
+  ],
+  "scales": {
+    "contract_pages": 15,
+    "contract_words": 6437,
+    "search_files": 200,
+    "environment_readers": 12,
+    "upstream_B1.1_exact": true
+  },
+  "extra_cases": [
+    "missing_second_yaml_rejected",
+    "modified_source_rejected",
+    "artifact_symlink_rejected"
+  ]
+}
+{"task": "B1.1", "pass": true, "reason": "ok"}
+{"task": "B2.1", "pass": true, "reason": "ok"}
+{"task": "B3.1", "pass": true, "reason": "ok"}
+{"task": "B4.1", "pass": true, "reason": "ok"}
+{"task": "B5.1", "pass": true, "reason": "ok"}
+{"task": "B6.1", "pass": true, "reason": "ok"}
+{"task": "B7.1", "pass": true, "reason": "ok"}
+{"task": "B8.1", "pass": true, "reason": "ok"}
+{"task": "B9.1", "pass": true, "reason": "ok"}
+{"path": "results/checkpoint-2/freeze-smoke/mock/20261120T115923Z-eb4b696b", "passed": 9, "total": 9, "requested_total": 9, "stopped_reason": null}

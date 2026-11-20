@@ -1,0 +1,31 @@
+{
+  "task": "B5.2",
+  "pass": false,
+  "state": {
+    "version": "0",
+    "request_id": "f869937aa87d1d617c27ffdba866297e",
+    "session_id": "1feed3af1a702e454b19345a9df5bdd7",
+    "status": "error",
+    "duration_seconds": 15.674952896000377,
+    "error": "write_outcome_unknown"
+  },
+  "duration_seconds": 16.0740129170008,
+  "task_id": "B5.2",
+  "repeat": 1,
+  "seconds": 16.0740129170008,
+  "tokens_in": null,
+  "tokens_out": null,
+  "tokens_complete": false,
+  "cost_usd": null,
+  "recorded_cost_usd": 0.000382,
+  "cost_complete": false,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "error",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "write_outcome_unknown"
+}
