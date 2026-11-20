@@ -1,5 +1,9 @@
 # Protocol version 0
 
+Mounted sessions use the installation bearer token and a separate random `X-Session-Key` header (32–256 characters). The client creates this key before the first provisioning request. A retry uses the same key and request identity. A different owner receives 403. An explicitly closed session returns 409 for a repeated command. A transient disconnection resumes from the last event sequence. The owner can still read technical events as newline-delimited JSON at `GET /sessions/{session_id}/history`. Active file paths, instructions, answers, output streams and proposal identifiers stay out of that durable history.
+
+Each public mount descriptor carries a generation, reverse port, pinned host public key and read-only flag. The public API accepts a mount or a file snapshot. Only the manager can attach a mount through the trusted host helper. The manager's private mounted endpoints and their request and response types are included in the sandbox OpenAPI document. A command can exit with zero and still return a write error when publication on the Mac failed. The active `write_decision` event conveys the decision for each affected path, including a proposal identifier when the client can export an alternative.
+
 The two protocols have complete JSON Schema documents and OpenAPI descriptions:
 
 | Boundary | Message schemas | HTTP routes |

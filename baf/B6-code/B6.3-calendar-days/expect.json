@@ -1,0 +1,76 @@
+{
+  "kind": "code",
+  "path": "dates.py",
+  "expected": [
+    [
+      "days_between",
+      [
+        " 2024−02−28 ",
+        "2024-03-01"
+      ],
+      {
+        "value": 2
+      }
+    ],
+    [
+      "days_between",
+      [
+        "2026-01-03",
+        "2025-12-30"
+      ],
+      {
+        "value": -4
+      }
+    ],
+    [
+      "days_between",
+      [
+        "2000-02-29",
+        "2000-02-29"
+      ],
+      {
+        "value": 0
+      }
+    ],
+    [
+      "days_between",
+      [
+        "",
+        "2026-01-01"
+      ],
+      {
+        "exception": "ValueError"
+      }
+    ],
+    [
+      "days_between",
+      [
+        "1900-02-29",
+        "1900-03-01"
+      ],
+      {
+        "exception": "ValueError"
+      }
+    ],
+    [
+      "days_between",
+      [
+        "２０２６-01-01",
+        "2026-01-01"
+      ],
+      {
+        "exception": "ValueError"
+      }
+    ],
+    [
+      "days_between",
+      [
+        "2026−01-01",
+        "2026-01-01"
+      ],
+      {
+        "exception": "ValueError"
+      }
+    ]
+  ]
+}

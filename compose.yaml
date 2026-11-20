@@ -24,14 +24,20 @@ services:
   sandbox-manager:
     <<: *service
     build: .
-    command: [python, -m, uvicorn, "runtime.sandbox:app", --host, 0.0.0.0, --port, "8000"]
+    command: [python, -m, uvicorn, "runtime.sandbox:app", --host, 0.0.0.0, --port, "8000", --no-access-log]
     environment:
       STATE_DIR: /state
       SANDBOX_NAMESPACE: ${COMPOSE_PROJECT_NAME:-itmo-checkpoint}
       HARNESS_CANARY_SECRET: canary-must-not-enter-sandbox
+      MOUNT_HELPER_SOCKET: /run/itmo-mount/helper.sock
+      MOUNT_ROOT: ${MOUNT_ROOT:-/var/lib/itmo-mount}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - sandbox-state:/state
+      - type: bind
+        source: ${MOUNT_HELPER_DIR:-/run/itmo-mount}
+        target: /run/itmo-mount
+        read_only: true
     networks: [control]
     depends_on:
       sandbox-image:
@@ -40,7 +46,7 @@ services:
   llm-proxy:
     <<: *service
     build: .
-    command: [python, -m, uvicorn, "runtime.proxy:app", --host, 0.0.0.0, --port, "8000"]
+    command: [python, -m, uvicorn, "runtime.proxy:app", --host, 0.0.0.0, --port, "8000", --no-access-log]
     user: "1000:1000"
     environment:
       MODEL_MODE: ${MODEL_MODE:-mock}
@@ -56,7 +62,7 @@ services:
   harness:
     <<: *service
     build: .
-    command: [python, -m, uvicorn, "runtime.harness:app", --host, 0.0.0.0, --port, "8000"]
+    command: [python, -m, uvicorn, "runtime.harness:app", --host, 0.0.0.0, --port, "8000", --no-access-log]
     environment:
       STATE_DIR: /state
       HARNESS: ${HARNESS:-sequential}
@@ -71,6 +77,7 @@ services:
   gateway:
     <<: *service
     build: .
+    command: [python, -m, uvicorn, "runtime.gateway:app", --host, 0.0.0.0, --port, "8000", --no-access-log]
     user: "1000:1000"
     environment:
       CLIENT_TOKEN: ${CLIENT_TOKEN:-local-checkpoint-token}

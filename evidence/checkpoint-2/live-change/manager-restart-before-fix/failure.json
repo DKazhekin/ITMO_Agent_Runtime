@@ -1,0 +1,7 @@
+{
+  "collected_at_utc": "2026-11-20T11:56:03.907951+00:00",
+  "restart_service": "sandbox-manager",
+  "error": "HTTPStatusError",
+  "message": "Server error '500 Internal Server Error' for url 'http://127.0.0.1:18126/sessions/2bf6723b81714b34971661a3e8de91d6'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+  "preceding_error": "runtime did not become healthy after restart"
+}

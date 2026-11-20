@@ -1,0 +1,60 @@
+{
+  "kind": "code",
+  "path": "slug.py",
+  "expected": [
+    [
+      "slugify",
+      [
+        "  VélO --- ３.0?"
+      ],
+      {
+        "value": "velo-3-0"
+      }
+    ],
+    [
+      "slugify",
+      [
+        "Café"
+      ],
+      {
+        "value": "cafe"
+      }
+    ],
+    [
+      "slugify",
+      [
+        "🙂 Мир"
+      ],
+      {
+        "value": ""
+      }
+    ],
+    [
+      "slugify",
+      [
+        "X_2/5"
+      ],
+      {
+        "value": "x-2-5"
+      }
+    ],
+    [
+      "slugify",
+      [
+        ""
+      ],
+      {
+        "value": ""
+      }
+    ],
+    [
+      "slugify",
+      [
+        "ﬃ Tést"
+      ],
+      {
+        "value": "ffi-test"
+      }
+    ]
+  ]
+}

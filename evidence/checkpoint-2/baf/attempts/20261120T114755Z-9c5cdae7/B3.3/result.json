@@ -1,0 +1,32 @@
+{
+  "task": "B3.3",
+  "pass": false,
+  "state": {
+    "version": "0",
+    "request_id": "59c4571dc4b720fb82c80896837173ef",
+    "session_id": "79a10d674e937fc9fd010ab66bac3856",
+    "status": "error",
+    "duration_seconds": 98.44707285799996,
+    "error": "transport_error",
+    "detail": "ReadTimeout"
+  },
+  "duration_seconds": 98.7832716670091,
+  "task_id": "B3.3",
+  "repeat": 1,
+  "seconds": 98.7832716670091,
+  "tokens_in": null,
+  "tokens_out": null,
+  "tokens_complete": false,
+  "cost_usd": null,
+  "recorded_cost_usd": 0.000429,
+  "cost_complete": false,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "error",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "transport_error: ReadTimeout"
+}

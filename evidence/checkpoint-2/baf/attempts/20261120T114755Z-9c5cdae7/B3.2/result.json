@@ -1,0 +1,45 @@
+{
+  "task": "B3.2",
+  "pass": true,
+  "state": {
+    "version": "0",
+    "request_id": "bf05bcfd90a10436f52cb9029f9d3fdd",
+    "session_id": "a0bb4f66184349da513336a25bc43e0f",
+    "status": "success",
+    "duration_seconds": 15.360108172999844,
+    "answer": "Готово — `/work/report.csv` создан.\n\n```\nid,date,description,amount\nR01,2025-12-31,Inventory,300.00\nR02,2026-02-03,Delivery,75.00\nR03,2026-03-17,\"Return \"\"priority\"\"\",-15.00\nR04,2026-04-09,\"Packaging, reusable\",120.50\nR05,2026-04-09,Storage,44.25\n```\n\nЧто сделано:\n- Таблица из `task.md` распарсена, все поля сохранены как текст (десятичные `300.00`, `75.00` и т.д. не тронуты).\n- Сортировка: по `date` по возрастанию, при равных датах — по `id` по возрастанию (R04 перед R05 в пределах 2026-04-09).\n- Стандартное CSV-экранирование: `Packaging, reusable` — в кавычках из-за запятой; `Return \"priority\"` — в кавычках с удвоением внутренних кавычек.\n- Кодировка UTF-8, заголовок `id,date,description,amount`, перевод строки `\\n`, без BOM.\n- Обратная проверка через `csv.reader` подтвердила корректность разбора (все 4 поля в каждой из 5 строк).\n\nСкрипт-генератор оставлен в `/work/build_report.py`, если понадобится пересобрать отчёт.",
+    "model_mode": "real"
+  },
+  "checker": {
+    "exit_code": 0,
+    "stdout": "{\"pass\": true, \"reason\": \"ok\"}\n",
+    "stderr": "",
+    "verdict": {
+      "pass": true,
+      "reason": "ok"
+    }
+  },
+  "tool_evidence": {
+    "pass": true,
+    "reason": "tool-execution evidence is not required for this task"
+  },
+  "duration_seconds": 15.719555874995422,
+  "task_id": "B3.2",
+  "repeat": 1,
+  "seconds": 15.719555874995422,
+  "tokens_in": 12434,
+  "tokens_out": 1157,
+  "tokens_complete": true,
+  "cost_usd": 0.000576,
+  "recorded_cost_usd": 0.000576,
+  "cost_complete": true,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "success",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "ok"
+}

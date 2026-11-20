@@ -1,0 +1,9 @@
+roles:
+  guest: {allow: [catalog]}
+  analyst: {inherits: [guest], allow: [report]}
+  auditor: {inherits: [guest], allow: [report]}
+  intern: {inherits: [analyst], deny: [report]}
+  temporary_auditor: {inherits: [auditor, intern]}
+  finance: {inherits: [analyst], allow: [ledger]}
+  supervisor: {inherits: [finance, auditor]}
+  vendor: {inherits: [guest], deny: [report]}

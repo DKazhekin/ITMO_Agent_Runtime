@@ -15,6 +15,7 @@ TASKS = {
     "B5.1": ("B5.1-statistics", "python stats.py data.csv", [sys.executable, "stats.py", "data.csv"]),
     "B5.2": ("B5.2-failing-tests", "python -m unittest -v", [sys.executable, "-m", "unittest", "-v"]),
     "B5.3": ("B5.3-build-status", "sh build.sh", ["sh", "build.sh"]),
+    "B5.4": ("B5.4-stderr-record-count", "python scan.py inventory.csv", [sys.executable, "scan.py", "inventory.csv"]),
 }
 FAILURES = ["test_calculations.CalculationTests." + name for name in ["test_negative_discount", "test_empty_average", "test_cent_rounding"]]
 
@@ -58,6 +59,7 @@ def test_correct_artifacts_without_runcommand_are_not_tool_evidence(task_id, tmp
         "B5.1": ("answer.txt", "9.5\n"),
         "B5.2": ("failed.txt", "\n".join(FAILURES) + "\n"),
         "B5.3": ("answer.txt", "no\nERROR: missing generated schema.json\n"),
+        "B5.4": ("answer.txt", "3\n"),
     }[task_id]
     (work / answer_file).write_text(answer)
     artifact = subprocess.run([sys.executable, str(task / "check.py"), str(work)], capture_output=True, text=True, timeout=10)

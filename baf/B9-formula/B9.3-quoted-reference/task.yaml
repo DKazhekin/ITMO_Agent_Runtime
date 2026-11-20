@@ -1,0 +1,6 @@
+id: B9.3
+baf: B9
+level: trap
+instruction: В книге workbook.xlsx на листе Data скопируй формулу из D2 в D3 с обычным для Excel сдвигом ссылок при копировании. Сохрани книгу по тому же
+  пути. Остальные ячейки и листы сохрани.
+answer_file: workbook.xlsx

@@ -1,0 +1,16 @@
+{
+  "kind": "json",
+  "path": "devices.json",
+  "expected": [
+    {
+      "id": "007",
+      "active": false,
+      "offset": -3
+    },
+    {
+      "id": "041",
+      "active": true,
+      "offset": 0
+    }
+  ]
+}

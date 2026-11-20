@@ -1,0 +1,56 @@
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+ERROR:    Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 692, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 572, in __aexit__
+    await self._router.shutdown()
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 681, in shutdown
+    handler()
+  File "/app/runtime/sandbox.py", line 90, in shutdown
+    close_mounted(session_id)
+  File "/app/runtime/sandbox.py", line 236, in close_mounted
+    return close_mount_binding(session_id, mounted)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/runtime/sandbox.py", line 256, in close_mount_binding
+    mount_call(mount_client.detach, session_id, mounted.generation if mounted else None)
+  File "/app/runtime/sandbox.py", line 43, in mount_call
+    return asyncio.run(method(*args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 191, in run
+    raise RuntimeError(
+RuntimeError: asyncio.run() cannot be called from a running event loop
+
+/usr/local/lib/python3.12/site-packages/uvicorn/lifespan/on.py:91: RuntimeWarning: coroutine 'MountClient.detach' was never awaited
+  return
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+ERROR:    Application shutdown failed. Exiting.
+INFO:     Finished server process [7]
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 692, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 569, in __aenter__
+    await self._router.startup()
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 671, in startup
+    handler()
+  File "/app/runtime/sandbox.py", line 66, in recover
+    mount_call(mount_client.detach, record["session_id"], None)
+  File "/app/runtime/sandbox.py", line 43, in mount_call
+    return asyncio.run(method(*args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 191, in run
+    raise RuntimeError(
+RuntimeError: asyncio.run() cannot be called from a running event loop
+
+/usr/local/lib/python3.12/site-packages/uvicorn/lifespan/on.py:91: RuntimeWarning: coroutine 'MountClient.detach' was never awaited
+  return
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+ERROR:    Application startup failed. Exiting.

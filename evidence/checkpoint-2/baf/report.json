@@ -1,0 +1,687 @@
+{
+  "kind": "mounted_real_baf",
+  "cohort": "first completed attempt per task",
+  "assigned": 35,
+  "attempted": 12,
+  "passed": 9,
+  "attempt_records": 12,
+  "retries": 0,
+  "not_run": [
+    "B4.1",
+    "B4.2",
+    "B4.3",
+    "B4.4",
+    "B5.1",
+    "B5.2",
+    "B5.3",
+    "B5.4",
+    "B6.1",
+    "B6.2",
+    "B6.3",
+    "B6.4",
+    "B7.1",
+    "B7.2",
+    "B7.3",
+    "B7.4",
+    "B8.1",
+    "B8.2",
+    "B8.3",
+    "B8.4",
+    "B9.1",
+    "B9.2",
+    "B9.3"
+  ],
+  "matrix": {
+    "B1": {
+      "assigned": 4,
+      "attempted": 4,
+      "passed": 4
+    },
+    "B2": {
+      "assigned": 4,
+      "attempted": 4,
+      "passed": 3
+    },
+    "B3": {
+      "assigned": 4,
+      "attempted": 4,
+      "passed": 2
+    },
+    "B4": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B5": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B6": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B7": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B8": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B9": {
+      "assigned": 3,
+      "attempted": 0,
+      "passed": 0
+    }
+  },
+  "tasks": {
+    "B1.1": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 31.912122875000932,
+        "tokens_in": 8472,
+        "tokens_out": 491,
+        "model_events": 5,
+        "recorded_cost_usd": 0.000405,
+        "trace_cost_usd": 0.000405,
+        "known_trace_cost_usd": 0.000405,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114357Z-f7f83c32",
+        "result": "attempts/20261120T114357Z-f7f83c32/B1.1/result.json",
+        "trace": "attempts/20261120T114357Z-f7f83c32/B1.1/trace.jsonl",
+        "workspace": "attempts/20261120T114357Z-f7f83c32/B1.1/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B1.2": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 4.620431749994168,
+        "tokens_in": 19799,
+        "tokens_out": 111,
+        "model_events": 3,
+        "recorded_cost_usd": 0.000977,
+        "trace_cost_usd": 0.000977,
+        "known_trace_cost_usd": 0.000977,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114357Z-f7f83c32",
+        "result": "attempts/20261120T114357Z-f7f83c32/B1.2/result.json",
+        "trace": "attempts/20261120T114357Z-f7f83c32/B1.2/trace.jsonl",
+        "workspace": "attempts/20261120T114357Z-f7f83c32/B1.2/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B1.3": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 6.180805291995057,
+        "tokens_in": 2745,
+        "tokens_out": 169,
+        "model_events": 3,
+        "recorded_cost_usd": 0.000138,
+        "trace_cost_usd": 0.000138,
+        "known_trace_cost_usd": 0.000138,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114357Z-f7f83c32",
+        "result": "attempts/20261120T114357Z-f7f83c32/B1.3/result.json",
+        "trace": "attempts/20261120T114357Z-f7f83c32/B1.3/trace.jsonl",
+        "workspace": "attempts/20261120T114357Z-f7f83c32/B1.3/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B1.4": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 5.7590498339995975,
+        "tokens_in": 3647,
+        "tokens_out": 210,
+        "model_events": 3,
+        "recorded_cost_usd": 0.000189,
+        "trace_cost_usd": 0.000189,
+        "known_trace_cost_usd": 0.000189,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114357Z-f7f83c32",
+        "result": "attempts/20261120T114357Z-f7f83c32/B1.4/result.json",
+        "trace": "attempts/20261120T114357Z-f7f83c32/B1.4/trace.jsonl",
+        "workspace": "attempts/20261120T114357Z-f7f83c32/B1.4/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B2.1": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 7.5390443750075065,
+        "tokens_in": 4635,
+        "tokens_out": 271,
+        "model_events": 4,
+        "recorded_cost_usd": 0.000219,
+        "trace_cost_usd": 0.000219,
+        "known_trace_cost_usd": 0.000219,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114357Z-f7f83c32",
+        "result": "attempts/20261120T114357Z-f7f83c32/B2.1/result.json",
+        "trace": "attempts/20261120T114357Z-f7f83c32/B2.1/trace.jsonl",
+        "workspace": "attempts/20261120T114357Z-f7f83c32/B2.1/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B2.2": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 37.15369495800405,
+        "tokens_in": 42892,
+        "tokens_out": 3187,
+        "model_events": 8,
+        "recorded_cost_usd": 0.001628,
+        "trace_cost_usd": 0.001628,
+        "known_trace_cost_usd": 0.001628,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114357Z-f7f83c32",
+        "result": "attempts/20261120T114357Z-f7f83c32/B2.2/result.json",
+        "trace": "attempts/20261120T114357Z-f7f83c32/B2.2/trace.jsonl",
+        "workspace": "attempts/20261120T114357Z-f7f83c32/B2.2/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B2.3": {
+      "first": {
+        "pass": false,
+        "reason": "transport_error: ReadTimeout",
+        "status": "error",
+        "seconds": 80.07755691700731,
+        "tokens_in": null,
+        "tokens_out": null,
+        "model_events": 2,
+        "recorded_cost_usd": 0.00012,
+        "trace_cost_usd": null,
+        "known_trace_cost_usd": 0.00012,
+        "provider_raw_cost_usd": null,
+        "cost_complete": false,
+        "attempt": "20261120T114357Z-f7f83c32",
+        "result": "attempts/20261120T114357Z-f7f83c32/B2.3/result.json",
+        "trace": "attempts/20261120T114357Z-f7f83c32/B2.3/trace.jsonl",
+        "workspace": "attempts/20261120T114357Z-f7f83c32/B2.3/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B2.4": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 31.246498500011512,
+        "tokens_in": 8816,
+        "tokens_out": 669,
+        "model_events": 5,
+        "recorded_cost_usd": 0.000431,
+        "trace_cost_usd": 0.000431,
+        "known_trace_cost_usd": 0.000431,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114755Z-9c5cdae7",
+        "result": "attempts/20261120T114755Z-9c5cdae7/B2.4/result.json",
+        "trace": "attempts/20261120T114755Z-9c5cdae7/B2.4/trace.jsonl",
+        "workspace": "attempts/20261120T114755Z-9c5cdae7/B2.4/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B3.1": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 11.321165708010085,
+        "tokens_in": 7790,
+        "tokens_out": 945,
+        "model_events": 5,
+        "recorded_cost_usd": 0.000436,
+        "trace_cost_usd": 0.000436,
+        "known_trace_cost_usd": 0.000436,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114755Z-9c5cdae7",
+        "result": "attempts/20261120T114755Z-9c5cdae7/B3.1/result.json",
+        "trace": "attempts/20261120T114755Z-9c5cdae7/B3.1/trace.jsonl",
+        "workspace": "attempts/20261120T114755Z-9c5cdae7/B3.1/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B3.2": {
+      "first": {
+        "pass": true,
+        "reason": "ok",
+        "status": "success",
+        "seconds": 15.719555874995422,
+        "tokens_in": 12434,
+        "tokens_out": 1157,
+        "model_events": 7,
+        "recorded_cost_usd": 0.000576,
+        "trace_cost_usd": 0.000576,
+        "known_trace_cost_usd": 0.000576,
+        "provider_raw_cost_usd": null,
+        "cost_complete": true,
+        "attempt": "20261120T114755Z-9c5cdae7",
+        "result": "attempts/20261120T114755Z-9c5cdae7/B3.2/result.json",
+        "trace": "attempts/20261120T114755Z-9c5cdae7/B3.2/trace.jsonl",
+        "workspace": "attempts/20261120T114755Z-9c5cdae7/B3.2/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B3.3": {
+      "first": {
+        "pass": false,
+        "reason": "transport_error: ReadTimeout",
+        "status": "error",
+        "seconds": 98.7832716670091,
+        "tokens_in": null,
+        "tokens_out": null,
+        "model_events": 5,
+        "recorded_cost_usd": 0.000429,
+        "trace_cost_usd": null,
+        "known_trace_cost_usd": 0.000429,
+        "provider_raw_cost_usd": null,
+        "cost_complete": false,
+        "attempt": "20261120T114755Z-9c5cdae7",
+        "result": "attempts/20261120T114755Z-9c5cdae7/B3.3/result.json",
+        "trace": "attempts/20261120T114755Z-9c5cdae7/B3.3/trace.jsonl",
+        "workspace": "attempts/20261120T114755Z-9c5cdae7/B3.3/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B3.4": {
+      "first": {
+        "pass": false,
+        "reason": "transport_error: HTTPException",
+        "status": "error",
+        "seconds": 21.31899387500016,
+        "tokens_in": null,
+        "tokens_out": null,
+        "model_events": 0,
+        "recorded_cost_usd": null,
+        "trace_cost_usd": null,
+        "known_trace_cost_usd": null,
+        "provider_raw_cost_usd": null,
+        "cost_complete": false,
+        "attempt": "20261120T115032Z-58aaa24f",
+        "result": "attempts/20261120T115032Z-58aaa24f/B3.4/result.json",
+        "trace": "attempts/20261120T115032Z-58aaa24f/B3.4/trace.jsonl",
+        "workspace": "attempts/20261120T115032Z-58aaa24f/B3.4/work",
+        "omitted_artifacts": []
+      },
+      "repeats": []
+    },
+    "B4.1": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B4.2": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B4.3": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B4.4": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B5.1": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B5.2": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B5.3": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B5.4": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B6.1": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B6.2": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B6.3": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B6.4": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B7.1": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B7.2": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B7.3": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B7.4": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B8.1": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B8.2": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B8.3": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B8.4": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B9.1": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B9.2": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    },
+    "B9.3": {
+      "first": null,
+      "repeats": [],
+      "unattempted": {
+        "attempt": "20261120T115032Z-58aaa24f",
+        "stopped_reason": "transport_error: HTTPException",
+        "reason": "stopped before final result"
+      }
+    }
+  },
+  "rounds": [
+    {
+      "id": "20261120T114357Z-f7f83c32",
+      "manifest": "attempts/20261120T114357Z-f7f83c32/manifest.json",
+      "summary": "attempts/20261120T114357Z-f7f83c32/summary.json",
+      "results": "attempts/20261120T114357Z-f7f83c32/results.jsonl",
+      "scheduled": [
+        "B1.1",
+        "B1.2",
+        "B1.3",
+        "B1.4",
+        "B2.1",
+        "B2.2",
+        "B2.3",
+        "B2.4",
+        "B3.1",
+        "B3.2",
+        "B3.3",
+        "B3.4",
+        "B4.1",
+        "B4.2",
+        "B4.3",
+        "B4.4",
+        "B5.1",
+        "B5.2",
+        "B5.3",
+        "B5.4",
+        "B6.1",
+        "B6.2",
+        "B6.3",
+        "B6.4",
+        "B7.1",
+        "B7.2",
+        "B7.3",
+        "B7.4",
+        "B8.1",
+        "B8.2",
+        "B8.3",
+        "B8.4",
+        "B9.1",
+        "B9.2",
+        "B9.3"
+      ],
+      "recorded": 7,
+      "stopped_reason": "transport_error: ReadTimeout"
+    },
+    {
+      "id": "20261120T114755Z-9c5cdae7",
+      "manifest": "attempts/20261120T114755Z-9c5cdae7/manifest.json",
+      "summary": "attempts/20261120T114755Z-9c5cdae7/summary.json",
+      "results": "attempts/20261120T114755Z-9c5cdae7/results.jsonl",
+      "scheduled": [
+        "B2.4",
+        "B3.1",
+        "B3.2",
+        "B3.3",
+        "B3.4",
+        "B4.1",
+        "B4.2",
+        "B4.3",
+        "B4.4",
+        "B5.1",
+        "B5.2",
+        "B5.3",
+        "B5.4",
+        "B6.1",
+        "B6.2",
+        "B6.3",
+        "B6.4",
+        "B7.1",
+        "B7.2",
+        "B7.3",
+        "B7.4",
+        "B8.1",
+        "B8.2",
+        "B8.3",
+        "B8.4",
+        "B9.1",
+        "B9.2",
+        "B9.3"
+      ],
+      "recorded": 4,
+      "stopped_reason": "transport_error: ReadTimeout"
+    },
+    {
+      "id": "20261120T115032Z-58aaa24f",
+      "manifest": "attempts/20261120T115032Z-58aaa24f/manifest.json",
+      "summary": "attempts/20261120T115032Z-58aaa24f/summary.json",
+      "results": "attempts/20261120T115032Z-58aaa24f/results.jsonl",
+      "scheduled": [
+        "B3.4",
+        "B4.1",
+        "B4.2",
+        "B4.3",
+        "B4.4",
+        "B5.1",
+        "B5.2",
+        "B5.3",
+        "B5.4",
+        "B6.1",
+        "B6.2",
+        "B6.3",
+        "B6.4",
+        "B7.1",
+        "B7.2",
+        "B7.3",
+        "B7.4",
+        "B8.1",
+        "B8.2",
+        "B8.3",
+        "B8.4",
+        "B9.1",
+        "B9.2",
+        "B9.3"
+      ],
+      "recorded": 1,
+      "stopped_reason": "transport_error: HTTPException"
+    }
+  ],
+  "costs": {
+    "currency": "USD",
+    "recorded_cost_usd": 0.005548,
+    "known_trace_cost_usd": 0.005548,
+    "trace_cost_usd": null,
+    "provider_raw_cost_usd": null,
+    "complete": false,
+    "unknown_record_paths": [
+      "attempts/20261120T114357Z-f7f83c32/B2.3/result.json",
+      "attempts/20261120T114755Z-9c5cdae7/B3.3/result.json",
+      "attempts/20261120T115032Z-58aaa24f/B3.4/result.json"
+    ],
+    "source": "Trace usage.cost_usd is the proxy-recorded rounded charge. Native usage.cost is a separate field."
+  }
+}

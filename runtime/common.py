@@ -9,7 +9,7 @@ from typing import Literal
 
 import httpx
 from fastapi import HTTPException
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class Message(BaseModel):
@@ -17,9 +17,23 @@ class Message(BaseModel):
     version: Literal["0"] = "0"
 
 
+class MountDescriptor(Message):
+    generation: str = Field(pattern=r"^[a-f0-9]{32}$")
+    reverse_port: int = Field(ge=1024, le=65535)
+    host_key: str = Field(min_length=1, max_length=2048)
+    readonly: bool
+
+
 class Session(Message):
     session_id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,64}$")
     files: dict[str, str] = Field(default_factory=dict)
+    mount: MountDescriptor | None = None
+
+    @model_validator(mode="after")
+    def exclusive_source(self):
+        if self.mount is not None and self.files:
+            raise ValueError("mounted sessions cannot contain fixture files")
+        return self
 
 
 class Run(Message):
@@ -35,6 +49,7 @@ class Run(Message):
 class Operation(Message):
     operation_id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,100}$")
     session_id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,64}$")
+    run_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
     tool: str = Field(pattern=r"^(RunCommand|ReadFile|WriteFile)$")
     arguments: dict
     timeout_seconds: int = Field(default=20, ge=1, le=60)
@@ -45,9 +60,10 @@ def check_version(message):
         raise HTTPException(422, "unsupported protocol version")
 
 
-def call(base, path, data=None, method=None, timeout=75):
+def call(base, path, data=None, method=None, timeout=75, headers=None):
     with httpx.Client(timeout=timeout, trust_env=False) as client:
-        response = client.request(method or ("POST" if data is not None else "GET"), base + path, json=data)
+        method = method or ("POST" if data is not None else "GET")
+        response = client.request(method, base + path, json=data, headers=headers)
         if response.status_code >= 400:
             raise HTTPException(response.status_code, response.text[:2000])
         return response.json()

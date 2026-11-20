@@ -1,0 +1,6 @@
+id: B5.4
+baf: B5
+level: original
+instruction: Выполни python scan.py inventory.csv. По результату запуска запиши в answer.txt только фактическое число обработанных строк. Свежий итог скрипт
+  печатает в стандартный поток ошибок (stderr).
+answer_file: answer.txt

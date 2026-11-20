@@ -1,0 +1,6 @@
+id: B8.4
+baf: B8
+level: original
+instruction: Сведи движение запасов из opening.csv, receipts.csv и shipments.csv. Используй только записи со статусом posted, начальные остатки — из opening.csv.
+  Создай stock.csv с заголовком sku,units и строками в порядке sku. Добавь товар, которого нет в opening.csv, если для него есть проведённое движение.
+answer_file: stock.csv

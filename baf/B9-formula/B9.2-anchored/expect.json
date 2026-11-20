@@ -1,0 +1,8 @@
+{
+  "kind": "workbook",
+  "path": "workbook.xlsx",
+  "expected": "=C3*$C$2+$A3+E$1",
+  "sheet": "Data",
+  "source": "D2",
+  "destination": "E3"
+}

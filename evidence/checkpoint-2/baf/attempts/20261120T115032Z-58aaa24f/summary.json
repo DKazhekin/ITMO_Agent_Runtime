@@ -1,0 +1,112 @@
+{
+  "pair": {
+    "harness": "sequential",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "model_version": "deepseek/deepseek-v4.1-flash-20261017",
+    "reasoning_effort": "high",
+    "provider": "deepinfra/fp8",
+    "quantization": "fp8"
+  },
+  "passed": 0,
+  "total": 1,
+  "requested_total": 24,
+  "complete": false,
+  "not_run": [
+    "baf/B4-edit/B4.1-install-version/task.yaml",
+    "baf/B4-edit/B4.2-project-rename/task.yaml",
+    "baf/B4-edit/B4.3-preserve-encoding/task.yaml",
+    "baf/B4-edit/B4.4-scoped-timeout/task.yaml",
+    "baf/B5-tools/B5.1-statistics/task.yaml",
+    "baf/B5-tools/B5.2-failing-tests/task.yaml",
+    "baf/B5-tools/B5.3-build-status/task.yaml",
+    "baf/B5-tools/B5.4-stderr-record-count/task.yaml",
+    "baf/B6-code/B6.1-slugify/task.yaml",
+    "baf/B6-code/B6.2-hourly-logs/task.yaml",
+    "baf/B6-code/B6.3-calendar-days/task.yaml",
+    "baf/B6-code/B6.4-coalesce-ranges/task.yaml",
+    "baf/B7-reason/B7.1-train-transfer/task.yaml",
+    "baf/B7-reason/B7.2-role-inheritance/task.yaml",
+    "baf/B7-reason/B7.3-policy-conflict/task.yaml",
+    "baf/B7-reason/B7.4-cold-chain-handoff/task.yaml",
+    "baf/B8-synthesis/B8.1-quarterly-sales/task.yaml",
+    "baf/B8-synthesis/B8.2-meeting-decisions/task.yaml",
+    "baf/B8-synthesis/B8.3-regulation-revision/task.yaml",
+    "baf/B8-synthesis/B8.4-reconciled-inventory/task.yaml",
+    "baf/B9-formula/B9.1-relative/task.yaml",
+    "baf/B9-formula/B9.2-anchored/task.yaml",
+    "baf/B9-formula/B9.3-quoted-reference/task.yaml"
+  ],
+  "quality_evidence": false,
+  "cost_usd": null,
+  "recorded_cost_usd": null,
+  "cost_complete": false,
+  "matrix": {
+    "B3": {
+      "assigned": 1,
+      "attempted": 1,
+      "passed": 0
+    },
+    "B4": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B5": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B6": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B7": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B8": {
+      "assigned": 4,
+      "attempted": 0,
+      "passed": 0
+    },
+    "B9": {
+      "assigned": 3,
+      "attempted": 0,
+      "passed": 0
+    }
+  },
+  "results": [
+    {
+      "task": "B3.4",
+      "pass": false,
+      "state": {
+        "version": "0",
+        "request_id": "47471fb62487c32e37d49e8c41863ce4",
+        "session_id": "677560ce338dfc5dbe34dd2057dbcb0c",
+        "status": "error",
+        "duration_seconds": 0.0789405949999491,
+        "error": "transport_error",
+        "detail": "HTTPException"
+      },
+      "duration_seconds": 21.31899387500016,
+      "task_id": "B3.4",
+      "repeat": 1,
+      "seconds": 21.31899387500016,
+      "tokens_in": null,
+      "tokens_out": null,
+      "tokens_complete": false,
+      "cost_usd": null,
+      "recorded_cost_usd": null,
+      "cost_complete": false,
+      "cost_source": null,
+      "outcome": "error",
+      "models": [],
+      "modes": [],
+      "mode_error": "observed model differs from approved evidence or is unconfirmed",
+      "reason": "transport_error: HTTPException"
+    }
+  ],
+  "stopped_reason": "transport_error: HTTPException"
+}

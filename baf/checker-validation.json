@@ -21,6 +21,12 @@
       "trap_rejected": true
     },
     {
+      "task_id": "B1.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
       "task_id": "B2.1",
       "missing_or_unchanged_rejected": true,
       "correct_accepted": true,
@@ -34,6 +40,12 @@
     },
     {
       "task_id": "B2.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B2.4",
       "missing_or_unchanged_rejected": true,
       "correct_accepted": true,
       "trap_rejected": true
@@ -57,6 +69,12 @@
       "trap_rejected": true
     },
     {
+      "task_id": "B3.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
       "task_id": "B4.1",
       "missing_or_unchanged_rejected": true,
       "correct_accepted": true,
@@ -75,6 +93,12 @@
       "trap_rejected": true
     },
     {
+      "task_id": "B4.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
       "task_id": "B5.1",
       "missing_or_unchanged_rejected": true,
       "correct_accepted": true,
@@ -88,6 +112,102 @@
     },
     {
       "task_id": "B5.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B5.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B6.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B7.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.3",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B8.4",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B9.1",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B9.2",
+      "missing_or_unchanged_rejected": true,
+      "correct_accepted": true,
+      "trap_rejected": true
+    },
+    {
+      "task_id": "B9.3",
       "missing_or_unchanged_rejected": true,
       "correct_accepted": true,
       "trap_rejected": true

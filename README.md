@@ -1,8 +1,8 @@
 # ITMO Agent Runtime
 
-A client-server agent runtime for track A of the ITMO × DeepPavlov Agentic LLM Systems course. A Python client submits a task and its files, a model selects tools, and a separate manager executes them in a restricted Linux container.
+A client selects a folder on a Mac and sends a task to a Linux server. The model can read files, propose edits and run commands in a network-isolated container. The desktop application and the terminal client use the same workspace session.
 
-The implementation includes four services, a command-line client, two version-0 protocols and 15 B1–B5 tasks with independent checkers. The [recorded real-model evaluation](evidence/baf/real/20261106T125440Z-e6a11cdd/summary.json) passed **15/15** with DeepSeek V4.1 Flash 1017. Recorded infrastructure verification passed **244 tests and 48 task-package checks** on Mac/Docker and Linux; a separate mounting prototype passed **17 checks**. All real-model attempts, including failures, are retained in [evaluation evidence](evidence/README.md).
+**Checkpoint 2** covers 35 single-function tasks across nine groups. Open the [six offline slides](docs/checkpoint-2/slides.html) in a browser and use the arrow keys to present. The [speaker notes and 30 course questions](docs/checkpoint-2/questions.md), [demonstration instructions](docs/checkpoint-2/workspace.md) and [recorded results](evidence/checkpoint-2/README.md) accompany the slides. The first checkpoint evaluated a different 15-task set and recorded [15/15 with DeepSeek](evidence/baf/real/20261106T125440Z-e6a11cdd/summary.json).
 
 ## Architecture
 
@@ -10,12 +10,12 @@ The implementation includes four services, a command-line client, two version-0 
 - [Harness](runtime/harness.py): model/tool loop, context, cancellation and bounded execution.
 - [Sandbox manager](runtime/sandbox.py): container lifecycle, command execution and artifact collection.
 - [Model proxy](runtime/proxy.py): deterministic replay or a remote HTTPS model, with credentials isolated from the agent.
-- [CLI client](client/cli.py): file upload, event polling, artifact download and session release.
+- [Desktop application](client/desktop.py) and [terminal client](client/cli.py) share [session ownership, recovery and proposal export](client/mounted.py).
 - [Protocols](contracts/README.md): request identities, errors and resumable event cursors.
 
-Each session has a non-root container with no network, no capabilities, a read-only root filesystem and bounded CPU, memory, process count and temporary storage. The manager has Docker socket access and is a trusted administrative service. This deployment targets a trusted local development environment; containers share the Linux host's kernel.
+Tool execution uses a non-root container with no network, no capabilities, a read-only root filesystem and bounded CPU, memory, process count and temporary storage. The manager has Docker socket access and is a trusted administrative service. This deployment targets a trusted local development environment; containers share the Linux host's kernel.
 
-The client currently uploads a **snapshot** of a synthetic fixture. The [SSHFS prototype](prototypes/mounting/README.md) separately tests Mac–Linux mounting; it is not integrated into the runtime. A desktop interface, integrated mounting and broader model comparisons remain outside this version.
+A mounted workspace uses an authenticated reverse SSH connection to a private file service on the Mac. A trusted Linux helper mounts it with SSHFS. Each mounted operation gets a fresh, isolated action container. The manager removes that container before the Mac publishes a confirmed edit. A synthetic fixture can also be supplied as a snapshot. [Mounted workspace protocol](docs/checkpoint-2/workspace.md) · [Architecture decision](docs/adr/0003-mounting.md).
 
 ## Requirements
 
@@ -69,7 +69,7 @@ To save an attempt with its events and artifacts:
 .venv/bin/python -m baf.run --mode mock --task B1.1
 ```
 
-Without `--task`, mock mode replays five simple tasks: B1.1, B2.1, B3.1, B4.1 and B5.1. It does not simulate solutions for the other ten tasks. See [task definitions and checking](docs/baf.md).
+Without an explicit task, mock mode runs one simple example for each of the nine functions. The paid evaluation uses a fresh mounted synthetic directory for every task. [Task definitions and checking](docs/baf.md).
 
 ## Verify
 
@@ -79,7 +79,7 @@ After preparing images and dependencies, run all offline checks with:
 sh scripts/check.sh
 ```
 
-The command uses existing images without builds or pulls, forces mock mode, clears provider credentials and removes the model proxy's external network. It runs infrastructure/client tests and validates the task package. The recorded [Mac](evidence/verification/checkpoint-final-mac.txt) and [Linux](evidence/verification/checkpoint-final-linux.txt) runs each passed 244 tests and 48 task-package cases, with no skips and two FastAPI startup-event deprecation warnings. Linux verification used a clean source directory and empty project volumes in a prepared virtual machine, not a newly installed operating system.
+The command uses existing images without builds or pulls, forces mock mode, clears provider credentials and removes the model proxy's external network. It runs infrastructure and client tests, validates the 35 task checkers and executes nine simple examples. GitHub Actions runs the same command on pushes and pull requests. The recorded [Mac](evidence/verification/checkpoint-final-mac.txt) and [Linux](evidence/verification/checkpoint-final-linux.txt) runs each passed 244 tests and 48 task-package cases, with no skips and two FastAPI startup-event deprecation warnings. Linux verification used a clean source directory and empty project volumes in a prepared virtual machine, not a newly installed operating system.
 
 The task package can also be checked without a server:
 
@@ -93,7 +93,7 @@ Its [recorded output](baf/checker-validation.json) is marked `task_package_valid
 
 Real mode requires a configured HTTPS endpoint, a model credential, exact model identity, model metadata and a persistent spending limit. Follow the [model configuration guide](docs/reference/model.md). The client, harness and proxy check the expected mode and model before provider calls; a default mock request cannot silently become a paid run.
 
-The recorded complete evaluation used DeepSeek V4.1 Flash 1017 in `high` reasoning mode through DeepInfra FP8. It passed all file checks and B5 command-execution checks. Total provider cost across the recorded attempts was **$0.018821183**. This is one successful full run after a 12/15 attempt, not a repeated-run reliability estimate. [Evidence and limitations](evidence/README.md) preserve the attempt history and distinguish recorded source hashes from subsequent repository changes.
+The recorded first-checkpoint evaluation used DeepSeek V4.1 Flash 1017 in `high` reasoning mode through DeepInfra FP8. It passed all file checks and B5 command-execution checks. Total provider cost across the recorded attempts was **$0.018821183**. This is one successful full run after a 12/15 attempt, not a repeated-run reliability estimate. [Evidence and limitations](evidence/README.md) preserve the attempt history and distinguish recorded source hashes from subsequent repository changes.
 
 ## Stop the server
 
@@ -106,10 +106,11 @@ This preserves named state volumes, including the paid-call ledger. `docker comp
 ## Documentation
 
 - [Architecture](docs/architecture.md) and [model/tool loop](docs/harness.md).
-- [Checkpoint requirements, demonstration and questions](docs/checkpoint-1.md).
+- [Checkpoint 2 demonstration](docs/checkpoint-2/workspace.md), [slides](docs/checkpoint-2/slides.html), [questions](docs/checkpoint-2/questions.md) and [results](evidence/checkpoint-2/README.md).
+- [Checkpoint 1 demonstration and questions](docs/checkpoint-1.md).
 - [Pinned course requirements](docs/reference/course.md).
 - [Comparison of three open-source agent systems](docs/reference/systems.md).
 - [Mounting alternatives and limitations](docs/reference/mounting.md).
 - [Architecture decisions](docs/adr/) and [protocol schemas](contracts/README.md).
 
-The course source is pinned to [`b01ddf7b89e5c603985e3d5b5af958bebc7b1972`](https://github.com/deeppavlov/agentic-course-itmo/tree/b01ddf7b89e5c603985e3d5b5af958bebc7b1972/projects). Evaluation data uses synthetic course fixtures; new run output is written to the local `results/` directory.
+The first checkpoint course source is pinned to [`b01ddf7b89e5c603985e3d5b5af958bebc7b1972`](https://github.com/deeppavlov/agentic-course-itmo/tree/b01ddf7b89e5c603985e3d5b5af958bebc7b1972/projects). Evaluation data uses synthetic course fixtures; new run output is written to the local `results/` directory.

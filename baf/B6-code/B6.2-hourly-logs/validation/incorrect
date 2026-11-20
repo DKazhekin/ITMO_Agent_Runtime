@@ -1,0 +1,14 @@
+from datetime import datetime
+
+def aggregate(lines):
+    totals = {}
+    for line in lines:
+        try:
+            stamp, level, size = line.split()
+            if level not in {"INFO", "WARN", "ERROR"} or not size.isascii() or not size.isdecimal():
+                continue
+            hour = datetime.fromisoformat(stamp).strftime("%Y-%m-%dT%H:00Z")
+        except ValueError:
+            continue
+        totals[hour] = totals.get(hour, 0) + int(size)
+    return totals

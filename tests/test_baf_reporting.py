@@ -1,4 +1,5 @@
 """Verify run approval metadata, early mode checks, and honest usage reports offline."""
+from contextlib import contextmanager
 import json
 import sys
 from pathlib import Path
@@ -89,6 +90,50 @@ def test_usage_is_summed_only_when_complete(tmp_path):
 def test_missing_model_events_do_not_claim_zero_usage(tmp_path):
     result = run.run_task(fixture_task(tmp_path), tmp_path / "results", RecordedClient([]))
     assert (result["tokens_in"], result["tokens_out"], result["tokens_complete"]) == (None, None, False)
+
+
+def test_partial_cost_retains_recorded_charges_without_claiming_total(tmp_path):
+    trace = [
+        model_event({"prompt_tokens": 10, "completion_tokens": 2, "cost_usd": 0.001}),
+        model_event({"prompt_tokens": 20, "completion_tokens": 3}),
+    ]
+    result = run.run_task(fixture_task(tmp_path), tmp_path / "results", RecordedClient(trace))
+    assert result["recorded_cost_usd"] == 0.001
+    assert result["cost_usd"] is None and not result["cost_complete"]
+    assert result["cost_source"] == "OpenRouter usage.cost recorded by the model proxy"
+
+
+def test_mounted_attempt_copies_only_fixture_and_reads_its_actual_files(tmp_path, monkeypatch):
+    from client.mounted import MountedSession
+
+    fixture = tmp_path / "source/fixture"
+    fixture.mkdir(parents=True)
+    (fixture / "input.txt").write_text("source")
+    (fixture.parent / "expect.json").write_text("private")
+    client = object()
+    seen = []
+
+    class Session:
+        def execute(self, instruction, **options):
+            assert instruction == "do the task" and options == {"timeout": 5}
+            (seen[-1] / "output.txt").write_text("saved through mount")
+            return {"status": "success"}, []
+
+    @contextmanager
+    def mount(actual, folder, *, coordinated):
+        assert actual is client and coordinated
+        assert sorted(item.name for item in folder.iterdir()) == ["input.txt"]
+        seen.append(folder)
+        yield Session()
+
+    monkeypatch.setattr(MountedSession, "open", mount)
+    mounted = run.MountedBafClient(client)
+    for destination in (tmp_path / "first", tmp_path / "second"):
+        state, events = mounted.execute(fixture, "do the task", destination, timeout=5)
+        assert state["status"] == "success" and events == []
+        assert (destination / "output.txt").read_text() == "saved through mount"
+    assert len(set(seen)) == 2
+    assert not (fixture / "output.txt").exists()
 
 
 def test_mock_events_have_known_zero_provider_tokens(tmp_path):

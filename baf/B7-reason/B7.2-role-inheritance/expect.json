@@ -1,0 +1,10 @@
+{
+  "kind": "set",
+  "path": "answer.txt",
+  "expected": [
+    "analyst",
+    "auditor",
+    "finance",
+    "supervisor"
+  ]
+}

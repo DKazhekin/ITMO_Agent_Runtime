@@ -1,0 +1,5 @@
+id: B6.2
+baf: B6
+level: medium
+instruction: Создай parse_logs.py и реализуй функцию aggregate(lines) по spec.md.
+answer_file: parse_logs.py

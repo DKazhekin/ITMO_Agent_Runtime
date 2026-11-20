@@ -11,12 +11,38 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import xml.etree.ElementTree as ET
+from zipfile import ZipFile
 
 import yaml
 
 ROOT = Path(__file__).resolve().parent
 READERS = [3, 17, 28, 46, 61, 79, 94, 112, 137, 158, 176, 193]
 FAILED_NAMES = ["test_calculations.CalculationTests." + name for name in ["test_negative_discount", "test_empty_average", "test_cent_rounding"]]
+
+
+def install_example(task: Path, work: Path, metadata: dict, example: str) -> None:
+    """Prepare examples without consulting the verifier's expected answer."""
+    source = task / "validation" / example
+    destination = work / metadata["answer_file"]
+    if not metadata["id"].startswith("B9."):
+        shutil.copyfile(source, destination)
+        return
+    sheet_part = "xl/worksheets/sheet1.xml"
+    namespace = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+    cell_reference = "E3" if metadata["id"] == "B9.2" else "D3"
+    with ZipFile(destination) as workbook:
+        files = {part: workbook.read(part) for part in workbook.namelist()}
+    sheet = ET.fromstring(files[sheet_part])
+    cell = sheet.find(f".//{namespace}c[@r='{cell_reference}']")
+    assert cell is not None
+    cell.clear()
+    cell.set("r", cell_reference)
+    ET.SubElement(cell, namespace + "f").text = source.read_text().strip().removeprefix("=")
+    files[sheet_part] = ET.tostring(sheet, encoding="utf-8")
+    with ZipFile(destination, "w") as workbook:
+        for part, data in files.items():
+            workbook.writestr(part, data)
 
 
 def execute_check(task: Path, work: Path) -> bool:
@@ -156,8 +182,11 @@ def verify_scales(tasks: list[Path]) -> dict:
 
 
 def main() -> None:
-    tasks = sorted(path.parent for path in ROOT.glob("B*/*/task.yaml"))
-    assert len(tasks) == 15
+    tasks = sorted(path.parent for path in ROOT.glob("B[1-9]-*/B*/task.yaml"))
+    by_id = {yaml.safe_load((task / "task.yaml").read_text())["id"]: task for task in tasks}
+    expected_ids = {f"B{group}.{case}" for group in range(1, 10)
+                    for case in range(1, 4 if group == 9 else 5)}
+    assert len(tasks) == len(expected_ids) and set(by_id) == expected_ids
     scales = verify_scales(tasks)
     cases = []
     with tempfile.TemporaryDirectory(prefix="itmo-baf-checkers-") as directory:
@@ -168,9 +197,16 @@ def main() -> None:
             work = temp / task_id
             shutil.copytree(task / "fixture", work)
             assert not execute_check(task, work), (task_id, "unfinished task accepted")
-            correct(task_id, work)
+            extended = (task / "validation").is_dir()
+            if extended:
+                install_example(task, work, metadata, "correct")
+            else:
+                correct(task_id, work)
             assert execute_check(task, work), (task_id, "correct artifact rejected")
-            corrupt(task_id, work, metadata)
+            if extended:
+                install_example(task, work, metadata, "incorrect")
+            else:
+                corrupt(task_id, work, metadata)
             assert not execute_check(task, work), (task_id, "incorrect artifact accepted")
             cases.append({"task_id": task_id, "missing_or_unchanged_rejected": True, "correct_accepted": True, "trap_rejected": True})
         # Additional independent checks against verifier shortcuts.

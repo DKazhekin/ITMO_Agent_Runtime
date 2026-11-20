@@ -1,0 +1,45 @@
+{
+  "task": "B2.2",
+  "pass": true,
+  "state": {
+    "version": "0",
+    "request_id": "0e165a6cfc79d4f2d1bd5b7c45751102",
+    "session_id": "fcf512548e1380028e74b83025180f84",
+    "status": "success",
+    "duration_seconds": 36.725863047000075,
+    "answer": "Готово. `answer.txt` записан в `/work`.\n\n**Найдено 12 файлов, где DB_URL действительно читается:**\n\n```\nmodules/component_003.py\nmodules/component_017.py\nmodules/component_028.py\nmodules/component_046.py\nmodules/component_061.py\nmodules/component_079.py\nmodules/component_094.py\nmodules/component_112.py\nmodules/component_137.py\nmodules/component_158.py\nmodules/component_176.py\nmodules/component_193.py\n```\n\nКлассификация (всего 50 файлов содержат строку `DB_URL`, просмотрены все 200 файлов в `/work/modules`):\n\n- **Включены (чтение):** `os.environ[\"DB_URL\"]` (003, 061, 137), `os.getenv(\"DB_URL\")` (017, 079, 158), `os.environ.get(\"DB_URL\", \"\")` (028, 094, 176), `getenv(\"DB_URL\", \"\")` из `from os import getenv` (046, 112, 193).\n- **Исключены — присваивание без чтения (16 файлов):** `os.environ[\"DB_URL\"] = \"sqlite:///local.db\"` (000, 013, 026, 039, 052, 065, 078, 091, 104, 117, 130, 143, 156, 169, 182, 195).\n- **Исключены — упоминание только в комментарии (22 файла):** `# DB_URL was used by an earlier release.`; при этом в коде читается другая переменная `TEST_DB_URL` (007, 014, 021, 035, 042, 049, 056, 063, 070, 084, 098, 105, 119, 126, 133, 140, 147, 161, 168, 175, 189, 196).\n- **Исключены — упоминание внутри строкового литерала (16 файлов):** `EXAMPLE = 'os.getenv(\"DB_URL\")'` (011, 022, 033, 044, 055, 066, 077, 088, 099, 110, 121, 132, 154, 165, 187, 198).\n\nПроверка выполнялась разбором AST (учёт контекста `Load` для подписки и вызовов `getenv`/`get`, точное сравнение имени `DB_URL`), поэтому `TEST_DB_URL`, комментарии и строки не попали в результат; динамических склейок имени переменной в коде нет.",
+    "model_mode": "real"
+  },
+  "checker": {
+    "exit_code": 0,
+    "stdout": "{\"pass\": true, \"reason\": \"ok\"}\n",
+    "stderr": "",
+    "verdict": {
+      "pass": true,
+      "reason": "ok"
+    }
+  },
+  "tool_evidence": {
+    "pass": true,
+    "reason": "tool-execution evidence is not required for this task"
+  },
+  "duration_seconds": 37.15369495800405,
+  "task_id": "B2.2",
+  "repeat": 1,
+  "seconds": 37.15369495800405,
+  "tokens_in": 42892,
+  "tokens_out": 3187,
+  "tokens_complete": true,
+  "cost_usd": 0.001628,
+  "recorded_cost_usd": 0.001628,
+  "cost_complete": true,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "success",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "ok"
+}

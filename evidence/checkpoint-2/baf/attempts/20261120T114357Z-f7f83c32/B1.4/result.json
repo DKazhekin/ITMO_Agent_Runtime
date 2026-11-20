@@ -1,0 +1,45 @@
+{
+  "task": "B1.4",
+  "pass": true,
+  "state": {
+    "version": "0",
+    "request_id": "c927b1a61c4b809df138928ba7f5cea1",
+    "session_id": "2049a760faa04ddbd3366ee2cb17696e",
+    "status": "success",
+    "duration_seconds": 5.382734937999885,
+    "answer": "**6** — по таблице в `operations.md` склад обязан уведомить магазин о задержке повторного заказа за 6 часов (рассылка прошлого месяца с 12 часами заменена действующим порядком).\n\nОтвет записан в `answer.txt`.",
+    "model_mode": "real"
+  },
+  "checker": {
+    "exit_code": 0,
+    "stdout": "{\"pass\": true, \"reason\": \"ok\"}\n",
+    "stderr": "",
+    "verdict": {
+      "pass": true,
+      "reason": "ok"
+    }
+  },
+  "tool_evidence": {
+    "pass": true,
+    "reason": "tool-execution evidence is not required for this task"
+  },
+  "duration_seconds": 5.7590498339995975,
+  "task_id": "B1.4",
+  "repeat": 1,
+  "seconds": 5.7590498339995975,
+  "tokens_in": 3647,
+  "tokens_out": 210,
+  "tokens_complete": true,
+  "cost_usd": 0.000189,
+  "recorded_cost_usd": 0.000189,
+  "cost_complete": true,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "success",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "ok"
+}

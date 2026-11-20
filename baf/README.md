@@ -1,11 +1,11 @@
 # Basic agent functions
 
-`catalog.yaml` preserves the full upstream catalog (B1–B8 and C1–C3). The `implementation` field marks B1–B5 as the current executable subset; deferred tasks are not reported as passing.
+The executable catalog covers 35 individual tasks: the course's B1–B8 tasks, one original variant per course function, and three tasks for the original workbook-formula function B9. The nine `.1` tasks are the standard replay smoke suite. C1–C3 are listed for a later evaluation.
 
-Each task contains `task.yaml`, `fixture/`, and `check.py`. B1.1 is preserved byte-for-byte from the course template: its metadata uses `messages` and `timeout_s`, and its checker reports failures in JSON without changing its exit code. New tasks use `instruction` and `timeout_seconds`; all checkers print a JSON object containing `pass` and `reason`. Consumers must inspect both the process status and the JSON field.
+Each task contains `task.yaml`, `fixture/`, and `check.py`. B1.1 preserves the original course files, including `messages`, `timeout_s` and its checker JSON contract. Checkers print a JSON verdict with `pass` and `reason`. Evaluate both the verdict and the process status.
 
-Copy only fixture contents into a fresh sandbox for each attempt. Checkers, schemas and hidden tests remain outside the sandbox. Check final artifacts rather than the model's prose. Reject artifact symlinks before running the original B1.1 checker.
+Only fixture contents and the prompt are available inside the session. Expectations, hidden cases and validation examples remain outside it. Real attempts use a fresh client-mounted directory. The runner reads the resulting local files after the session closes. Mock attempts default to snapshot workspaces and can also use the mount.
 
-The extended checkers require pinned `jsonschema` and `PyYAML` dependencies on the verifier. B4.2 compares submitted syntax trees with the trusted rename before executing a constrained, validated function in hidden behavior tests; it does not execute arbitrary submitted source on the verifier.
+The code-generation checker runs submitted Python with the local `itmo-sandbox:0.1` image. The container has no network or host mounts and receives the submission and input cases through standard input. Expected answers stay on the verifier. The host runner needs access to the Docker CLI and image when running B6 or the full smoke suite.
 
-`python baf/validate_tasks.py` checks fixture scale, correct artifacts, deliberately wrong artifacts, byte preservation and the unmodified upstream B1.1 example. This validates the task package, not a model's ability to solve it. Real model results and model imitation results must remain separate.
+See [commands and evidence format](../docs/baf.md).

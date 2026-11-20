@@ -1,0 +1,5 @@
+{
+  "kind": "text",
+  "path": "answer.txt",
+  "expected": "R3\n09:25"
+}

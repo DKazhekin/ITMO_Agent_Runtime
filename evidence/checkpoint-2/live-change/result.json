@@ -1,0 +1,84 @@
+{
+  "collected_at_utc": "2026-11-20T11:52:29.221480+00:00",
+  "scenario": "Actual mounted Mac folder, real runtime services, deterministic local model",
+  "observed_model_steps": [
+    {
+      "offered": "read"
+    },
+    {
+      "observed": "8000",
+      "offered": "stale_write"
+    },
+    {
+      "notification": true,
+      "offered": "reread"
+    },
+    {
+      "observed": "9000",
+      "offered": "answer"
+    }
+  ],
+  "public_events": [
+    {
+      "seq": 1,
+      "type": "started"
+    },
+    {
+      "seq": 2,
+      "type": "model"
+    },
+    {
+      "seq": 3,
+      "type": "tool_call",
+      "tool": "ReadFile"
+    },
+    {
+      "seq": 4,
+      "type": "tool_result"
+    },
+    {
+      "seq": 5,
+      "type": "model"
+    },
+    {
+      "seq": 6,
+      "type": "file_changed",
+      "path": "port.txt",
+      "file_version": "cd2f24f404f125c5caf95c08954cdf8a7472c895e4edff694803f997fa49dd42"
+    },
+    {
+      "seq": 7,
+      "type": "model"
+    },
+    {
+      "seq": 8,
+      "type": "tool_call",
+      "tool": "ReadFile"
+    },
+    {
+      "seq": 9,
+      "type": "tool_result"
+    },
+    {
+      "seq": 10,
+      "type": "model"
+    },
+    {
+      "seq": 11,
+      "type": "result"
+    }
+  ],
+  "final_answer": "Current port: 9000",
+  "stale_command_executed": false,
+  "technical_history_excludes_raw_text": true,
+  "technical_terminal": {
+    "version": "0",
+    "session_id": "0527d2e1e5f4f940129ef6a71d4264f0",
+    "request_id": "deca0f6552516f06d74f1f52aed68c1d",
+    "status": "success",
+    "model_mode": "mock",
+    "duration_seconds": 1.3802756060001684
+  },
+  "restart_tested": false,
+  "test_model_sha256": "d40a088011cf2717ad15deb14e32e8a155a68b7369e14eb416a576176573b225"
+}

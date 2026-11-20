@@ -15,8 +15,9 @@ class Client:
             headers={"Authorization": "Bearer " + (token or os.getenv("CLIENT_TOKEN", "local-checkpoint-token"))},
             timeout=85, trust_env=False)
 
-    def request(self, method, path, data=None):
-        response = self.http.request(method, path, json=data)
+    def request(self, method, path, data=None, *, session_key=None):
+        headers = {"X-Session-Key": session_key} if session_key else None
+        response = self.http.request(method, path, json=data, headers=headers)
         response.raise_for_status()
         return response.json()
 
@@ -90,13 +91,44 @@ def main():
     parser.add_argument("--url", default=None)
     parser.add_argument("--mode", choices=["mock", "real"], default="mock")
     parser.add_argument("--model", default=None)
-    parser.add_argument("--fixture", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--fixture", type=Path)
+    source.add_argument("--folder", type=Path, help="Mount this local folder in the remote sandbox")
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--read-only", action="store_true")
+    parser.add_argument("--save-proposals", type=Path, metavar="DIR",
+                        help="Save unapplied versions in this local directory before the session closes")
     parser.add_argument("instruction")
     args = parser.parse_args()
-    state, trace = Client(args.url).execute(args.fixture, args.instruction, args.output,
-        on_event=lambda event: print(json.dumps(event, ensure_ascii=False)),
-        expected_mode=args.mode, expected_model=args.model)
+    def show(event):
+        print(json.dumps(event, ensure_ascii=False), flush=True)
+
+    client = Client(args.url)
+    if args.folder:
+        from client.mounted import MountedSession
+        if args.output:
+            parser.error("--folder writes to the mounted directory")
+        client.preflight(args.mode, args.model)
+        with MountedSession.open(client, args.folder, readonly=args.read_only) as session:
+            def mounted_event(event):
+                show(event)
+                decision = event.get("decision", {})
+                proposal = decision.get("proposal_id")
+                if args.save_proposals and proposal:
+                    args.save_proposals.mkdir(mode=0o700, parents=True, exist_ok=True)
+                    destination = args.save_proposals / (proposal + "-" + Path(decision["path"]).name)
+                    print(session.save_proposal(proposal, destination), flush=True)
+            run = session.submit(args.instruction, expected_mode=args.mode, expected_model=args.model)
+            try:
+                state, _ = session.follow(run, on_event=mounted_event)
+            except KeyboardInterrupt:
+                session.cancel(run)
+                raise
+    else:
+        if not args.output or args.read_only or args.save_proposals:
+            parser.error("--fixture requires --output and supports snapshot mode only")
+        state, _ = client.execute(args.fixture, args.instruction, args.output, on_event=show,
+                                  expected_mode=args.mode, expected_model=args.model)
     print(json.dumps(state, ensure_ascii=False))
     raise SystemExit(state["status"] != "success")
 

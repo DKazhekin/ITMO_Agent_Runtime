@@ -73,11 +73,15 @@ def test_exports_match_runtime_and_cover_all_http_routes():
             operation = openapi["paths"][path][method]
             if path.endswith("/stream"):
                 assert "text/event-stream" in operation["responses"]["200"]["content"]
+            elif protocol == "client-v0" and path.endswith("/history"):
+                assert operation["responses"]["200"]["content"]["application/x-ndjson"]["x-line-schema"] == {
+                    "$ref": "#/components/schemas/HistoryRow"}
             else:
                 assert operation["responses"]["200"]["content"]["application/json"]["schema"] == {
                     "$ref": f"#/components/schemas/{result}"}
             if protocol == "client-v0" and path != "/health":
-                assert operation["security"] == [{"ClientToken": []}]
+                assert {"ClientToken": [], "SessionKey": []} in operation["security"]
+                assert ({"ClientToken": []} in operation["security"]) != path.endswith("/history")
 
 
 def test_schemas_reject_malformed_versions_statuses_results_and_arguments():

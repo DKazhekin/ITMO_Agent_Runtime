@@ -1,0 +1,5 @@
+{
+  "kind": "edit",
+  "path": "settings.ini",
+  "expected": "# Service maintenance\n<!-- upgrade example: timeout_ms = 250 -->\n[staging]\ntimeout_ms = 250\n[production]\ntimeout_ms = 450\n# Keep the staging timeout during rollout.\n"
+}

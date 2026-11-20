@@ -1,0 +1,5 @@
+id: B4.4
+baf: B4
+level: original
+instruction: В settings.ini измени timeout_ms только в секции [production] на 450. Сохрани остальной файл, включая комментарии и переводы строк, в точности.
+answer_file: settings.ini

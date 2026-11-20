@@ -1,0 +1,204 @@
+[
+  {
+    "name": "real_mount",
+    "actual": "fuse.sshfs",
+    "expected": "fuse.sshfs",
+    "passed": true
+  },
+  {
+    "name": "record_version_read",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "linux_reads_mac",
+    "actual": "8000",
+    "expected": "8000",
+    "passed": true
+  },
+  {
+    "name": "read_confirmed",
+    "actual": "unchanged",
+    "expected": "unchanged",
+    "passed": true
+  },
+  {
+    "name": "begin_binary",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "before_confirmation",
+    "actual": false,
+    "expected": false,
+    "passed": true
+  },
+  {
+    "name": "binary_published",
+    "actual": "applied",
+    "expected": "applied",
+    "passed": true
+  },
+  {
+    "name": "binary_content",
+    "actual": "00ff636f6e74656e7480",
+    "expected": "00ff636f6e74656e7480",
+    "passed": true
+  },
+  {
+    "name": "retry_idempotent",
+    "actual": {
+      "status": "applied",
+      "outcomes": [
+        {
+          "path": "output",
+          "operation_id": "binary",
+          "status": "applied"
+        }
+      ]
+    },
+    "expected": {
+      "status": "applied",
+      "outcomes": [
+        {
+          "path": "output",
+          "operation_id": "binary",
+          "status": "applied"
+        }
+      ]
+    },
+    "passed": true
+  },
+  {
+    "name": "rename_applied",
+    "actual": "applied",
+    "expected": "applied",
+    "passed": true
+  },
+  {
+    "name": "renamed_content",
+    "actual": "nested",
+    "expected": "nested",
+    "passed": true
+  },
+  {
+    "name": "coordinated_real_edit",
+    "actual": "applied",
+    "expected": "applied",
+    "passed": true
+  },
+  {
+    "name": "coordinated_original",
+    "actual": "8080",
+    "expected": "8080",
+    "passed": true
+  },
+  {
+    "name": "non_sequential_apply",
+    "actual": "applied",
+    "expected": "applied",
+    "passed": true
+  },
+  {
+    "name": "non_sequential_binary_result",
+    "actual": "615163645859",
+    "expected": "615163645859",
+    "passed": true
+  },
+  {
+    "name": "staged_create_and_delete",
+    "actual": "unchanged",
+    "expected": "unchanged",
+    "passed": true
+  },
+  {
+    "name": "removed_file_not_published",
+    "actual": false,
+    "expected": false,
+    "passed": true
+  },
+  {
+    "name": "client_detects_local_change",
+    "actual": [
+      "original"
+    ],
+    "expected": [
+      "original"
+    ],
+    "passed": true
+  },
+  {
+    "name": "client_replays_change_without_read",
+    "actual": [
+      {
+        "path": "original",
+        "version": "c4fe6b6dbe94790f232013154cb80fc5dd3ec9106d433492f20f038b1ce25656",
+        "seq": 1
+      }
+    ],
+    "expected": [
+      {
+        "path": "original",
+        "version": "c4fe6b6dbe94790f232013154cb80fc5dd3ec9106d433492f20f038b1ce25656",
+        "seq": 1
+      }
+    ],
+    "passed": true
+  },
+  {
+    "name": "original_conflict",
+    "actual": "conflict",
+    "expected": "conflict",
+    "passed": true
+  },
+  {
+    "name": "original_preserved",
+    "actual": "9000",
+    "expected": "9000",
+    "passed": true
+  },
+  {
+    "name": "coordinated_existing_rename",
+    "actual": "applied",
+    "expected": "applied",
+    "passed": true
+  },
+  {
+    "name": "coordinated_source_removed",
+    "actual": false,
+    "expected": false,
+    "passed": true
+  },
+  {
+    "name": "coordinated_destination_bytes",
+    "actual": "6d6f7665206279746573",
+    "expected": "6d6f7665206279746573",
+    "passed": true
+  },
+  {
+    "name": "coordinated_delete_applied",
+    "actual": "applied",
+    "expected": "applied",
+    "passed": true
+  },
+  {
+    "name": "coordinated_delete_visible",
+    "actual": false,
+    "expected": false,
+    "passed": true
+  },
+  {
+    "name": "detach",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "client_cleanup",
+    "actual": null,
+    "expected": null,
+    "passed": true
+  }
+]

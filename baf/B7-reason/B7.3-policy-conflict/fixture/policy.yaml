@@ -1,0 +1,6 @@
+rules:
+  - {id: r10, env: dev, role: Z, resource: Q, priority: 20, effect: allow}
+  - {id: r11, env: prod, role: Z, resource: Q, priority: 10, effect: allow}
+  - {id: r12, env: prod, role: Z, resource: Q, priority: 10, effect: deny}
+  - {id: r13, env: prod, role: Z, resource: X, priority: 12, effect: deny}
+  - {id: r14, env: prod, role: Z, resource: Q, priority: 5, effect: allow}

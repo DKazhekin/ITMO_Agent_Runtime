@@ -1,0 +1,13 @@
+{
+  "mode": "mock",
+  "case": "B4.1 with uncoordinated editor",
+  "state": "write_unverified",
+  "original_before_sha256": "561f3b312b51e430c95f52f564aa0ffbebde6d7c532a0d7f4fcf553f64b179db",
+  "original_after_sha256": "561f3b312b51e430c95f52f564aa0ffbebde6d7c532a0d7f4fcf553f64b179db",
+  "exported_proposal_sha256": "66e7a3c8ca6092b3622b091403c7c320974c5a3c7c0fa465579e83d1447767e1",
+  "wrong_owner_http": 403,
+  "duplicate_after_release_http": 409,
+  "resume_after": 1,
+  "active_events": 7,
+  "technical_events": 11
+}

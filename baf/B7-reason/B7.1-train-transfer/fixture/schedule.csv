@@ -1,0 +1,6 @@
+flight,city,event,date,time,platform
+A,X,depart,2026-06-08,22:20,4
+A,Y,arrive,2026-06-08,23:56,2
+B,Y,depart,2026-06-09,00:11,6
+B,Z,arrive,2026-06-09,02:15,1
+C,Y,depart,2026-06-09,00:22,2

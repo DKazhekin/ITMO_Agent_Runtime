@@ -1,0 +1,20 @@
+{
+  "collected_at_utc": "2026-11-20T11:53:32.421055+00:00",
+  "restart_service": "harness",
+  "restart_method": "docker restart after confirmed publication while model was blocked",
+  "status": {
+    "version": "0",
+    "session_id": "3ee710e30352db1b45baa02cbcb2e983",
+    "request_id": "8e3085654739a106f1cd1fcdfa2e9783",
+    "status": "error",
+    "error": "harness_restarted",
+    "duration_seconds": 1.1051392555236816
+  },
+  "repeat_status": 409,
+  "one_write_before_restart": true,
+  "original_inode_and_mtime_preserved": true,
+  "second_write_executed": false,
+  "terminal_events": 1,
+  "technical_history_excludes_raw_text": true,
+  "test_model_sha256": "3894a8160b1fd118e5fb5fbfe42a9e712421339a57cd33956c5c7df9a463162b"
+}

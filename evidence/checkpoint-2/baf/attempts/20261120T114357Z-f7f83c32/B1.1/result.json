@@ -1,0 +1,45 @@
+{
+  "task": "B1.1",
+  "pass": true,
+  "state": {
+    "version": "0",
+    "request_id": "2387f5720f0c1d7508b87dae3e34ca1c",
+    "session_id": "7fb8cb504b9317723d3d21d6e811fed1",
+    "status": "success",
+    "duration_seconds": 10.52128732499989,
+    "answer": "Сервис `orders` слушает порт **8137** (указан в `config/app.yaml` → `service.listen.port`). В том же файле в комментарии упомянут порт 8080, но он помечен как устаревший и не используется.\n\nЧисло `8137` записано в `/work/answer.txt`.",
+    "model_mode": "real"
+  },
+  "checker": {
+    "exit_code": 0,
+    "stdout": "{\"pass\": true, \"reason\": \"ok\"}\n",
+    "stderr": "",
+    "verdict": {
+      "pass": true,
+      "reason": "ok"
+    }
+  },
+  "tool_evidence": {
+    "pass": true,
+    "reason": "tool-execution evidence is not required for this task"
+  },
+  "duration_seconds": 31.912122875000932,
+  "task_id": "B1.1",
+  "repeat": 1,
+  "seconds": 31.912122875000932,
+  "tokens_in": 8472,
+  "tokens_out": 491,
+  "tokens_complete": true,
+  "cost_usd": 0.000405,
+  "recorded_cost_usd": 0.000405,
+  "cost_complete": true,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "success",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "ok"
+}

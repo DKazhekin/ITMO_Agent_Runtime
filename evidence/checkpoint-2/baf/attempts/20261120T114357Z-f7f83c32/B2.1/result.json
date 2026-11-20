@@ -1,0 +1,45 @@
+{
+  "task": "B2.1",
+  "pass": true,
+  "state": {
+    "version": "0",
+    "request_id": "272b7c93f97c1d2dffd556c5bdf78adc",
+    "session_id": "1fd22d1634eba62b00a1d49ab629b770",
+    "status": "success",
+    "duration_seconds": 7.081280503000016,
+    "answer": "`parse_date` определена в файле `utilities/dates.py` — путь записан в `answer.txt`.",
+    "model_mode": "real"
+  },
+  "checker": {
+    "exit_code": 0,
+    "stdout": "{\"pass\": true, \"reason\": \"ok\"}\n",
+    "stderr": "",
+    "verdict": {
+      "pass": true,
+      "reason": "ok"
+    }
+  },
+  "tool_evidence": {
+    "pass": true,
+    "reason": "tool-execution evidence is not required for this task"
+  },
+  "duration_seconds": 7.5390443750075065,
+  "task_id": "B2.1",
+  "repeat": 1,
+  "seconds": 7.5390443750075065,
+  "tokens_in": 4635,
+  "tokens_out": 271,
+  "tokens_complete": true,
+  "cost_usd": 0.000219,
+  "recorded_cost_usd": 0.000219,
+  "cost_complete": true,
+  "cost_source": "OpenRouter usage.cost recorded by the model proxy",
+  "outcome": "success",
+  "models": [
+    "deepseek/deepseek-v4.1-flash-1017"
+  ],
+  "modes": [
+    "real"
+  ],
+  "reason": "ok"
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "real_mount",
+    "actual": "fuse.sshfs",
+    "expected": "fuse.sshfs",
+    "passed": true
+  },
+  {
+    "name": "kernel_read_only",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "read_only_original_visible",
+    "actual": "8000",
+    "expected": "8000",
+    "passed": true
+  },
+  {
+    "name": "read_only_new_file_absent",
+    "actual": false,
+    "expected": false,
+    "passed": true
+  },
+  {
+    "name": "read_only_close",
+    "actual": "unchanged",
+    "expected": "unchanged",
+    "passed": true
+  },
+  {
+    "name": "detach",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "client_cleanup",
+    "actual": null,
+    "expected": null,
+    "passed": true
+  }
+]

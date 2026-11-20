@@ -1,0 +1,68 @@
+[
+  {
+    "name": "offscreen_qt_platform",
+    "actual": "offscreen",
+    "expected": "offscreen",
+    "passed": true
+  },
+  {
+    "name": "mock_model_selected",
+    "actual": "mock",
+    "expected": "mock",
+    "passed": true
+  },
+  {
+    "name": "directory_dialog_accepted",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "synthetic_folder_in_widget",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "session_connected",
+    "actual": "Папка подключена.",
+    "expected": "Папка подключена.",
+    "passed": true
+  },
+  {
+    "name": "desktop_reports_terminal_result",
+    "actual": "Задача завершена.",
+    "expected": "Задача завершена.",
+    "passed": true
+  },
+  {
+    "name": "mock_completion_visible_in_chat",
+    "actual": "Finished",
+    "expected": "Finished",
+    "passed": true
+  },
+  {
+    "name": "answer_written_to_mac",
+    "actual": "8137",
+    "expected": "8137",
+    "passed": true
+  },
+  {
+    "name": "gateway_confirmed_session_release",
+    "actual": "Сеанс завершён.",
+    "expected": "Сеанс завершён.",
+    "passed": true
+  },
+  {
+    "name": "window_closed",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "synthetic_folder_cleaned",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  }
+]

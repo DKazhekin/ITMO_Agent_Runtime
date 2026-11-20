@@ -1,0 +1,5 @@
+id: B1.4
+baf: B1
+level: original
+instruction: За сколько часов склад обязан уведомить магазин о задержке повторных заказов? Используй operations.md и запиши целое число в answer.txt.
+answer_file: answer.txt

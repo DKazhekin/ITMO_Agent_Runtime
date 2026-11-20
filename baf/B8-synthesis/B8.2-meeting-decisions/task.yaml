@@ -1,0 +1,6 @@
+id: B8.2
+baf: B8
+level: medium
+instruction: Собери утверждённые решения из всех протоколов meetings/*.md в decisions.json. Нужен массив объектов со строковыми полями decision (текст решения
+  без завершающей точки), date (YYYY-MM-DD), owner (ответственный). Отсортируй по дате. Предложения не включай.
+answer_file: decisions.json

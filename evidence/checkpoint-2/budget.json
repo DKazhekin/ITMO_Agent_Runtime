@@ -1,0 +1,21 @@
+{
+  "unit": "USD",
+  "limit": 6.0,
+  "proxy_rounded_charges": 0.005548,
+  "reserved_pending": 0.7,
+  "arithmetical_remainder": 5.294452,
+  "paid_requests_enabled": false,
+  "blocking_reasons": [
+    "unexpected_model_or_provider"
+  ],
+  "provider_key_usage_delta": "0.005523127",
+  "provider_external_key_usage_delta": "0",
+  "provider_checked_at_utc": "2026-11-20T11:52:38.619206+00:00",
+  "known_limitations": [
+    "Key usage is a before/after account counter. It does not identify the provider of an individual request.",
+    "The proxy retained no approved model result for the rejected reply. Its final identity is unconfirmed.",
+    "Reservations are held until reconciled. They are not provider charges."
+  ],
+  "provider_counter": "https://openrouter.ai/api/v1/key",
+  "provider_details": "https://openrouter.ai/docs/api/api-reference/generations/get-generation"
+}

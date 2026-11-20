@@ -1,0 +1,929 @@
+{
+  "collected_at_utc": "2026-11-20T11:50:26.434461+00:00",
+  "client_os": "macOS-26.7.3-arm64-arm-64bit",
+  "docker_host": {
+    "NCPU": 4,
+    "MemTotal": 5142511616,
+    "KernelVersion": "6.8.0-117-generic",
+    "ServerVersion": "29.5.2"
+  },
+  "mount_helper_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+  "server_runtime_sha256": {
+    "gateway": "c312f28d9d0ec052f02d0c320edba16dfaba5d8dd151312ad8ee0c09219e157d",
+    "harness": "c312f28d9d0ec052f02d0c320edba16dfaba5d8dd151312ad8ee0c09219e157d",
+    "sandbox-manager": "c312f28d9d0ec052f02d0c320edba16dfaba5d8dd151312ad8ee0c09219e157d"
+  },
+  "client_source_sha256": "f02709ebccdf883488cce0bf21e2e200ae36edb3a05c578888eb07c5f61cf7dc",
+  "reference": [
+    "https://github.com/deeppavlov/agentic-course-itmo/blob/818740966b0d5b08fc9e46c3f6e449c824367ba9/projects/A-agent-runtime.md#L57",
+    "https://github.com/deeppavlov/agentic-course-itmo/blob/818740966b0d5b08fc9e46c3f6e449c824367ba9/projects/A-agent-runtime.md#L76",
+    "https://github.com/deeppavlov/agentic-course-itmo/blob/818740966b0d5b08fc9e46c3f6e449c824367ba9/projects/checkpoint-2-questions.md#L84"
+  ],
+  "small_files": {
+    "count": 16,
+    "bytes_each": 1024
+  },
+  "large_file_bytes": 1048576,
+  "written_file_bytes": 16384,
+  "method": {
+    "environment": "Running local services and built images; serial independent sessions, no model call.",
+    "background": "A real-model evaluation ran in a separate Compose project on the same Linux VM. These times do not characterize an idle VM.",
+    "open_ms": "Mounted: Mac file service, SSH reverse tunnel and HTTP provision. Fixture: only manager HTTP provision with payload prepared.",
+    "noop_exec_ms": "A true command round trip measured inside the control network; includes acknowledgement and mounted container lifecycle.",
+    "noop_manager_ms": "Duration recorded by the sandbox manager for the same true command.",
+    "workload_exec_ms": "The complete file workload round trip inside the control network.",
+    "file_operations": "Times measured inside the work container; mounted write timer ends after staging, and receipt/actual publication checked separately.",
+    "memory": "Container cgroup memory.current during the workload; idle service deltas use memory usage less inactive_file. Optional host deltas use RSS for the mount service, SSHFS processes and this Mac client process, independently. These values are not summed. Linux ssh and the Docker daemon are excluded.",
+    "percentiles": "Arithmetic median; p95 is empirical nearest rank.",
+    "parallelism": "Not measured."
+  },
+  "samples": {
+    "mounted": [
+      {
+        "open_ms": 272.399,
+        "noop_exec_ms": 275.281539,
+        "noop_manager_ms": 258.825060999925,
+        "workload_exec_ms": 539.017088,
+        "stat_ms": 2.333205,
+        "walk_ms": 60.822332,
+        "read_small_batch_ms": 105.281478,
+        "read_large_ms": 14.12198,
+        "write_in_container_ms": 5.766701,
+        "tool_container_memory_bytes": 10510336,
+        "idle_control_before_bytes": {
+          "gateway": 52461568,
+          "harness": 69242880,
+          "sandbox-manager": 41426944
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52473856,
+          "harness": 69251072,
+          "sandbox-manager": 41455616
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 12288,
+          "harness": 8192,
+          "sandbox-manager": 28672
+        },
+        "host_before": {
+          "helper_rss_bytes": 22241280,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2887680,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 48644096
+        },
+        "host_open": {
+          "helper_rss_bytes": 22241280,
+          "sshfs_processes": 2,
+          "sshfs_rss_bytes": 5726208,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 62914560
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2838528,
+          "client_rss_bytes": 14270464
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 208.599458,
+        "noop_exec_ms": 261.985587,
+        "noop_manager_ms": 245.14840300003016,
+        "workload_exec_ms": 512.099429,
+        "stat_ms": 2.127788,
+        "walk_ms": 63.490075,
+        "read_small_batch_ms": 111.507256,
+        "read_large_ms": 15.846769,
+        "write_in_container_ms": 6.206075,
+        "tool_container_memory_bytes": 10506240,
+        "idle_control_before_bytes": {
+          "gateway": 52465664,
+          "harness": 69246976,
+          "sandbox-manager": 43995136
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52473856,
+          "harness": 69251072,
+          "sandbox-manager": 44003328
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 8192,
+          "harness": 4096,
+          "sandbox-manager": 8192
+        },
+        "host_before": {
+          "helper_rss_bytes": 22241280,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2887680,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 69566464
+        },
+        "host_open": {
+          "helper_rss_bytes": 22241280,
+          "sshfs_processes": 2,
+          "sshfs_rss_bytes": 5705728,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 69795840
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2818048,
+          "client_rss_bytes": 229376
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 203.3585,
+        "noop_exec_ms": 235.654775,
+        "noop_manager_ms": 221.06987999995908,
+        "workload_exec_ms": 517.970064,
+        "stat_ms": 2.405455,
+        "walk_ms": 64.255696,
+        "read_small_batch_ms": 100.65585,
+        "read_large_ms": 15.990851,
+        "write_in_container_ms": 5.364451,
+        "tool_container_memory_bytes": 10514432,
+        "idle_control_before_bytes": {
+          "gateway": 52568064,
+          "harness": 67301376,
+          "sandbox-manager": 45486080
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52477952,
+          "harness": 67301376,
+          "sandbox-manager": 45486080
+        },
+        "idle_control_delta_bytes": {
+          "gateway": -90112,
+          "harness": 0,
+          "sandbox-manager": 0
+        },
+        "host_before": {
+          "helper_rss_bytes": 22245376,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2887680,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 73678848
+        },
+        "host_open": {
+          "helper_rss_bytes": 22245376,
+          "sshfs_processes": 2,
+          "sshfs_rss_bytes": 5726208,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 73875456
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2838528,
+          "client_rss_bytes": 196608
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 210.482959,
+        "noop_exec_ms": 255.863817,
+        "noop_manager_ms": 241.1629640000683,
+        "workload_exec_ms": 545.645415,
+        "stat_ms": 2.164497,
+        "walk_ms": 67.599355,
+        "read_small_batch_ms": 112.496119,
+        "read_large_ms": 14.619186,
+        "write_in_container_ms": 5.834282,
+        "tool_container_memory_bytes": 10518528,
+        "idle_control_before_bytes": {
+          "gateway": 52465664,
+          "harness": 67301376,
+          "sandbox-manager": 45514752
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52482048,
+          "harness": 67305472,
+          "sandbox-manager": 45502464
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 16384,
+          "harness": 4096,
+          "sandbox-manager": -12288
+        },
+        "host_before": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 0,
+          "sshfs_rss_bytes": 0,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 72368128
+        },
+        "host_open": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2838528,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 72597504
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2838528,
+          "client_rss_bytes": 229376
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 213.114083,
+        "noop_exec_ms": 253.250893,
+        "noop_manager_ms": 237.32620900000256,
+        "workload_exec_ms": 528.599202,
+        "stat_ms": 2.269788,
+        "walk_ms": 64.466522,
+        "read_small_batch_ms": 104.18125,
+        "read_large_ms": 15.611517,
+        "write_in_container_ms": 6.11299,
+        "tool_container_memory_bytes": 10510336,
+        "idle_control_before_bytes": {
+          "gateway": 52572160,
+          "harness": 67301376,
+          "sandbox-manager": 45535232
+        },
+        "idle_control_open_bytes": {
+          "gateway": 62779392,
+          "harness": 67338240,
+          "sandbox-manager": 45527040
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 10207232,
+          "harness": 36864,
+          "sandbox-manager": -8192
+        },
+        "host_before": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 0,
+          "sshfs_rss_bytes": 0,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 78086144
+        },
+        "host_open": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2826240,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 78233600
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2826240,
+          "client_rss_bytes": 147456
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 200.514875,
+        "noop_exec_ms": 248.16539,
+        "noop_manager_ms": 230.30879399993864,
+        "workload_exec_ms": 515.086697,
+        "stat_ms": 2.278038,
+        "walk_ms": 58.81407,
+        "read_small_batch_ms": 100.06621,
+        "read_large_ms": 13.566311,
+        "write_in_container_ms": 5.162242,
+        "tool_container_memory_bytes": 10522624,
+        "idle_control_before_bytes": {
+          "gateway": 52473856,
+          "harness": 67338240,
+          "sandbox-manager": 47968256
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52482048,
+          "harness": 67342336,
+          "sandbox-manager": 47972352
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 8192,
+          "harness": 4096,
+          "sandbox-manager": 4096
+        },
+        "host_before": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 0,
+          "sshfs_rss_bytes": 0,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 78168064
+        },
+        "host_open": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2822144,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 78364672
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2822144,
+          "client_rss_bytes": 196608
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 201.947083,
+        "noop_exec_ms": 241.302136,
+        "noop_manager_ms": 225.6262030000471,
+        "workload_exec_ms": 500.73624,
+        "stat_ms": 2.08808,
+        "walk_ms": 61.97652,
+        "read_small_batch_ms": 105.682739,
+        "read_large_ms": 13.386061,
+        "write_in_container_ms": 5.688865,
+        "tool_container_memory_bytes": 10514432,
+        "idle_control_before_bytes": {
+          "gateway": 52473856,
+          "harness": 67338240,
+          "sandbox-manager": 47980544
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52482048,
+          "harness": 67350528,
+          "sandbox-manager": 47984640
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 8192,
+          "harness": 12288,
+          "sandbox-manager": 4096
+        },
+        "host_before": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 0,
+          "sshfs_rss_bytes": 0,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 76939264
+        },
+        "host_open": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2834432,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 77119488
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2834432,
+          "client_rss_bytes": 180224
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 206.381209,
+        "noop_exec_ms": 281.074765,
+        "noop_manager_ms": 264.6070839998629,
+        "workload_exec_ms": 531.527664,
+        "stat_ms": 2.857078,
+        "walk_ms": 69.49513,
+        "read_small_batch_ms": 106.862399,
+        "read_large_ms": 14.849307,
+        "write_in_container_ms": 5.72224,
+        "tool_container_memory_bytes": 10518528,
+        "idle_control_before_bytes": {
+          "gateway": 52584448,
+          "harness": 67346432,
+          "sandbox-manager": 47996928
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52486144,
+          "harness": 67354624,
+          "sandbox-manager": 47996928
+        },
+        "idle_control_delta_bytes": {
+          "gateway": -98304,
+          "harness": 8192,
+          "sandbox-manager": 0
+        },
+        "host_before": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 0,
+          "sshfs_rss_bytes": 0,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 78479360
+        },
+        "host_open": {
+          "helper_rss_bytes": 22249472,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2834432,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 78626816
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2834432,
+          "client_rss_bytes": 147456
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 203.293583,
+        "noop_exec_ms": 241.463197,
+        "noop_manager_ms": 226.2154330001067,
+        "workload_exec_ms": 538.833203,
+        "stat_ms": 2.020913,
+        "walk_ms": 64.19426,
+        "read_small_batch_ms": 101.905359,
+        "read_large_ms": 13.8231,
+        "write_in_container_ms": 5.089741,
+        "tool_container_memory_bytes": 10518528,
+        "idle_control_before_bytes": {
+          "gateway": 52473856,
+          "harness": 67346432,
+          "sandbox-manager": 48013312
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52486144,
+          "harness": 67354624,
+          "sandbox-manager": 48001024
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 12288,
+          "harness": 8192,
+          "sandbox-manager": -12288
+        },
+        "host_before": {
+          "helper_rss_bytes": 22253568,
+          "sshfs_processes": 0,
+          "sshfs_rss_bytes": 0,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 64356352
+        },
+        "host_open": {
+          "helper_rss_bytes": 22253568,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2834432,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 64520192
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2834432,
+          "client_rss_bytes": 163840
+        },
+        "write_verified_on_mac": true
+      },
+      {
+        "open_ms": 198.788459,
+        "noop_exec_ms": 237.293774,
+        "noop_manager_ms": 222.48505099992144,
+        "workload_exec_ms": 475.816627,
+        "stat_ms": 2.162038,
+        "walk_ms": 58.846767,
+        "read_small_batch_ms": 90.804792,
+        "read_large_ms": 15.942013,
+        "write_in_container_ms": 4.858699,
+        "tool_container_memory_bytes": 10506240,
+        "idle_control_before_bytes": {
+          "gateway": 52477952,
+          "harness": 67350528,
+          "sandbox-manager": 48025600
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52486144,
+          "harness": 67354624,
+          "sandbox-manager": 48025600
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 8192,
+          "harness": 4096,
+          "sandbox-manager": 0
+        },
+        "host_before": {
+          "helper_rss_bytes": 22253568,
+          "sshfs_processes": 0,
+          "sshfs_rss_bytes": 0,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 66256896
+        },
+        "host_open": {
+          "helper_rss_bytes": 22253568,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2838528,
+          "helper_source_sha256": "5700f91ef4d3c1f94d7ab0f0beae1d9f3157a7513fdd692aad7d1f936af8d547",
+          "client_rss_bytes": 66437120
+        },
+        "host_delta": {
+          "helper_rss_bytes": 0,
+          "sshfs_processes": 1,
+          "sshfs_rss_bytes": 2838528,
+          "client_rss_bytes": 180224
+        },
+        "write_verified_on_mac": true
+      }
+    ],
+    "fixture": [
+      {
+        "open_ms": 165.86056,
+        "noop_exec_ms": 41.363983,
+        "noop_manager_ms": 27.38537899995208,
+        "workload_exec_ms": 125.94349,
+        "stat_ms": 0.011041,
+        "walk_ms": 0.09375,
+        "read_small_batch_ms": 0.083083,
+        "read_large_ms": 0.241583,
+        "write_in_container_ms": 0.041458,
+        "tool_container_memory_bytes": 11571200,
+        "idle_control_before_bytes": {
+          "gateway": 52461568,
+          "harness": 69246976,
+          "sandbox-manager": 41525248
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52584448,
+          "harness": 69246976,
+          "sandbox-manager": 43991040
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 122880,
+          "harness": 0,
+          "sandbox-manager": 2465792
+        }
+      },
+      {
+        "open_ms": 183.095611,
+        "noop_exec_ms": 38.150404,
+        "noop_manager_ms": 24.187173999962397,
+        "workload_exec_ms": 142.452042,
+        "stat_ms": 0.013041,
+        "walk_ms": 0.116792,
+        "read_small_batch_ms": 0.098334,
+        "read_large_ms": 0.357583,
+        "write_in_container_ms": 0.045625,
+        "tool_container_memory_bytes": 11554816,
+        "idle_control_before_bytes": {
+          "gateway": 52465664,
+          "harness": 67301376,
+          "sandbox-manager": 44019712
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52580352,
+          "harness": 67301376,
+          "sandbox-manager": 45502464
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 114688,
+          "harness": 0,
+          "sandbox-manager": 1482752
+        }
+      },
+      {
+        "open_ms": 171.488119,
+        "noop_exec_ms": 37.901234,
+        "noop_manager_ms": 23.728756000082285,
+        "workload_exec_ms": 136.128004,
+        "stat_ms": 0.011083,
+        "walk_ms": 0.095291,
+        "read_small_batch_ms": 0.080208,
+        "read_large_ms": 0.287875,
+        "write_in_container_ms": 0.029708,
+        "tool_container_memory_bytes": 11530240,
+        "idle_control_before_bytes": {
+          "gateway": 52465664,
+          "harness": 67301376,
+          "sandbox-manager": 45494272
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52580352,
+          "harness": 67301376,
+          "sandbox-manager": 45510656
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 114688,
+          "harness": 0,
+          "sandbox-manager": 16384
+        }
+      },
+      {
+        "open_ms": 158.559671,
+        "noop_exec_ms": 33.275156,
+        "noop_manager_ms": 19.614010999930542,
+        "workload_exec_ms": 88.012864,
+        "stat_ms": 0.010625,
+        "walk_ms": 0.100749,
+        "read_small_batch_ms": 0.080459,
+        "read_large_ms": 0.270791,
+        "write_in_container_ms": 0.033791,
+        "tool_container_memory_bytes": 11554816,
+        "idle_control_before_bytes": {
+          "gateway": 52469760,
+          "harness": 67305472,
+          "sandbox-manager": 45510656
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52584448,
+          "harness": 67305472,
+          "sandbox-manager": 45531136
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 114688,
+          "harness": 0,
+          "sandbox-manager": 20480
+        }
+      },
+      {
+        "open_ms": 157.597248,
+        "noop_exec_ms": 35.025277,
+        "noop_manager_ms": 20.27600899987192,
+        "workload_exec_ms": 126.933547,
+        "stat_ms": 0.011208,
+        "walk_ms": 0.102166,
+        "read_small_batch_ms": 0.086458,
+        "read_large_ms": 0.285333,
+        "write_in_container_ms": 0.035333,
+        "tool_container_memory_bytes": 11489280,
+        "idle_control_before_bytes": {
+          "gateway": 52469760,
+          "harness": 67338240,
+          "sandbox-manager": 45539328
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52584448,
+          "harness": 67338240,
+          "sandbox-manager": 47964160
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 114688,
+          "harness": 0,
+          "sandbox-manager": 2424832
+        }
+      },
+      {
+        "open_ms": 153.217374,
+        "noop_exec_ms": 34.36361,
+        "noop_manager_ms": 19.913674999997966,
+        "workload_exec_ms": 128.162496,
+        "stat_ms": 0.010875,
+        "walk_ms": 0.087625,
+        "read_small_batch_ms": 0.081333,
+        "read_large_ms": 0.248166,
+        "write_in_container_ms": 0.028916,
+        "tool_container_memory_bytes": 11616256,
+        "idle_control_before_bytes": {
+          "gateway": 52473856,
+          "harness": 67342336,
+          "sandbox-manager": 47964160
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52588544,
+          "harness": 67338240,
+          "sandbox-manager": 47980544
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 114688,
+          "harness": -4096,
+          "sandbox-manager": 16384
+        }
+      },
+      {
+        "open_ms": 178.076906,
+        "noop_exec_ms": 31.479738,
+        "noop_manager_ms": 17.33717900015108,
+        "workload_exec_ms": 84.350814,
+        "stat_ms": 0.011375,
+        "walk_ms": 0.112083,
+        "read_small_batch_ms": 0.086167,
+        "read_large_ms": 0.325166,
+        "write_in_container_ms": 0.03425,
+        "tool_container_memory_bytes": 11599872,
+        "idle_control_before_bytes": {
+          "gateway": 52473856,
+          "harness": 67346432,
+          "sandbox-manager": 48005120
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52580352,
+          "harness": 67346432,
+          "sandbox-manager": 48017408
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 106496,
+          "harness": 0,
+          "sandbox-manager": 12288
+        }
+      },
+      {
+        "open_ms": 169.615745,
+        "noop_exec_ms": 33.008108,
+        "noop_manager_ms": 19.51900799986106,
+        "workload_exec_ms": 138.976923,
+        "stat_ms": 0.0105,
+        "walk_ms": 0.091625,
+        "read_small_batch_ms": 0.09125,
+        "read_large_ms": 0.268916,
+        "write_in_container_ms": 0.031083,
+        "tool_container_memory_bytes": 11640832,
+        "idle_control_before_bytes": {
+          "gateway": 52473856,
+          "harness": 67346432,
+          "sandbox-manager": 48009216
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52596736,
+          "harness": 67346432,
+          "sandbox-manager": 48017408
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 122880,
+          "harness": 0,
+          "sandbox-manager": 8192
+        }
+      },
+      {
+        "open_ms": 170.38082,
+        "noop_exec_ms": 32.788067,
+        "noop_manager_ms": 18.930382999997164,
+        "workload_exec_ms": 135.656173,
+        "stat_ms": 0.010875,
+        "walk_ms": 0.105541,
+        "read_small_batch_ms": 0.0815,
+        "read_large_ms": 0.296416,
+        "write_in_container_ms": 0.029125,
+        "tool_container_memory_bytes": 11657216,
+        "idle_control_before_bytes": {
+          "gateway": 52473856,
+          "harness": 67350528,
+          "sandbox-manager": 48009216
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52584448,
+          "harness": 67350528,
+          "sandbox-manager": 48021504
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 110592,
+          "harness": 0,
+          "sandbox-manager": 12288
+        }
+      },
+      {
+        "open_ms": 195.583642,
+        "noop_exec_ms": 32.448273,
+        "noop_manager_ms": 18.242216000089684,
+        "workload_exec_ms": 90.752791,
+        "stat_ms": 0.010666,
+        "walk_ms": 0.099958,
+        "read_small_batch_ms": 0.090208,
+        "read_large_ms": 0.330332,
+        "write_in_container_ms": 0.030917,
+        "tool_container_memory_bytes": 11481088,
+        "idle_control_before_bytes": {
+          "gateway": 52477952,
+          "harness": 67354624,
+          "sandbox-manager": 48013312
+        },
+        "idle_control_open_bytes": {
+          "gateway": 52588544,
+          "harness": 67354624,
+          "sandbox-manager": 48058368
+        },
+        "idle_control_delta_bytes": {
+          "gateway": 110592,
+          "harness": 0,
+          "sandbox-manager": 45056
+        }
+      }
+    ]
+  },
+  "failures": [],
+  "summary": {
+    "mounted": {
+      "open_ms": {
+        "median": 204.8698545,
+        "p95": 272.399
+      },
+      "noop_exec_ms": {
+        "median": 250.7081415,
+        "p95": 281.074765
+      },
+      "noop_manager_ms": {
+        "median": 233.8175014999706,
+        "p95": 264.6070839998629
+      },
+      "workload_exec_ms": {
+        "median": 523.284633,
+        "p95": 545.645415
+      },
+      "stat_ms": {
+        "median": 2.2171425,
+        "p95": 2.857078
+      },
+      "walk_ms": {
+        "median": 63.8421675,
+        "p95": 69.49513
+      },
+      "read_small_batch_ms": {
+        "median": 104.73136400000001,
+        "p95": 112.496119
+      },
+      "read_large_ms": {
+        "median": 14.7342465,
+        "p95": 15.990851
+      },
+      "write_in_container_ms": {
+        "median": 5.7055525,
+        "p95": 6.206075
+      },
+      "tool_container_memory_bytes": {
+        "median": 10514432.0,
+        "p95": 10522624
+      },
+      "idle_control_delta_bytes": {
+        "gateway": {
+          "median": 8192.0,
+          "p95": 10207232
+        },
+        "harness": {
+          "median": 6144.0,
+          "p95": 36864
+        },
+        "sandbox-manager": {
+          "median": 0.0,
+          "p95": 28672
+        }
+      },
+      "host_delta": {
+        "helper_rss_bytes": {
+          "median": 0.0,
+          "p95": 0
+        },
+        "sshfs_processes": {
+          "median": 1.0,
+          "p95": 1
+        },
+        "sshfs_rss_bytes": {
+          "median": 2834432.0,
+          "p95": 2838528
+        },
+        "client_rss_bytes": {
+          "median": 188416.0,
+          "p95": 14270464
+        }
+      }
+    },
+    "fixture": {
+      "open_ms": {
+        "median": 169.99828250000002,
+        "p95": 195.583642
+      },
+      "noop_exec_ms": {
+        "median": 33.819383,
+        "p95": 41.363983
+      },
+      "noop_manager_ms": {
+        "median": 19.763842999964254,
+        "p95": 27.38537899995208
+      },
+      "workload_exec_ms": {
+        "median": 127.5480215,
+        "p95": 142.452042
+      },
+      "stat_ms": {
+        "median": 0.010957999999999999,
+        "p95": 0.013041
+      },
+      "walk_ms": {
+        "median": 0.10035350000000001,
+        "p95": 0.116792
+      },
+      "read_small_batch_ms": {
+        "median": 0.084625,
+        "p95": 0.098334
+      },
+      "read_large_ms": {
+        "median": 0.28660399999999997,
+        "p95": 0.357583
+      },
+      "write_in_container_ms": {
+        "median": 0.032437,
+        "p95": 0.045625
+      },
+      "tool_container_memory_bytes": {
+        "median": 11563008.0,
+        "p95": 11657216
+      },
+      "idle_control_delta_bytes": {
+        "gateway": {
+          "median": 114688.0,
+          "p95": 122880
+        },
+        "harness": {
+          "median": 0.0,
+          "p95": 0
+        },
+        "sandbox-manager": {
+          "median": 18432.0,
+          "p95": 2465792
+        }
+      }
+    }
+  }
+}

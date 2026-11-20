@@ -1,0 +1,5 @@
+id: B6.1
+baf: B6
+level: simple
+instruction: Реализуй функцию slugify(text) в файле slug.py по правилам spec.md.
+answer_file: slug.py

@@ -1,0 +1,6 @@
+id: B7.4
+baf: B7
+level: original
+instruction: По conditions.md определи самый ранний по времени допустимый выезд груза из склада. Запиши код машины и время её выезда в формате HH:MM в answer.txt,
+  каждый на отдельной строке.
+answer_file: answer.txt

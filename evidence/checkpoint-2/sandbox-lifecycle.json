@@ -1,0 +1,103 @@
+{
+  "measured_at_utc": "2026-11-20T11:50:05.528984+00:00",
+  "sandbox_image_id": "sha256:f27e983949cd4a6d4ae0591d8e597984a80ab0ff63e8abffd19f6bc899870f43",
+  "sandbox_source_sha256": "33a0c97ea6b6d32c7cb017f3695fae0f42cf98cfd102b25cff78dc841dec7f1d",
+  "docker_host": {
+    "ServerVersion": "29.5.2",
+    "KernelVersion": "6.8.0-117-generic",
+    "NCPU": 4,
+    "MemTotal": 5142511616
+  },
+  "samples": [
+    {
+      "cold_create_and_start_ms": 73.887856,
+      "started_container_true_ms": 18.491859,
+      "idle_cgroup_usage_bytes": 516096,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 516096
+    },
+    {
+      "cold_create_and_start_ms": 50.643417,
+      "started_container_true_ms": 19.010527,
+      "idle_cgroup_usage_bytes": 512000,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 512000
+    },
+    {
+      "cold_create_and_start_ms": 54.343622,
+      "started_container_true_ms": 24.053481,
+      "idle_cgroup_usage_bytes": 507904,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 507904
+    },
+    {
+      "cold_create_and_start_ms": 49.611834,
+      "started_container_true_ms": 16.368778,
+      "idle_cgroup_usage_bytes": 626688,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 626688
+    },
+    {
+      "cold_create_and_start_ms": 51.912874,
+      "started_container_true_ms": 18.980276,
+      "idle_cgroup_usage_bytes": 512000,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 512000
+    },
+    {
+      "cold_create_and_start_ms": 43.373297,
+      "started_container_true_ms": 26.778853,
+      "idle_cgroup_usage_bytes": 520192,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 520192
+    },
+    {
+      "cold_create_and_start_ms": 54.626704,
+      "started_container_true_ms": 20.930024,
+      "idle_cgroup_usage_bytes": 524288,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 524288
+    },
+    {
+      "cold_create_and_start_ms": 47.332751,
+      "started_container_true_ms": 20.059108,
+      "idle_cgroup_usage_bytes": 532480,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 532480
+    },
+    {
+      "cold_create_and_start_ms": 60.810407,
+      "started_container_true_ms": 18.537318,
+      "idle_cgroup_usage_bytes": 499712,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 499712
+    },
+    {
+      "cold_create_and_start_ms": 64.113613,
+      "started_container_true_ms": 21.772107,
+      "idle_cgroup_usage_bytes": 495616,
+      "idle_cgroup_usage_minus_inactive_file_bytes": 495616
+    }
+  ],
+  "remaining_test_containers": 0,
+  "reference": [
+    "https://github.com/deeppavlov/agentic-course-itmo/blob/818740966b0d5b08fc9e46c3f6e449c824367ba9/projects/A-agent-runtime.md#L76",
+    "https://github.com/deeppavlov/agentic-course-itmo/blob/818740966b0d5b08fc9e46c3f6e449c824367ba9/projects/checkpoint-2-questions.md#L84"
+  ],
+  "method": {
+    "container_start": "Fresh container and namespace, built image already local. Timer covers runtime.sandbox.create_container, not image build or pull.",
+    "exec": "One /bin/true per started container; timer covers Docker exec creation, start and exit inspection. No gateway, model or fixture transfer.",
+    "memory": "One Docker cgroup reading per idle container after true returned. Cache-adjusted sample subtracts inactive_file. VM, manager, daemon, host mount helper and parallel capacity are outside this measurement.",
+    "background": "A real-model evaluation ran in a separate Compose project on the same Linux VM. These times do not characterize an idle VM.",
+    "percentiles": "Arithmetic median; p95 uses empirical nearest rank."
+  },
+  "summary": {
+    "cold_create_and_start_ms": {
+      "median": 53.128248,
+      "p95": 73.887856
+    },
+    "started_container_true_ms": {
+      "median": 19.5348175,
+      "p95": 26.778853
+    },
+    "idle_cgroup_usage_bytes": {
+      "median": 514048.0,
+      "p95": 626688
+    },
+    "idle_cgroup_usage_minus_inactive_file_bytes": {
+      "median": 514048.0,
+      "p95": 626688
+    }
+  }
+}

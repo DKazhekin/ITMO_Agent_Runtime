@@ -1,0 +1,43 @@
+{
+  "task": "B9.1",
+  "pass": true,
+  "state": {
+    "version": "0",
+    "request_id": "3ad9f0c6522339cfccedc261d6e1bda5",
+    "session_id": "34c5c99489621aaedfdfee50235f8fc8",
+    "status": "success",
+    "duration_seconds": 1.035935016000053,
+    "answer": "Replay finished",
+    "model_mode": "mock"
+  },
+  "checker": {
+    "exit_code": 0,
+    "stdout": "{\"pass\": true, \"reason\": \"ok\"}\n",
+    "stderr": "",
+    "verdict": {
+      "pass": true,
+      "reason": "ok"
+    }
+  },
+  "tool_evidence": {
+    "pass": true,
+    "reason": "tool-execution evidence is not required for this task"
+  },
+  "duration_seconds": 1.4211244579928461,
+  "task_id": "B9.1",
+  "repeat": 1,
+  "seconds": 1.4211244579928461,
+  "tokens_in": 0,
+  "tokens_out": 0,
+  "tokens_complete": true,
+  "cost_usd": 0,
+  "recorded_cost_usd": 0,
+  "cost_complete": true,
+  "cost_source": null,
+  "outcome": "success",
+  "models": [],
+  "modes": [
+    "mock"
+  ],
+  "reason": "ok"
+}

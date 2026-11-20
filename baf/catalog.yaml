@@ -1,4 +1,4 @@
-# Курсовой набор БАФ (примерный). Студент добавляет свои задачи по каждой БАФ, одну свою БАФ и одну составную.
+# Курсовые задания Б1–Б8 и собственные задания Б1.4–Б9.3.
 version: 1
 bafs:
   B1:
@@ -55,6 +55,26 @@ composite:
   - {id: C3, prompt: "Добавь в проект утилиту из spec.md с тестами", decomposition: [B1, B6, B5, B4], check: "скрытые тесты + тесты агента проходят"}
 
 implementation:
-  active_checkpoint: 1
-  implemented: [B1, B2, B3, B4, B5]
-  deferred: [B6, B7, B8, C1, C2, C3]
+  active_checkpoint: 2
+  implemented: [B1, B2, B3, B4, B5, B6, B7, B8, B9]
+  deferred: [C1, C2, C3]
+  executable_count: 35
+  smoke: [B1.1, B2.1, B3.1, B4.1, B5.1, B6.1, B7.1, B8.1, B9.1]
+
+original_variants:
+  - {id: B1.4, fixture: B1-read/B1.4-explicit-backorder, focus: Старая рассылка и действующая таблица}
+  - {id: B2.4, fixture: B2-search/B2.4-live-entrypoints, focus: Определения уровня модуля среди методов и импортов}
+  - {id: B3.4, fixture: B3-create/B3.4-typed-device-manifest, focus: Типы идентификаторов и смещений}
+  - {id: B4.4, fixture: B4-edit/B4.4-scoped-timeout, focus: Повторяющееся имя в секциях и комментарии}
+  - {id: B5.4, fixture: B5-tools/B5.4-stderr-record-count, focus: Устаревший счётчик в stdout и актуальный в stderr}
+  - {id: B6.4, fixture: B6-code/B6.4-coalesce-ranges, focus: Соприкасающиеся полуинтервалы}
+  - {id: B7.4, fixture: B7-reason/B7.4-cold-chain-handoff, focus: Одновременные ограничения на время и вместимость}
+  - {id: B8.4, fixture: B8-synthesis/B8.4-reconciled-inventory, focus: Черновики и товар без начального остатка}
+
+original_baf:
+  id: B9
+  name: Перенос формулы между ячейками
+  tasks:
+    - {id: B9.1, level: simple, fixture: B9-formula/B9.1-relative, focus: Относительные ссылки}
+    - {id: B9.2, level: medium, fixture: B9-formula/B9.2-anchored, focus: Полностью и частично закреплённые ссылки}
+    - {id: B9.3, level: trap, fixture: B9-formula/B9.3-quoted-reference, focus: Адресоподобный текст в кавычках}

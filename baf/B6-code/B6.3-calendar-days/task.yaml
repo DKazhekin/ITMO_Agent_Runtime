@@ -1,0 +1,5 @@
+id: B6.3
+baf: B6
+level: trap
+instruction: Создай dates.py и реализуй days_between(a, b) по правилам spec.md.
+answer_file: dates.py

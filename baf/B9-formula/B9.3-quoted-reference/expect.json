@@ -1,0 +1,8 @@
+{
+  "kind": "workbook",
+  "path": "workbook.xlsx",
+  "expected": "=IF(B3=\"A1\",\"B2: keep\",C3)",
+  "sheet": "Data",
+  "source": "D2",
+  "destination": "D3"
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "real_mount",
+    "actual": "fuse.sshfs",
+    "expected": "fuse.sshfs",
+    "passed": true
+  },
+  {
+    "name": "partial_bytes_staged",
+    "actual": "8",
+    "expected": "8",
+    "passed": true
+  },
+  {
+    "name": "known_original_preserved_at_disconnect",
+    "actual": "8000",
+    "expected": "8000",
+    "passed": true
+  },
+  {
+    "name": "disconnect_reports_unknown",
+    "actual": "unknown",
+    "expected": "unknown",
+    "passed": true
+  },
+  {
+    "name": "closed_mount_is_unavailable",
+    "actual": false,
+    "expected": false,
+    "passed": true
+  },
+  {
+    "name": "same_generation_is_not_reattached",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "detach",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "name": "client_cleanup",
+    "actual": null,
+    "expected": null,
+    "passed": true
+  }
+]

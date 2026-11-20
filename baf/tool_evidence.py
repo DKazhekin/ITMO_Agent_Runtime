@@ -123,11 +123,16 @@ def _command_kind(task_id: str, command: str) -> None:
         if len(segments) != 1 or len(first) != 2 or first[0] not in _SHELL or not _script_path(first[1], "build.sh"):
             raise ValueError("expected direct sh build.sh with separate stdout and stderr")
         return
+    if task_id == "B5.4":
+        arguments = _python_arguments(first)
+        if len(segments) != 1 or len(arguments) != 2 or not _script_path(arguments[0], "scan.py") or not _script_path(arguments[1], "inventory.csv"):
+            raise ValueError("expected direct python scan.py inventory.csv with separate stdout and stderr")
+        return
     raise ValueError("unsupported B5 task")
 
 
 def _check_observation(task_id: str, result: dict[str, Any]) -> None:
-    expected_exit = 0 if task_id == "B5.1" else 1
+    expected_exit = 0 if task_id in {"B5.1", "B5.4"} else 1
     if type(result.get("exit_code")) is not int or result["exit_code"] != expected_exit:
         raise ValueError(f"expected observed exit code {expected_exit}")
     expected_status = "success" if expected_exit == 0 else "error"
@@ -160,6 +165,9 @@ def _check_observation(task_id: str, result: dict[str, Any]) -> None:
         identifiers = {identifier for method, identifier in failures if identifier.rsplit(".", 1)[-1] == method}
         if len(failures) != 3 or identifiers != _FAILURES:
             raise ValueError("observed failing test identifiers do not match the fixture")
+    elif task_id == "B5.4":
+        if stdout.strip() != "cached processed: 5" or stderr.strip() != "processed: 3":
+            raise ValueError("scanner output must include the cached stdout and fresh stderr counts")
     elif stdout.strip() != "OK" or stderr.strip() != "ERROR: missing generated schema.json":
         raise ValueError("build output must include OK and its actual stderr failure reason")
 
@@ -173,7 +181,7 @@ def check_tool_evidence(task_id: str, trace: Sequence[dict[str, Any]]) -> tuple[
     """
     if not task_id.startswith("B5."):
         return True, "tool-execution evidence is not required for this task"
-    if task_id not in {"B5.1", "B5.2", "B5.3"}:
+    if task_id not in {"B5.1", "B5.2", "B5.3", "B5.4"}:
         return False, "unsupported B5 task; tool execution is unverified"
     calls: dict[str, dict[str, Any]] = {}
     conflicts: set[str] = set()

@@ -1,0 +1,5 @@
+id: B6.4
+baf: B6
+level: original
+instruction: Реализуй функцию merge_ranges(ranges) в ranges.py по правилам spec.md.
+answer_file: ranges.py

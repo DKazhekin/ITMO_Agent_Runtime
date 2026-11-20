@@ -8,7 +8,8 @@ import shlex
 import subprocess
 from pathlib import Path
 
-from runtime.common import Operation, Run, Session
+from runtime.common import MountDescriptor, Operation, Run, Session
+from runtime.session_journal import DECISIONS, ERRORS, TOOLS
 
 
 VERSION = {"type": "string", "const": "0"}
@@ -36,7 +37,7 @@ def event(kind, fields):
 
 
 def definitions():
-    defs = {model.__name__: model.model_json_schema() for model in (Session, Run, Operation)}
+    defs = {model.__name__: model.model_json_schema() for model in (Session, MountDescriptor, Run, Operation)}
     defs.update({
         "RunCommandArguments": obj({"command": TEXT}),
         "ReadFileArguments": obj({"path": TEXT}),
@@ -109,10 +110,76 @@ def definitions():
     defs["SandboxResultEvent"] = event("result", {"result": ref("OperationResult")})
     defs["ClientEvent"] = variants("StartedEvent", "ModelEvent", "ToolCallEvent", "ToolResultEvent", "ClientResultEvent")
     defs["SandboxEvent"] = variants("StartedEvent", "SandboxResultEvent")
+    add_mounted_definitions(defs)
     for protocol in ("Client", "Sandbox"):
         defs[protocol + "EventBatch"] = obj({"version": VERSION,
             "events": {"type": "array", "items": ref(protocol + "Event")}})
     return defs
+
+
+def add_mounted_definitions(defs):
+    session_id = defs["Session"]["properties"]["session_id"]
+    opaque = {"type": "string", "pattern": "^[a-f0-9]{32}$"}
+    mode = {"enum": ["mock", "real"]}
+    tool = {"enum": sorted(TOOLS)}
+    # The manager receives the public handshake identity in memory alongside its opaque session ID.
+    provision = copy.deepcopy(defs["Session"])
+    provision["properties"].update(client_session_id=session_id, session_id=opaque, mount=ref("MountDescriptor"))
+    provision["required"] = ["client_session_id", "session_id", "mount"]
+    defs["MountedProvision"] = provision
+    defs["MountedOperation"] = {"allOf": [ref("OperationRequest"), {"type": "object",
+        "properties": {"run_id": opaque, "session_id": opaque}, "required": ["run_id"]}]}
+    defs["WriteDecision"] = obj({"status": {"enum": sorted(DECISIONS)}, "path": TEXT,
+        "operation_id": ID, "proposal_id": opaque}, ["status", "path", "operation_id"])
+    defs["WriteDecisionEvent"] = event("write_decision", {"operation_id": ID, "decision": ref("WriteDecision")})
+    defs["FileChangedEvent"] = event("file_changed", {"path": TEXT, "file_version": TEXT})
+    for name in ("OperationInProgress", "OperationSuccess", "OperationFailure"):
+        defs[name]["properties"].update(session_id=session_id, request_id=ID, tool=tool,
+            write_decisions={"type": "array", "items": ref("WriteDecision")})
+    defs["OperationFailure"]["properties"]["error"] = {"enum": sorted(ERRORS)}
+    defs["RunFailure"]["properties"].update(error={"enum": sorted(ERRORS)}, duration_seconds=NONNEGATIVE)
+    defs["RunCancelled"]["properties"].update(error={"const": "write_outcome_unknown"}, duration_seconds=NONNEGATIVE)
+    defs["InvalidToolResult"]["required"] = ["status", "error"]
+
+    # Once the client closes a mount, the owner can still read a content-free result and stream.
+    technical_result = obj({"version": VERSION, "session_id": session_id, "request_id": ID, "operation_id": ID,
+        "tool": tool, "status": {"enum": ["success", "cancelled", "error", "running"]}, "model_mode": mode,
+        "exit_code": {"type": "integer"}, "error": {"enum": sorted(ERRORS)}, "duration_seconds": NONNEGATIVE,
+        "truncated": {"type": "boolean"}}, ["status"])
+    defs["TechnicalResult"] = technical_result
+    defs["ClosedRunSuccess"] = obj({"version": VERSION, "session_id": opaque, "request_id": opaque,
+        "status": {"const": "success"}, "model_mode": mode, "duration_seconds": NONNEGATIVE})
+    defs["RunResponse"]["oneOf"].append(ref("ClosedRunSuccess"))
+    counters = obj({key: {"type": "integer", "minimum": 0}
+                    for key in ("prompt_tokens", "completion_tokens", "total_tokens")}, [])
+    safe = {
+        "started": {"session_id": session_id},
+        "model": {"step": {"type": "integer"}, "mode": mode, "usage": counters},
+        "tool_call": {"operation_id": ID, "tool": tool},
+        "tool_result": {"operation_id": ID, "result": ref("TechnicalResult")},
+        "write_decision": {"operation_id": ID, "decision": obj({"status": {"enum": sorted(DECISIONS)}}, [])},
+        "file_changed": {},
+        "result": {"result": ref("TechnicalResult")},
+    }
+    rows = []
+    for kind, fields in safe.items():
+        row = event(kind, fields)
+        if kind == "tool_call":
+            row["required"].remove("tool")
+        rows.append(row)
+    defs["TechnicalEvent"] = {"oneOf": rows}
+    sourced = copy.deepcopy(rows)
+    for row in sourced:
+        row["properties"]["source"] = {"enum": ["harness", "sandbox"]}
+        row["required"].append("source")
+    defs["HistoryRow"] = {"oneOf": sourced}
+    defs["TechnicalEvents"] = obj({"events": {"type": "array", "items": ref("TechnicalEvent")}})
+    defs["ChangesRequest"] = obj({"run_id": opaque})
+    defs["ChangesResponse"] = obj({"changes": {"type": "array", "items": obj(
+        {"path": TEXT, "version": TEXT, "seq": {"type": "integer", "minimum": 1}})}})
+    normal = defs["ClientEvent"]["oneOf"]
+    defs["ClientEvent"] = {"anyOf": [*normal, ref("WriteDecisionEvent"), ref("FileChangedEvent"), ref("TechnicalEvent")]}
+    defs["SandboxEvent"]["oneOf"].append(ref("WriteDecisionEvent"))
 
 
 def schemas():
@@ -137,11 +204,19 @@ ROUTES = {
         ("/runs/{run_id}/stream", "get"): (None, "ClientEvent"),
         ("/runs/{run_id}/cancel", "post"): (None, "RunResponse"),
         ("/sessions/{session_id}/files", "get"): (None, "CollectResponse"),
+        ("/sessions/{session_id}/history", "get"): (None, "HistoryRow"),
         ("/sessions/{session_id}", "delete"): (None, "ReleaseResponse"),
     },
     "sandbox-v0": {
         ("/health", "get"): (None, "HealthResponse"),
         ("/sessions", "post"): ("Session", "SessionResponse"),
+        ("/sessions/{session_id}", "get"): (None, "SessionResponse"),
+        ("/mounted-sessions", "post"): ("MountedProvision", "SessionResponse"),
+        ("/mounted-exec", "post"): ("MountedOperation", "OperationResponse"),
+        ("/mounted-sessions/{session_id}", "delete"): (None, "ReleaseResponse"),
+        ("/mounted-sessions/{session_id}/cancel", "post"): (None, "ReleaseResponse"),
+        ("/mounted-sessions/{session_id}/changes", "post"): ("ChangesRequest", "ChangesResponse"),
+        ("/mounted-sessions/{session_id}/history", "get"): (None, "TechnicalEvents"),
         ("/exec", "post"): ("OperationRequest", "OperationResponse"),
         ("/operations/{operation_id}/events", "get"): (None, "SandboxEventBatch"),
         ("/operations/{operation_id}/stream", "get"): (None, "SandboxEvent"),
@@ -176,6 +251,7 @@ def enrich_openapi(raw, protocol):
     components.setdefault("schemas", {}).update(openapi_refs(definitions()))
     if protocol == "client-v0":
         components.setdefault("securitySchemes", {})["ClientToken"] = {"type": "http", "scheme": "bearer"}
+        components["securitySchemes"]["SessionKey"] = {"type": "apiKey", "in": "header", "name": "X-Session-Key"}
     for (path, method), (request, response) in ROUTES[protocol].items():
         route = result["paths"][path][method]
         if request:
@@ -200,7 +276,15 @@ def enrich_openapi(raw, protocol):
                 "schema": {"type": "string", "pattern": "^-?[0-9]+$"},
                 "description": "Last delivered sequence number; takes precedence over the after query parameter."})
         if protocol == "client-v0" and path != "/health":
-            route["security"] = [{"ClientToken": []}]
+            if path.endswith("/history"):
+                route["responses"]["200"]["content"] = {"application/x-ndjson": {"schema": {"type": "string"},
+                    "x-line-schema": {"$ref": "#/components/schemas/HistoryRow"}}}
+            route["security"] = [{"ClientToken": [], "SessionKey": []}]
+            if not path.endswith("/history"):
+                route["security"].append({"ClientToken": []})
+            route["x-session-key-policy"] = "Mounted sessions require the owner's X-Session-Key for every request."
+            route["responses"]["403"] = {"description": "Missing or invalid mounted session key", "content": {
+                "application/json": {"schema": {"$ref": "#/components/schemas/HTTPErrorResponse"}}}}
             route["responses"]["401"] = {"description": "Invalid Bearer token", "content": {"application/json": {
                 "schema": {"$ref": "#/components/schemas/HTTPErrorResponse"}}}}
     return result

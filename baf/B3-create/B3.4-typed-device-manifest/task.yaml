@@ -1,0 +1,6 @@
+id: B3.4
+baf: B3
+level: original
+instruction: Создай devices.json по данным specs.md. Нужен массив с одной записью на устройство. id — строка как в источнике, active — логическое значение,
+  offset — целое число. Сохрани порядок таблицы.
+answer_file: devices.json

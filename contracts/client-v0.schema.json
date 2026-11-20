@@ -3,6 +3,48 @@
   "$id": "urn:itmo:client-v0",
   "$defs": {
     "Session": {
+      "$defs": {
+        "MountDescriptor": {
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "const": "0",
+              "default": "0",
+              "title": "Version",
+              "type": "string"
+            },
+            "generation": {
+              "pattern": "^[a-f0-9]{32}$",
+              "title": "Generation",
+              "type": "string"
+            },
+            "reverse_port": {
+              "maximum": 65535,
+              "minimum": 1024,
+              "title": "Reverse Port",
+              "type": "integer"
+            },
+            "host_key": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "title": "Host Key",
+              "type": "string"
+            },
+            "readonly": {
+              "title": "Readonly",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "generation",
+            "reverse_port",
+            "host_key",
+            "readonly"
+          ],
+          "title": "MountDescriptor",
+          "type": "object"
+        }
+      },
       "additionalProperties": false,
       "properties": {
         "version": {
@@ -22,12 +64,63 @@
           },
           "title": "Files",
           "type": "object"
+        },
+        "mount": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MountDescriptor"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
         "session_id"
       ],
       "title": "Session",
+      "type": "object"
+    },
+    "MountDescriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "0",
+          "default": "0",
+          "title": "Version",
+          "type": "string"
+        },
+        "generation": {
+          "pattern": "^[a-f0-9]{32}$",
+          "title": "Generation",
+          "type": "string"
+        },
+        "reverse_port": {
+          "maximum": 65535,
+          "minimum": 1024,
+          "title": "Reverse Port",
+          "type": "integer"
+        },
+        "host_key": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Host Key",
+          "type": "string"
+        },
+        "readonly": {
+          "title": "Readonly",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "generation",
+        "reverse_port",
+        "host_key",
+        "readonly"
+      ],
+      "title": "MountDescriptor",
       "type": "object"
     },
     "Run": {
@@ -119,6 +212,19 @@
           "pattern": "^[a-zA-Z0-9_-]{1,64}$",
           "title": "Session Id",
           "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{32}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Run Id"
         },
         "tool": {
           "pattern": "^(RunCommand|ReadFile|WriteFile)$",
@@ -537,6 +643,28 @@
         },
         "status": {
           "const": "running"
+        },
+        "session_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Session Id",
+          "type": "string"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "tool": {
+          "enum": [
+            "ReadFile",
+            "RunCommand",
+            "WriteFile"
+          ]
+        },
+        "write_decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WriteDecision"
+          }
         }
       },
       "required": [
@@ -575,6 +703,28 @@
         "duration_seconds": {
           "type": "number",
           "minimum": 0
+        },
+        "session_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Session Id",
+          "type": "string"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "tool": {
+          "enum": [
+            "ReadFile",
+            "RunCommand",
+            "WriteFile"
+          ]
+        },
+        "write_decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WriteDecision"
+          }
         }
       },
       "required": [
@@ -606,8 +756,18 @@
         "error": {
           "enum": [
             "command_error",
+            "harness_restarted",
+            "invalid_tool",
+            "model_error",
+            "mount_lost",
+            "sandbox_error",
+            "sandbox_restarted",
+            "step_limit",
             "timeout",
-            "sandbox_error"
+            "transport_error",
+            "write_conflict",
+            "write_outcome_unknown",
+            "write_unverified"
           ]
         },
         "exit_code": {
@@ -631,6 +791,28 @@
         },
         "detail": {
           "type": "string"
+        },
+        "session_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Session Id",
+          "type": "string"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "tool": {
+          "enum": [
+            "ReadFile",
+            "RunCommand",
+            "WriteFile"
+          ]
+        },
+        "write_decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WriteDecision"
+          }
         }
       },
       "required": [
@@ -791,16 +973,27 @@
         },
         "error": {
           "enum": [
+            "command_error",
             "harness_restarted",
-            "timeout",
+            "invalid_tool",
+            "model_error",
+            "mount_lost",
             "sandbox_error",
+            "sandbox_restarted",
             "step_limit",
+            "timeout",
             "transport_error",
-            "model_error"
+            "write_conflict",
+            "write_outcome_unknown",
+            "write_unverified"
           ]
         },
         "detail": {
           "type": "string"
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 0
         }
       },
       "required": [
@@ -831,6 +1024,13 @@
         },
         "status": {
           "const": "cancelled"
+        },
+        "error": {
+          "const": "write_outcome_unknown"
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 0
         }
       },
       "required": [
@@ -867,6 +1067,9 @@
         },
         {
           "$ref": "#/$defs/RunCancelled"
+        },
+        {
+          "$ref": "#/$defs/ClosedRunSuccess"
         }
       ]
     },
@@ -885,8 +1088,7 @@
       },
       "required": [
         "status",
-        "error",
-        "detail"
+        "error"
       ],
       "additionalProperties": false
     },
@@ -1151,7 +1353,7 @@
       "additionalProperties": false
     },
     "ClientEvent": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/StartedEvent"
         },
@@ -1166,6 +1368,15 @@
         },
         {
           "$ref": "#/$defs/ClientResultEvent"
+        },
+        {
+          "$ref": "#/$defs/WriteDecisionEvent"
+        },
+        {
+          "$ref": "#/$defs/FileChangedEvent"
+        },
+        {
+          "$ref": "#/$defs/TechnicalEvent"
         }
       ]
     },
@@ -1176,8 +1387,1075 @@
         },
         {
           "$ref": "#/$defs/SandboxResultEvent"
+        },
+        {
+          "$ref": "#/$defs/WriteDecisionEvent"
         }
       ]
+    },
+    "MountedProvision": {
+      "$defs": {
+        "MountDescriptor": {
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "const": "0",
+              "default": "0",
+              "title": "Version",
+              "type": "string"
+            },
+            "generation": {
+              "pattern": "^[a-f0-9]{32}$",
+              "title": "Generation",
+              "type": "string"
+            },
+            "reverse_port": {
+              "maximum": 65535,
+              "minimum": 1024,
+              "title": "Reverse Port",
+              "type": "integer"
+            },
+            "host_key": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "title": "Host Key",
+              "type": "string"
+            },
+            "readonly": {
+              "title": "Readonly",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "generation",
+            "reverse_port",
+            "host_key",
+            "readonly"
+          ],
+          "title": "MountDescriptor",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "0",
+          "default": "0",
+          "title": "Version",
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$"
+        },
+        "files": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Files",
+          "type": "object"
+        },
+        "mount": {
+          "$ref": "#/$defs/MountDescriptor"
+        },
+        "client_session_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Session Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_session_id",
+        "session_id",
+        "mount"
+      ],
+      "title": "Session",
+      "type": "object"
+    },
+    "MountedOperation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/OperationRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "run_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            },
+            "session_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "run_id"
+          ]
+        }
+      ]
+    },
+    "WriteDecision": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "applied",
+            "cancelled",
+            "conflict",
+            "proposal",
+            "unchanged",
+            "unknown"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "operation_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "proposal_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$"
+        }
+      },
+      "required": [
+        "status",
+        "path",
+        "operation_id"
+      ],
+      "additionalProperties": false
+    },
+    "WriteDecisionEvent": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "0"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "trace_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "time": {
+          "type": "number",
+          "minimum": 0
+        },
+        "type": {
+          "const": "write_decision"
+        },
+        "operation_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "decision": {
+          "$ref": "#/$defs/WriteDecision"
+        }
+      },
+      "required": [
+        "version",
+        "seq",
+        "trace_id",
+        "time",
+        "type",
+        "operation_id",
+        "decision"
+      ],
+      "additionalProperties": false
+    },
+    "FileChangedEvent": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "0"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "trace_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "time": {
+          "type": "number",
+          "minimum": 0
+        },
+        "type": {
+          "const": "file_changed"
+        },
+        "path": {
+          "type": "string"
+        },
+        "file_version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "seq",
+        "trace_id",
+        "time",
+        "type",
+        "path",
+        "file_version"
+      ],
+      "additionalProperties": false
+    },
+    "TechnicalResult": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "0"
+        },
+        "session_id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Session Id",
+          "type": "string"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "operation_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+        },
+        "tool": {
+          "enum": [
+            "ReadFile",
+            "RunCommand",
+            "WriteFile"
+          ]
+        },
+        "status": {
+          "enum": [
+            "success",
+            "cancelled",
+            "error",
+            "running"
+          ]
+        },
+        "model_mode": {
+          "enum": [
+            "mock",
+            "real"
+          ]
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "error": {
+          "enum": [
+            "command_error",
+            "harness_restarted",
+            "invalid_tool",
+            "model_error",
+            "mount_lost",
+            "sandbox_error",
+            "sandbox_restarted",
+            "step_limit",
+            "timeout",
+            "transport_error",
+            "write_conflict",
+            "write_outcome_unknown",
+            "write_unverified"
+          ]
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "ClosedRunSuccess": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "0"
+        },
+        "session_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$"
+        },
+        "status": {
+          "const": "success"
+        },
+        "model_mode": {
+          "enum": [
+            "mock",
+            "real"
+          ]
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "version",
+        "session_id",
+        "request_id",
+        "status",
+        "model_mode",
+        "duration_seconds"
+      ],
+      "additionalProperties": false
+    },
+    "TechnicalEvent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "started"
+            },
+            "session_id": {
+              "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "session_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "model"
+            },
+            "step": {
+              "type": "integer"
+            },
+            "mode": {
+              "enum": [
+                "mock",
+                "real"
+              ]
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "prompt_tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "completion_tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "total_tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "step",
+            "mode",
+            "usage"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "tool_call"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "tool": {
+              "enum": [
+                "ReadFile",
+                "RunCommand",
+                "WriteFile"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "operation_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "tool_result"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "result": {
+              "$ref": "#/$defs/TechnicalResult"
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "operation_id",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "write_decision"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "decision": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "enum": [
+                    "applied",
+                    "cancelled",
+                    "conflict",
+                    "proposal",
+                    "unchanged",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "operation_id",
+            "decision"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "file_changed"
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "result"
+            },
+            "result": {
+              "$ref": "#/$defs/TechnicalResult"
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "result"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "HistoryRow": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "started"
+            },
+            "session_id": {
+              "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+              "title": "Session Id",
+              "type": "string"
+            },
+            "source": {
+              "enum": [
+                "harness",
+                "sandbox"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "session_id",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "model"
+            },
+            "step": {
+              "type": "integer"
+            },
+            "mode": {
+              "enum": [
+                "mock",
+                "real"
+              ]
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "prompt_tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "completion_tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "total_tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [],
+              "additionalProperties": false
+            },
+            "source": {
+              "enum": [
+                "harness",
+                "sandbox"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "step",
+            "mode",
+            "usage",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "tool_call"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "tool": {
+              "enum": [
+                "ReadFile",
+                "RunCommand",
+                "WriteFile"
+              ]
+            },
+            "source": {
+              "enum": [
+                "harness",
+                "sandbox"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "operation_id",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "tool_result"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "result": {
+              "$ref": "#/$defs/TechnicalResult"
+            },
+            "source": {
+              "enum": [
+                "harness",
+                "sandbox"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "operation_id",
+            "result",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "write_decision"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "decision": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "enum": [
+                    "applied",
+                    "cancelled",
+                    "conflict",
+                    "proposal",
+                    "unchanged",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [],
+              "additionalProperties": false
+            },
+            "source": {
+              "enum": [
+                "harness",
+                "sandbox"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "operation_id",
+            "decision",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "file_changed"
+            },
+            "source": {
+              "enum": [
+                "harness",
+                "sandbox"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "const": "0"
+            },
+            "seq": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "trace_id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+            },
+            "time": {
+              "type": "number",
+              "minimum": 0
+            },
+            "type": {
+              "const": "result"
+            },
+            "result": {
+              "$ref": "#/$defs/TechnicalResult"
+            },
+            "source": {
+              "enum": [
+                "harness",
+                "sandbox"
+              ]
+            }
+          },
+          "required": [
+            "version",
+            "seq",
+            "trace_id",
+            "time",
+            "type",
+            "result",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TechnicalEvents": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TechnicalEvent"
+          }
+        }
+      },
+      "required": [
+        "events"
+      ],
+      "additionalProperties": false
+    },
+    "ChangesRequest": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{32}$"
+        }
+      },
+      "required": [
+        "run_id"
+      ],
+      "additionalProperties": false
+    },
+    "ChangesResponse": {
+      "type": "object",
+      "properties": {
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "seq": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "path",
+              "version",
+              "seq"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "changes"
+      ],
+      "additionalProperties": false
     },
     "ClientEventBatch": {
       "type": "object",
